@@ -8,12 +8,9 @@ declare var process: {
 }
 
 
-console.log(process.env.JWT_EXPIRE_TIME)
-
 // creating jsonwebtoken
 
 const getToken = async (id: String) => {
-    console.log('from getToken', id)
     return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
         // in what time token expire
         expiresIn: process.env.JWT_EXPIRE_TIME

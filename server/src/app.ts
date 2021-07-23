@@ -11,10 +11,11 @@ const NAMESPACE = 'server'
 
 
 // body parser ===========================
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.json())
+app.use(express.text())
+app.use(express.urlencoded({ extended: false }))
 
-connectDB()
+// connectDB()
 
 // logger ===================================
 app.use((req, res, next) => {

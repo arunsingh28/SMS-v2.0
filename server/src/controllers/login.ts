@@ -28,7 +28,7 @@ const getToken = async (id: String) => {
 
 
 const login = async (req: any, res: any, next: any) => {
-    console.log(req.params)
+    console.log(req.body)
     // if (!id) {
     //     return res.json({message:'please add id'}).status(200)
     // } else {

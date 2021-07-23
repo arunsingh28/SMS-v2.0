@@ -7,25 +7,17 @@ declare var process: {
     }
 }
 
-
 // creating jsonwebtoken
-
 const getToken = async (id: String) => {
     return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
-        // in what time token expire
         expiresIn: process.env.JWT_EXPIRE_TIME
     })
 }
 
 
-// interface req {
-//     body: string,
-//     param
-// }
-
-
 const login = async (req: any, res: any, next: any) => {
     const {id} = req.body
+    console.log(req.headers)
     if (!id) {
         return res.json({message:'please add id'}).status(200)
     } else {

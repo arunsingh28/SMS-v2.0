@@ -15,7 +15,7 @@ app.use(express.json())
 app.use(express.text())
 app.use(express.urlencoded({ extended: false }))
 
-// connectDB()
+connectDB()
 
 // logger ===================================
 app.use((req, res, next) => {
@@ -30,6 +30,7 @@ app.use((req, res, next) => {
 // routes ======================================
 import loginRoutes from './routes/login'
 
+
 app.use('/api/login', loginRoutes)
 
 
@@ -42,6 +43,13 @@ app.use((req, res, next) => {
 
 
 // server start =================================
-app.listen(config.server.port, () => {
+const server = app.listen(config.server.port, () => {
     console.log(`Server started on port ${config.server.port}`);
+})
+
+
+// handle server crash =========================
+process.on("unhandledRejection",(err,promise)=>{
+    console.log(`logged Error: ${err}`)
+    server.close(()=> process.exit(1))
 })

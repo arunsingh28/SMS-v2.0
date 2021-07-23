@@ -13,8 +13,8 @@ export const connectDB = async () => {
         useFindAndModify: true,
         useCreateIndex: true
     }).then(() => {
-        console.log(`******Connection established to Database********`)
+        console.log(`****** Connection established to Database ********`)
     }).catch(err => {
-        console.log(`\n******Connection not established to Database********\n\n`, err)
+        console.log(`\n****** Connection not established to Database ********\n\n`, err)
     })
 }

@@ -28,15 +28,14 @@ const getToken = async (id: String) => {
 
 
 const login = async (req: any, res: any, next: any) => {
-    console.log(req.body)
-    // if (!id) {
-    //     return res.json({message:'please add id'}).status(200)
-    // } else {
-    //     const token = await getToken(id)
-    //     console.log(token)
-    //     return res.json({ message: 'hello', token })
-    // }
-    next()
+    const {id} = req.body
+    if (!id) {
+        return res.json({message:'please add id'}).status(200)
+    } else {
+        const token = await getToken(id)
+        console.log(token)
+        return res.json({ message: 'hello', token })
+    }
 }
 
 

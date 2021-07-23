@@ -16,10 +16,10 @@ const user = new mongoose.Schema({
         minlength: 6,
         select: false
     },
-    profile: {
-        type: String,
-        required: true
-    }
+    // profile: {
+    //     type: String,
+    //     required: true
+    // }
 })
 
 

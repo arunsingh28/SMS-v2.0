@@ -30,10 +30,10 @@ app.use((req, res, next) => {
 
 
 // routes ======================================
-import loginRoutes from './routes/login'
+import loginRoutes from './routes/L&R'
 
 
-app.use('/api/login', loginRoutes)
+app.use('/api', loginRoutes)
 
 
 // error handling ===============================

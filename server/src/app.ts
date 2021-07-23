@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import config from '../config/config'
 import logging from '../config/logger'
-
+import { connectDB } from './utils/DB'
 // init express variable to app ==========
 const app = express()
 
@@ -14,6 +14,7 @@ const NAMESPACE = 'server'
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+connectDB()
 
 // logger ===================================
 app.use((req, res, next) => {

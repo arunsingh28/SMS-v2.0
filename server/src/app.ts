@@ -30,9 +30,9 @@ app.use(express.urlencoded({ extended: false }))
 
  */
 
-import loginController from './controllers/index'
+import loginRoutes from './routes/login'
 
-app.use('/api/login', loginController)
+app.use('/api/login', loginRoutes)
 
 
 
@@ -40,7 +40,7 @@ app.use('/api/login', loginController)
 // error handling
 app.use((req, res, next) => {
     const error = new Error('Page not found');
-    return res.json({message:error.message,statusCode: 404}).status(404);
+    return res.json({ message: error.message, statusCode: 404 }).status(404);
 })
 
 app.listen(config.server.port, () => {

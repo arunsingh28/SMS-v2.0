@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-declare var process:{
+declare var process: {
     env: {
         JWT_SECRET_KEY: string,
         JWT_EXPIRE_TIME: number
@@ -13,6 +13,7 @@ console.log(process.env.JWT_EXPIRE_TIME)
 // creating jsonwebtoken
 
 const getToken = async (id: String) => {
+    console.log('from getToken', id)
     return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
         // in what time token expire
         expiresIn: process.env.JWT_EXPIRE_TIME
@@ -20,13 +21,22 @@ const getToken = async (id: String) => {
 }
 
 
-
+// interface req {
+//     body: string,
+//     param
+// }
 
 
 const login = async (req: any, res: any, next: any) => {
-    await getToken(req.body)
-    return res.json({ message: 'hello' })
-
+    console.log(req.params)
+    // if (!id) {
+    //     return res.json({message:'please add id'}).status(200)
+    // } else {
+    //     const token = await getToken(id)
+    //     console.log(token)
+    //     return res.json({ message: 'hello', token })
+    // }
+    next()
 }
 
 

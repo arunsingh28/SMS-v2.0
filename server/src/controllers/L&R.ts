@@ -39,7 +39,7 @@ const register = async (req: any, res: any, next: any) => {
         return res.status(201).json({ message: 'password not matching' })
     }
     else {
-        
+        // something went wrong check it tommorow
         const newUser = new _user({
             email, password,
         })

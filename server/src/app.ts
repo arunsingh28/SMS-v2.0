@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'
 import config from '../config/config'
 import logging from '../config/logger'
 import { connectDB } from './utils/DB'
+
 // init express variable to app ==========
 const app = express()
 
@@ -10,11 +11,12 @@ const app = express()
 const NAMESPACE = 'server'
 
 
-// body parser ===========================
+// body parser ============================
 app.use(express.json())
 app.use(express.text())
 app.use(express.urlencoded({ extended: false }))
 
+// databse connection ======================
 connectDB()
 
 // logger ===================================
@@ -34,11 +36,10 @@ import loginRoutes from './routes/login'
 app.use('/api/login', loginRoutes)
 
 
-
 // error handling ===============================
 app.use((req, res, next) => {
     const error = new Error('Page not found');
-    return res.json({ message: error.message, statusCode: 404 }).status(404);
+    return res.status(404).json({ message: error.message, statusCode: res.statusCode });
 })
 
 
@@ -49,7 +50,7 @@ const server = app.listen(config.server.port, () => {
 
 
 // handle server crash =========================
-process.on("unhandledRejection",(err,promise)=>{
+process.on("unhandledRejection", (err, promise) => {
     console.log(`logged Error: ${err}`)
-    server.close(()=> process.exit(1))
+    server.close(() => process.exit(1))
 })

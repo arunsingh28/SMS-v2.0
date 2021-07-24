@@ -17,18 +17,6 @@ const getToken = async (id: String) => {
 }
 
 
-const login = async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.body
-    console.log(req.headers)
-    if (!id) {
-        return res.json({ message: 'please add id' }).status(200)
-    } else {
-        const token = await getToken(id)
-        console.log(token)
-        return res.json({ message: 'hello', token })
-    }
-}
-
 
 const register = async (req: Request, res: Response, next: NextFunction) => {
     const { email, password, confirmPassword, name } = req.body
@@ -66,7 +54,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 
 
 const LOGIN_API = {
-    login, register
+    register
 }
 
 export default LOGIN_API

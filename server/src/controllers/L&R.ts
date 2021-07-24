@@ -1,22 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
-import jwt from "jsonwebtoken";
+import getToken from '../utils/token'
 import _user from '../models/user.model'
-
-declare var process: {
-    env: {
-        JWT_SECRET_KEY: string,
-        JWT_EXPIRE_TIME: number
-    }
-}
-
-// creating jsonwebtoken
-const getToken = async (id: String) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
-        expiresIn: process.env.JWT_EXPIRE_TIME
-    })
-}
-
-
 
 
 const logout = async (req: Request, res: Response) => {

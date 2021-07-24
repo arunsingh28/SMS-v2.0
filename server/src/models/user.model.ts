@@ -8,6 +8,7 @@ export interface UserDocument extends mongoose.Document {
     createdAt: Date,
     updatedAt: Date,
     name: string,
+    status: boolean,
     comparePassword(candidatePassword: string): Promise<boolean>
 }
 

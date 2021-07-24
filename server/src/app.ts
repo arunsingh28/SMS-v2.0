@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import config from '../config/config'
 import logging from '../config/logger'
 import { connectDB } from './utils/DB'
-
+import Router from './routes/router'
 // init express variable to app ==========
 const app = express()
 
@@ -29,11 +29,8 @@ app.use((req, res, next) => {
 })
 
 
-// routes ======================================
-import loginRoutes from './routes/L&R'
-
-
-app.use('/api', loginRoutes)
+// inti router
+Router(app)
 
 
 // error handling ===============================

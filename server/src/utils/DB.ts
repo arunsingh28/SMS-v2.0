@@ -2,8 +2,8 @@ import mongoose from 'mongoose'
 
 declare var process: {
     env: {
-        MONGODB_URI: string
-    }
+        MONGODB_URI: string,
+    },
 }
 
 export const connectDB = async () => {

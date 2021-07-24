@@ -41,23 +41,21 @@ const userSchema = new mongoose.Schema({
 
 
 
-// advance  ==========================
+// hasing & salting  ==========================
 
-userSchema.pre('save', async (next: mongoose.HookNextFunction) => {
-    const user = this as unknown as UserDocument
+userSchema.pre('save', async function (next: mongoose.HookNextFunction) {
+    const user = this as UserDocument
     if (!user.isModified('password')) return next()
-
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hashSync(user.password, salt)
     user.password = hash
-    console.log('from pre function:',user)
     return next()
 })
 
 
 // user logged in ? =================
-userSchema.methods.comparePassword = async (candidatePassword: string) => {
-    const user = this as unknown as UserDocument;
+userSchema.methods.comparePassword = async function (candidatePassword: string) {
+    const user = this as UserDocument;
     return bcrypt.compare(candidatePassword, user.password).catch((e) => false)
 }
 

@@ -5,8 +5,10 @@ import authorization from '../middleware/shield'
 // const upload = multer()
 import upload from '../utils/uploader'
 
+
 // base routes
 export default function (router: Express) {
-    router.post('/api/login', (<any>authorization),)
+    router.post('/api/login',(<any>authorization),register_contollers.login)
     router.post('/api/register', register_contollers.register)
+    router.get('/api/logout',register_contollers.logout)
 }

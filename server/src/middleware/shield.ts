@@ -2,7 +2,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken'
 import _user from '../models/user.model'
 import { Response, Request, NextFunction } from 'express'
 
-interface ig extends Request{
+interface request extends Request{
     user: any
 }
 
@@ -12,7 +12,7 @@ declare var process: {
     }
 }
 
-const authorization = async (req: ig, res: Response, next: NextFunction) => {
+const authorization = async (req: request, res: Response, next: NextFunction) => {
 
     let token;
 
@@ -25,14 +25,20 @@ const authorization = async (req: ig, res: Response, next: NextFunction) => {
     } 
     try {
         const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY)
-
-        const user = await _user.findOne( { email: (<any>decoded).id })
-
+        const user = await _user.findOneAndUpdate( { email: (<any>decoded).id },{
+            $set: {
+                status: true
+            }
+        })
         if (!user) {
             return res.status(404).json({ message: 'No user found ', code: req.statusCode })
         }
-        req.user = user
-        next()
+        if(user.status === true){
+            return res.status(401).json({ message: 'account already in use', code: req.statusCode })
+        }else{
+            req.user = user
+            next()
+        }
     } catch (error) {
         return res.status(401).json({ message: 'Not authorize to access this route ', error, code: req.statusCode })
     }

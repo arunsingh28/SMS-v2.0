@@ -16,9 +16,12 @@ const getToken = async (id: String) => {
     })
 }
 
+const logout = async(req: Request,res: Response)=>{
+    const user = (<any>req).user
+    console.log(user)
+}
 
-
-const register = async (req: Request, res: Response, next: NextFunction) => {
+const register = async (req: Request, res: Response) => {
     const { email, password, confirmPassword, name } = req.body
     if (!email || !password || !confirmPassword || !name) {
         return res.status(200).json({ message: 'please fill all detail' })
@@ -42,7 +45,10 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 
-
+const login = async (req: Request, res: Response) => {
+    const user = (<any>req).user
+    return res.json({message:'logged in',data:user})
+}
 
 
 
@@ -54,7 +60,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 
 
 const LOGIN_API = {
-    register
+    register,login,logout
 }
 
 export default LOGIN_API

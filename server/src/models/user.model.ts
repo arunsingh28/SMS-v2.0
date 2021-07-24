@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    status: {
+        type: Boolean,
+        default: false
     }
     // profile: {
     //     type: String,
@@ -42,7 +46,6 @@ const userSchema = new mongoose.Schema({
 
 
 // hasing & salting  ==========================
-
 userSchema.pre('save', async function (next: mongoose.HookNextFunction) {
     const user = this as UserDocument
     if (!user.isModified('password')) return next()
@@ -58,7 +61,6 @@ userSchema.methods.comparePassword = async function (candidatePassword: string) 
     const user = this as UserDocument;
     return bcrypt.compare(candidatePassword, user.password).catch((e) => false)
 }
-
 
 const user = mongoose.model<UserDocument>('user', userSchema)
 

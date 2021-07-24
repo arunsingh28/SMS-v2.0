@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 import _user from '../models/user.model'
 import { Response, Request, NextFunction } from 'express'
 
+
 // interface request extends Request{
 //     user: any
 // }
@@ -13,19 +14,16 @@ declare var process: {
 }
 
 const authorization = async (req: Request, res: Response, next: NextFunction) => {
-
     let token;
-
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
         token = req.headers.authorization.split(" ")[1]
     }
-    console.log(token)
     if (!token) {
         return res.status(401).json({ message: 'not authorize to access content', code: req.statusCode })
-    } 
+    }
     try {
         const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY)
-        const user = await _user.findOneAndUpdate( { email: (<any>decoded).id },{
+        const user = await _user.findOneAndUpdate({ email: (<any>decoded).id }, {
             $set: {
                 status: true
             }
@@ -33,11 +31,11 @@ const authorization = async (req: Request, res: Response, next: NextFunction) =>
         if (!user) {
             return res.status(404).json({ message: 'No user found ', code: req.statusCode })
         }
-        if(user.status === true){
+        if (user.status === true) {
             return res.status(401).json({ message: 'account already in use', code: req.statusCode })
-        }else{
+        } else {
             // session created for user 
-            (<any>req).session.user = user
+            req.session.user = user._id
             next()
         }
     } catch (error) {

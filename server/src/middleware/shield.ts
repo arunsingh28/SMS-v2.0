@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
-import _user from '../models/user'
-
+import _user from '../models/user.model'
+import { Response, Request, NextFunction } from 'express'
 
 declare var process: {
     env: {
@@ -8,8 +8,7 @@ declare var process: {
     }
 }
 
-
-const authorization = async (req, res, next) => {
+const authorization = async (req: Request, res: Response, next: NextFunction) => {
     let token;
 
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
@@ -23,14 +22,16 @@ const authorization = async (req, res, next) => {
     try {
         const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY)
 
-        const user = await _user.findById(decoded.id)
+        const user = await _user.findById(decoded)
 
         if (!user) {
             return res.status(404).json({ message: 'No user found ', code: req.statusCode })
         }
-        req.user = user
+        // req.user = user
         next()
     } catch (error) {
         return res.status(401).json({ message: 'Not authorize to access this route ', code: req.statusCode })
     }
 }
+
+export default authorization;

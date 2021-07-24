@@ -19,15 +19,14 @@ const getToken = async (id: String) => {
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.body
-    console.log(req.file)
-    // console.log(req.headers)
-    // if (!id) {
-    //     return res.json({ message: 'please add id' }).status(200)
-    // } else {
-    //     const token = await getToken(id)
-    //     console.log(token)
-    //     return res.json({ message: 'hello', token })
-    // }
+    console.log(req.headers)
+    if (!id) {
+        return res.json({ message: 'please add id' }).status(200)
+    } else {
+        const token = await getToken(id)
+        console.log(token)
+        return res.json({ message: 'hello', token })
+    }
 }
 
 
@@ -45,8 +44,9 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
             email, password, name
         })
         try {
+            const token = await getToken(email)
             await newUser.save()
-            return res.status(200).json({ message: 'account created!', data: newUser })
+            return res.status(200).json({ message: 'account created!', data: newUser, token })
         } catch (error) {
             return res.status(201).json({ message: 'account not created', data: error.message })
         }

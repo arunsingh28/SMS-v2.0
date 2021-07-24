@@ -1,17 +1,14 @@
 import multerS3 from 'multer-s3'
 import multer from 'multer'
-import AWS, { CodeBuild } from 'aws-sdk'
+import AWS from 'aws-sdk'
 
 declare var process: {
     env: {
         AWS_ACESS_KEY: string,
         AWS_SECRET_KEY: string,
-        AWS_BUCKET_NAME: string                               
+        AWS_BUCKET_NAME: string
     }
 }
-
-
-
 
 
 const s3 = new AWS.S3({
@@ -19,7 +16,7 @@ const s3 = new AWS.S3({
     secretAccessKey: process.env.AWS_ACESS_KEY
 })
 
-export default function () {
+const aws = () => {
     multer({
         storage: multerS3({
             s3,
@@ -34,3 +31,6 @@ export default function () {
         })
     })
 }
+
+
+export default aws

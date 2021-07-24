@@ -9,6 +9,8 @@ declare var process: {
 }
 
 const authorization = async (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.headers)
+    
     let token;
 
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {

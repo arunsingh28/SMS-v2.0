@@ -4,8 +4,8 @@ import config from '../config/config'
 import logging from '../config/logger'
 import { connectDB } from './utils/DB'
 import Router from './routes/router'
-import session from 'express-session'
-
+// import session from 'express-session'
+import Session from './middleware/session'
 
 
 // init express variable to app ==========
@@ -33,15 +33,13 @@ app.use((req, res, next) => {
 })
 
 
-// session ==================================
-app.use(session({
-    secret: 'keyword',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
-}))
+// proxy ==================================
+app.set("trust proxy", 1)
 
-// inti router
+// session ===================================
+Session(app)
+
+// inti router ================================
 Router(app)
 
 

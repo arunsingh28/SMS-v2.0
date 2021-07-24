@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
-
 import jwt from "jsonwebtoken";
 import _user from '../models/user.model'
+
 declare var process: {
     env: {
         JWT_SECRET_KEY: string,
@@ -16,9 +16,11 @@ const getToken = async (id: String) => {
     })
 }
 
-const logout = async(req: Request,res: Response)=>{
-    const user = (<any>req).user
-    console.log(user)
+
+
+
+const logout = async (req: Request, res: Response) => {
+    console.log(req.headers)
 }
 
 const register = async (req: Request, res: Response) => {
@@ -46,8 +48,9 @@ const register = async (req: Request, res: Response) => {
 
 
 const login = async (req: Request, res: Response) => {
-    const user = (<any>req).user
-    return res.json({message:'logged in',data:user})
+    const user = req.session.user
+    console.log(req.session)
+    return res.json({ message: 'logged in', data: user })
 }
 
 
@@ -60,7 +63,7 @@ const login = async (req: Request, res: Response) => {
 
 
 const LOGIN_API = {
-    register,login,logout
+    register, login, logout
 }
 
 export default LOGIN_API

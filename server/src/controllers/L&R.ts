@@ -31,8 +31,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 
 const register = async (req: Request, res: Response, next: NextFunction) => {
-    const { email, password, confirmPassword } = req.body
-    if (!email || !password || !confirmPassword) {
+    const { email, password, confirmPassword, name } = req.body
+    if (!email || !password || !confirmPassword || !name) {
         return res.status(200).json({ message: 'please fill all detail' })
     }
     if (password != confirmPassword) {
@@ -41,7 +41,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
     else {
         // something went wrong check it tommorow
         const newUser = new _user({
-            email, password,
+            email, password, name
         })
         try {
             await newUser.save()

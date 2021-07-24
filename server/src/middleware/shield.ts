@@ -1,10 +1,10 @@
-import jwt, { JwtPayload } from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import _user from '../models/user.model'
 import { Response, Request, NextFunction } from 'express'
 
-interface request extends Request{
-    user: any
-}
+// interface request extends Request{
+//     user: any
+// }
 
 declare var process: {
     env: {
@@ -12,7 +12,7 @@ declare var process: {
     }
 }
 
-const authorization = async (req: request, res: Response, next: NextFunction) => {
+const authorization = async (req: Request, res: Response, next: NextFunction) => {
 
     let token;
 
@@ -36,7 +36,8 @@ const authorization = async (req: request, res: Response, next: NextFunction) =>
         if(user.status === true){
             return res.status(401).json({ message: 'account already in use', code: req.statusCode })
         }else{
-            req.user = user
+            // session created for user 
+            (<any>req).session.user = user
             next()
         }
     } catch (error) {

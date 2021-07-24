@@ -4,6 +4,10 @@ import config from '../config/config'
 import logging from '../config/logger'
 import { connectDB } from './utils/DB'
 import Router from './routes/router'
+import session from 'express-session'
+
+
+
 // init express variable to app ==========
 const app = express()
 
@@ -28,6 +32,14 @@ app.use((req, res, next) => {
     next()
 })
 
+
+// session ==================================
+app.use(session({
+    secret: 'keyword',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}))
 
 // inti router
 Router(app)

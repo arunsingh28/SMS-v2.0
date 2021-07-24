@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 
 import jwt from "jsonwebtoken";
-// import _user from '../models/user'
+import _user from '../models/user.model'
 declare var process: {
     env: {
         JWT_SECRET_KEY: string,
@@ -40,12 +40,16 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
     }
     else {
         // something went wrong check it tommorow
-        // const newUser = new _user({
-        //     email, password,
-        // })
+        const newUser = new _user({
+            email, password,
+        })
+        try {
+            await newUser.save()
+            return res.status(200).json({ message: 'account created!', data: newUser })
+        } catch (error) {
+            return res.status(201).json({ message: 'account not created', data: error.message })
+        }
     }
-
-    return res.status(200).json({ email, password, confirmPassword })
 }
 
 

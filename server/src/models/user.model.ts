@@ -7,6 +7,7 @@ export interface UserDocument extends mongoose.Document {
     password: string,
     createdAt: Date,
     updatedAt: Date,
+    name: string,
     comparePassword(candidatePassword: string): Promise<boolean>
 }
 
@@ -27,23 +28,28 @@ const userSchema = new mongoose.Schema({
         required: [true, "please provide a password"],
         minlength: 6,
         select: false
+    },
+    name: {
+        type: String,
+        required: true
     }
     // profile: {
     //     type: String,
     //     required: true
     // }
-})
+}, { timestamps: true })
 
+const user = mongoose.model<UserDocument>('user', userSchema)
 
 // advance  ==========================
 
-// userSchema.pre('save', async (next: mongoose.HookNextFunction) => {
-//     let user = this as UserDocument;
-//     if(!user.isModified('password')) return next()
+userSchema.pre('save', async (next: mongoose.HookNextFunction) => {
+    let user = this as UserDocument;
+    if (!user.isModified('password')) return next()
 
-//     const salt = await bcrypt.genSalt(10)
-//     const hash = await bcrypt.hashSync(user.password, salt)
-// })
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hashSync(user.password, salt)
+})
 
 
 // user logged in ? =================
@@ -54,7 +60,6 @@ const userSchema = new mongoose.Schema({
 // }
 
 
-const user = mongoose.model<UserDocument>('user', userSchema)
 
 
 export default user

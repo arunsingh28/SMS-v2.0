@@ -3,6 +3,7 @@ import _user from '../models/user.model'
 import { Response, Request, NextFunction } from 'express'
 
 
+
 // interface request extends Request{
 //     user: any
 // }
@@ -31,9 +32,7 @@ const authorization = async (req: Request, res: Response, next: NextFunction) =>
         if (!user) {
             return res.status(404).json({ message: 'No user found ', code: req.statusCode })
         }
-        if (user.status === true) {
-            return res.status(401).json({ message: 'account already in use', code: req.statusCode })
-        } else {
+        else {
             // session created for user 
             req.session.user = user._id
             next()

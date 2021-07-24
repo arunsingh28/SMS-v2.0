@@ -2,9 +2,10 @@ import { Request, Response, NextFunction } from 'express'
 import getToken from '../utils/token'
 import _user from '../models/user.model'
 
+// import sessionID from '../middleware/error'
 
 const logout = async (req: Request, res: Response) => {
-    console.log(req.headers)
+    console.log(req.session.user)
 }
 
 const register = async (req: Request, res: Response) => {
@@ -33,7 +34,7 @@ const register = async (req: Request, res: Response) => {
 
 const login = async (req: Request, res: Response) => {
     const user = req.session.user
-    console.log(req.session)
+    // console.log(req.session)
     return res.json({ message: 'logged in', data: user })
 }
 

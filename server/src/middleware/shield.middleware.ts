@@ -20,7 +20,7 @@ const authorization = async (req: Request, res: Response, next: NextFunction) =>
         token = req.headers.authorization.split(" ")[1]
     }
     if (!token) {
-        return res.status(401).json({ message: 'not authorize to access content', code: req.statusCode })
+        return res.status(401).json({ message: 'not authorize to access content', code: res.statusCode })
     }
     try {
         const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY)
@@ -30,7 +30,7 @@ const authorization = async (req: Request, res: Response, next: NextFunction) =>
             }
         })
         if (!user) {
-            return res.status(404).json({ message: 'No user found ', code: req.statusCode })
+            return res.status(203).json({ message: 'No user found ', code: res.statusCode })
         }
         else {
             // session created for user 
@@ -38,7 +38,7 @@ const authorization = async (req: Request, res: Response, next: NextFunction) =>
             next()
         }
     } catch (error) {
-        return res.status(401).json({ message: 'Not authorize to access this route ', error, code: req.statusCode })
+        return res.status(401).json({ message: 'Not authorize to access this route ', error, code: res.statusCode })
     }
 }
 

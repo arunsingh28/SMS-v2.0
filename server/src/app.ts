@@ -1,5 +1,4 @@
 import express from 'express'
-import bodyParser from 'body-parser'
 import config from '../config/config'
 import logging from '../config/logger'
 import { connectDB } from './utils/DB'
@@ -38,6 +37,7 @@ app.set("trust proxy", 1)
 
 // session ===================================
 Session(app)
+
 
 // inti router ================================
 Router(app)

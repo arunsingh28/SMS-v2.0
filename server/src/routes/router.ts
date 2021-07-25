@@ -3,11 +3,8 @@ import user_contollers from '../controllers/user.private'
 import { Express } from 'express'
 import authorization from '../middleware/shield.middleware'
 
-// import multer from 'multer'
-// const upload = multer()
-
 import upload from '../utils/uploader'
-
+import aws from '../utils/aws'
 
 // base routes
 export default function (router: Express) {
@@ -17,5 +14,5 @@ export default function (router: Express) {
 
 
     // private routes
-    router.post('/api/user/:userID', authorization, user_contollers.imageUpload)
+    router.post('/api/user/:userID', authorization, upload.single('file'), user_contollers.imageUpload)
 }

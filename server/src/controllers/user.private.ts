@@ -30,15 +30,13 @@ const imageUpload = async (req: Request, res: Response) => {
 const removeProfile = async (req: Request, res: Response) => {
     const id = req.session.user
     const user = await _user.findById(id)
-    const profile = (<any>user).profile
-    console.log(profile)
-    // console.log('key', key)
-    // const isDelete = await deleteObject(key).catch(() => false)
-    // if (isDelete === false) {
-    //     return res.status(203).json({ message: 'server error try again', code: res.statusCode })
-    // } else {
-    //     return res.status(200).json({ message: 'Profile Image delete.', code: res.statusCode })
-    // }
+    const key = (<any>user).profile[0].key
+    const isDelete = await deleteObject(key).catch(() => false)
+    if (isDelete === false) {
+        return res.status(203).json({ message: 'server error try again', code: res.statusCode })
+    } else {
+        return res.status(200).json({ message: 'Profile Image delete.', code: res.statusCode })
+    }
 }
 
 

@@ -60,6 +60,7 @@ userSchema.pre('save', async function (next: mongoose.HookNextFunction) {
 // check password true || false? =================
 userSchema.methods.comparePassword = async function (candidatePassword: string) {
     const user = this as UserDocument;
+    console.log(user)
     return bcrypt.compare(candidatePassword, user.password).catch((e) => false)
   
 }

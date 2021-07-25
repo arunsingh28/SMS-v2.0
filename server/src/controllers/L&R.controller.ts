@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt'
 
 
 
+
 // import sessionID from '../middleware/error'
 
 const logout = async (req: Request, res: Response) => {
@@ -21,7 +22,7 @@ const register = async (req: Request, res: Response) => {
         return res.status(401).json({ message: 'password not matching', code: res.statusCode })
     }
     else {
-        // something went wrong check it tommorow
+        // hasing password
         const newUser = new _user({
             email, password, name
         })
@@ -50,9 +51,6 @@ const login = async (req: Request, res: Response) => {
         if (user?.status === true) {
             return res.status(203).json({ message: "user alredy logged in diffrent device", code: res.statusCode })
         }
-        // check password
-        // const isMatch = await bcrypt.compare(password, user.comparePassword).catch(() => false)
-
         const isMatch = await user.comparePassword(password)
         console.log(isMatch)
         if (isMatch === false) {
@@ -67,7 +65,10 @@ const login = async (req: Request, res: Response) => {
 
 
 
-
+const all = async (req: Request, res: Response) => {
+    const users = await _user.find()
+    return res.json({data:users})
+}
 
 
 
@@ -75,7 +76,7 @@ const login = async (req: Request, res: Response) => {
 
 
 const LOGIN_API = {
-    register, login, logout
+    register, login, logout,all
 }
 
 export default LOGIN_API

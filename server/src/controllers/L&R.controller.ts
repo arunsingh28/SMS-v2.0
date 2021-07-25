@@ -1,13 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import getToken from '../utils/token'
 import _user from '../models/user.model'
-import bcrypt from 'bcrypt'
-
-
-
-
-
-// import sessionID from '../middleware/error'
 
 const logout = async (req: Request, res: Response) => {
     console.log(req.session.user)
@@ -51,13 +44,14 @@ const login = async (req: Request, res: Response) => {
         if (user?.status === true) {
             return res.status(203).json({ message: "user alredy logged in diffrent device", code: res.statusCode })
         }
+        // checking user password
         const isMatch = await user.comparePassword(password)
-        console.log(isMatch)
         if (isMatch === false) {
             return res.status(401).json({ message: 'Invalid credinitals', code: res.statusCode })
         } else {
             // genrate token
             const token = await getToken(email)
+            // send data to client
             return res.json({ message: 'logged in', data: user, token, code: res.statusCode })
         }
     }
@@ -69,8 +63,8 @@ const login = async (req: Request, res: Response) => {
 
 
 
-const LOGIN_API = {
+const module = {
     register, login, logout
 }
 
-export default LOGIN_API
+export default module

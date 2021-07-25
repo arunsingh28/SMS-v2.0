@@ -10,6 +10,10 @@ export interface UserDocument extends mongoose.Document {
     updatedAt: Date,
     name: string,
     status: boolean,
+    profile: {
+        key: string,
+        location: string
+    }
 }
 
 

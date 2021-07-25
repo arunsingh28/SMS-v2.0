@@ -3,7 +3,6 @@ import user_contollers from '../controllers/user.private'
 import { Express } from 'express'
 import authorization from '../middleware/shield.middleware'
 
-
 import multer from 'multer'
 import multerS3 from 'multer-s3'
 import AWS from 'aws-sdk'
@@ -49,6 +48,24 @@ export default function (router: Express) {
     router.get('/api/logout', register_contollers.logout)
 
 
-    // private routes
-    router.post('/api/user/:userID', authorization, upload.single('file'), user_contollers.imageUpload)
+    /** 
+     * @private routes
+     * @method post
+     * 
+     * for uploading profile imgage
+     *  
+    */
+    router.post('/api/user/add-profile', authorization, upload.single('file'), user_contollers.imageUpload)
+
+    /** 
+     * @private routes
+     * @method post
+     * 
+     * for deleteing profile imgage
+     *  
+    */
+    router.get('/api/user/delete-user', authorization, user_contollers.removeProfile)
+
+
+    
 }

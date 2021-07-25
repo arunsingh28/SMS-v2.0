@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
-import _user from '../models/user.model'
-
-
+import _user, { UserDocument } from '../models/user.model'
+import deleteObject from '../utils/aws'
 
 const imageUpload = async (req: Request, res: Response) => {
     const id = req.session.user
@@ -28,10 +27,24 @@ const imageUpload = async (req: Request, res: Response) => {
     return res.status(200).json({ message: 'image uploaded', data, code: res.statusCode })
 }
 
+const removeProfile = async (req: Request, res: Response) => {
+    const id = req.session.user
+    const user = await _user.findById(id)
+    const profile = (<any>user).profile
+    console.log(profile)
+    // console.log('key', key)
+    // const isDelete = await deleteObject(key).catch(() => false)
+    // if (isDelete === false) {
+    //     return res.status(203).json({ message: 'server error try again', code: res.statusCode })
+    // } else {
+    //     return res.status(200).json({ message: 'Profile Image delete.', code: res.statusCode })
+    // }
+}
+
 
 
 const module = {
-    imageUpload
+    imageUpload, removeProfile
 }
 
 export default module

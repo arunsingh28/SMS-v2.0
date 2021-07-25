@@ -36,11 +36,11 @@ const userSchema = new mongoose.Schema({
     status: {
         type: Boolean,
         default: false
-    }
-    // profile: {
-    //     type: String,
-    //     required: true
-    // }
+    },
+    profile: [{
+        key: String,
+        location: String
+    }]
 }, { timestamps: true })
 
 
@@ -61,7 +61,7 @@ userSchema.methods.comparePassword = async function (candidatePassword: string) 
     const user = this as UserDocument;
     console.log(user)
     return bcrypt.compare(candidatePassword, user.password).catch((e) => false)
-  
+
 }
 
 

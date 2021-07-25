@@ -52,10 +52,10 @@ export default function (router: Express) {
      * @private routes
      * @method post
      * 
-     * for uploading profile imgage
+     * for add profile imgage
      *  
     */
-    router.post('/api/user/add-profile', authorization, upload.single('file'), user_contollers.imageUpload)
+    router.post('/api/user/add-profile', authorization, upload.single('file'), user_contollers.addProfile)
 
     /** 
      * @private routes
@@ -64,8 +64,18 @@ export default function (router: Express) {
      * for deleteing profile imgage
      *  
     */
-    router.get('/api/user/delete-user', authorization, user_contollers.removeProfile)
+    router.get('/api/user/delete-profile', authorization, user_contollers.removeProfile)
 
 
-    
+    /** 
+     * @private routes
+     * @method post
+     * 
+     * for update profile imgage
+     *  
+    */
+    router.get('/api/user/update-profile', authorization, upload.single('file'), user_contollers.updateProfile)
+
+
+
 }

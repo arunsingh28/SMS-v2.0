@@ -71,8 +71,26 @@ const removeProfile = async (req: Request, res: Response) => {
 
 const updateProfile = async (req: Request, res: Response) => {
     const id = req.session.user
-    const user = await _user.findById(id)
-    const key = (<any>user).profile[0]?.key
+    const file = req.file
+    const key = (<any>file).key
+    const location = (<any>file).location
+    const isUpdate = await _user.findOneAndUpdate({ _id: id }, {
+        // set recent image 
+        $set: {
+            profile: {
+                key,
+                location
+            }
+        }
+    }).catch(() => false)
+    if (isUpdate === false) {
+        await deleteObject(key)
+        return res.status(500).json({ message: 'server error', code: res.statusCode })
+    } else {
+        await deleteObject(key)
+        return res.status(200).json({ message: 'Profile Image delete.', code: res.statusCode })
+    }
+
 }
 
 

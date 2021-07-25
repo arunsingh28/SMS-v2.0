@@ -33,19 +33,26 @@ const register = async (req: Request, res: Response) => {
 
 
 const login = async (req: Request, res: Response) => {
-    console.log('login function')
     const { email, password } = req.body
-    console.log(email,password)
+    console.log(email, password)
     if (!email || !password) {
         return res.status(400).json({ message: 'please fill all detail', code: res.statusCode })
     }
-    const user = await _user.findOne({ email })
-    console.log(user)
+    const user = await _user.findOneAndUpdate({ email }, {
+        $set: {
+            status: true
+        }
+    })
     // if user not found
     if (!user) {
         return res.status(203).json({ message: 'User not found', code: res.statusCode })
     } else {
-        return res.json({ message: 'logged in', data: user, code: res.statusCode })
+        if (user?.status === true) {
+            return res.status(203).json({ message: "user alredy logged in diffrent device", code: res.statusCode })
+        }
+        // genrate token
+        const token = await getToken(email)
+        return res.json({ message: 'logged in', data: user, token, code: res.statusCode })
     }
 }
 

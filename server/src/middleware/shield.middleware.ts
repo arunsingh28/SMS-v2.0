@@ -15,6 +15,7 @@ declare var process: {
 }
 
 const authorization = async (req: Request, res: Response, next: NextFunction) => {
+    console.log('auth')
     let token;
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
         token = req.headers.authorization.split(" ")[1]

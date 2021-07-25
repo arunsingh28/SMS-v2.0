@@ -1,8 +1,7 @@
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response } from 'express'
 import getToken from '../utils/token'
 import _user from '../models/user.model'
 import crypto from 'crypto'
-
 
 
 const register = async (req: Request, res: Response) => {
@@ -72,7 +71,35 @@ const logout = async (req: Request, res: Response) => {
 
 
 const updatePassword = async (req: Request, res: Response) => {
-
+    const id = req.session.user
+    const { password, confirmPassword, oldPassword } = req.body
+    // find user with this id
+    const user = await _user.findById(id)
+    if (!password || !confirmPassword || !oldPassword) {
+        return res.status(400).json({ message: 'fill all detail', code: res.statusCode })
+    }
+    try {
+        if (password != confirmPassword) {
+            return res.status(400).json({ message: 'password not matching', code: res.statusCode })
+        } else {
+            // compare old-password with client-password
+            const isMatch = await (<any>user).comparePassword(oldPassword)
+            if (isMatch === false) {
+                return res.status(401).json({ message: 'Invalid credinitals', code: res.statusCode })
+            } else {
+                const hash = await user?.encryptPassword(password)
+                // save to db
+                await user?.updateOne({
+                    $set: {
+                        password: hash
+                    }
+                }).then(() => {
+                    return res.status(200).json({ message: 'password change successfully', code: res.statusCode })
+                })
+            }
+        }
+    } catch (error) {
+    }
 }
 
 const forgotPassword = async (req: Request, res: Response) => {

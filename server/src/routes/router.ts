@@ -69,15 +69,6 @@ export default function (router: Express) {
     */
     router.get('/api/logout', register_contollers.logout)
 
-    /** 
-    * @private routes
-    * @method post
-    * 
-    * for updating password 
-    *  
-   */
-    router.post('/api/update-password', register_contollers.updatePassword)
-
 
     /** 
     * @private routes
@@ -87,6 +78,15 @@ export default function (router: Express) {
     *  
    */
     router.post('/api/forgot-password', register_contollers.forgotPassword)
+
+    /** 
+    * @private routes
+    * @method post
+    * 
+    * for updating password 
+    *  
+   */
+    router.post('/api/update-password', authorization, register_contollers.updatePassword)
 
 
     /** 

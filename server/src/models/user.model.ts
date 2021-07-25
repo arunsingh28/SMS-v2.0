@@ -4,7 +4,8 @@ import bcrypt from 'bcrypt'
 
 export interface UserDocument extends mongoose.Document {
     comparePassword(candidatePassword: string): Promise<boolean>,
-    destroyToken(): string
+    destroyToken(): string,
+    encryptPassword(newPassword: string): Promise<string>,
     email: string,
     password: string,
     createdAt: Date,
@@ -69,6 +70,13 @@ userSchema.methods.comparePassword = async function (candidatePassword: string) 
 
 }
 
+
+userSchema.methods.encryptPassword = async function (newPassword: string) {
+    console.log('plain', newPassword)
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hashSync(newPassword, salt)
+    return hash
+}
 // create new dummy token
 // userSchema.methods.destroyToken = async function () {
 //     const token = crypto.randomBytes(20).toString('hex')

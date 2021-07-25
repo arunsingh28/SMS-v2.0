@@ -74,7 +74,7 @@ export default function (router: Express) {
      * for update profile imgage
      *  
     */
-    router.get('/api/user/update-profile', authorization, upload.single('file'), user_contollers.updateProfile)
+    router.post('/api/user/update-profile', authorization, upload.single('file'), user_contollers.updateProfile)
 
 
 

@@ -15,13 +15,11 @@ const s3 = new AWS.S3({
 })
 
 const deleteObject = async (key: string) => {
-    console.log(key)
     await s3.deleteObject({
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: key
-    }, (err, data) => {
+    }, (err) => {
         if (err) throw err;
-        console.log(data)
     })
 }
 

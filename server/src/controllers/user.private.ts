@@ -1,3 +1,4 @@
+
 import { Request, Response } from 'express'
 import _user, { UserDocument } from '../models/user.model'
 import deleteObject from '../utils/aws'
@@ -9,6 +10,9 @@ import deleteObject from '../utils/aws'
 const addProfile = async (req: Request, res: Response) => {
     const id = req.session.user
     const file = req.file
+    if (!file) {
+        return res.status(203).json({ message: 'plese provide image', code: res.statusCode })
+    }
     const key = (<any>file).key
     const location = (<any>file).location
     // find by id and update the profile
@@ -61,7 +65,7 @@ const removeProfile = async (req: Request, res: Response) => {
     if (isDelete === false) {
         return res.status(203).json({ message: 'server error try again', code: res.statusCode })
     } else {
-        return res.status(200).json({ message: 'Profile Image delete.', code: res.statusCode })
+        return res.status(200).json({ message: 'Profile Image deleted.', code: res.statusCode })
     }
 }
 
@@ -72,25 +76,35 @@ const removeProfile = async (req: Request, res: Response) => {
 const updateProfile = async (req: Request, res: Response) => {
     const id = req.session.user
     const file = req.file
+    if (!file) {
+        return res.status(203).json({ message: 'plese provide image', code: res.statusCode })
+    }
     const key = (<any>file).key
     const location = (<any>file).location
-    const isUpdate = await _user.findOneAndUpdate({ _id: id }, {
-        // set recent image 
-        $set: {
-            profile: {
-                key,
-                location
+    try {
+        // delte previous image from aws
+        const user = await _user.findById(id)
+        let _key = (<any>user).profile[0].key
+        await deleteObject(_key).then(async () => {
+            // storing latest image data to db
+            const isUpdate = await _user.findOneAndUpdate({ _id: id }, {
+                // set recent image 
+                $set: {
+                    profile: {
+                        key,
+                        location
+                    }
+                }
+            }).catch(() => false)
+            if (isUpdate === false) {
+                return res.status(500).json({ message: 'server error', code: res.statusCode })
+            } else {
+                return res.status(200).json({ message: 'Profile Image updated.', code: res.statusCode })
             }
-        }
-    }).catch(() => false)
-    if (isUpdate === false) {
-        await deleteObject(key)
+        })
+    } catch (error) {
         return res.status(500).json({ message: 'server error', code: res.statusCode })
-    } else {
-        await deleteObject(key)
-        return res.status(200).json({ message: 'Profile Image delete.', code: res.statusCode })
     }
-
 }
 
 

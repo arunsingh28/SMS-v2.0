@@ -71,11 +71,18 @@ const logout = async (req: Request, res: Response) => {
 
 
 
+const updatePassword = async (req: Request, res: Response) => {
+
+}
+
+const forgotPassword = async (req: Request, res: Response) => {
+
+}
 
 
 
 const module = {
-    register, login, logout
+    register, login, logout, updatePassword, forgotPassword
 }
 
 export default module

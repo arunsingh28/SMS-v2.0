@@ -65,18 +65,12 @@ const login = async (req: Request, res: Response) => {
 
 
 
-const all = async (req: Request, res: Response) => {
-    const users = await _user.find()
-    return res.json({data:users})
-}
-
-
 
 
 
 
 const LOGIN_API = {
-    register, login, logout,all
+    register, login, logout
 }
 
 export default LOGIN_API

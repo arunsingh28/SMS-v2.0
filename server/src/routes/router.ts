@@ -16,12 +16,10 @@ declare var process: {
     }
 }
 
-
 const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_ACESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_KEY
 })
-
 
 const upload = multer({
     storage: multerS3({
@@ -36,6 +34,9 @@ const upload = multer({
         }
     })
 })
+
+
+
 
 
 

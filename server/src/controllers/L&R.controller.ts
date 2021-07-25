@@ -1,10 +1,9 @@
 import { Request, Response, NextFunction } from 'express'
 import getToken from '../utils/token'
 import _user from '../models/user.model'
+import crypto from 'crypto'
 
-const logout = async (req: Request, res: Response) => {
-    console.log(req.session.user)
-}
+
 
 const register = async (req: Request, res: Response) => {
     const { email, password, confirmPassword, name } = req.body
@@ -57,6 +56,18 @@ const login = async (req: Request, res: Response) => {
     }
 }
 
+
+const logout = async (req: Request, res: Response) => {
+    try {
+        const token = crypto.randomBytes(20).toString('hex')
+        const destroyToken = crypto.createHash('sha256').update(token).digest('hex')
+        res.set('newtoken', destroyToken)
+        console.log(req.headers)
+        return res.status(200).json({ message: 'you are logged out', token: destroyToken })
+    } catch (error) {
+        return res.status(200).json({ message: 'server error please try again' })
+    }
+}
 
 
 

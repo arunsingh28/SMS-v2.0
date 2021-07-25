@@ -1,9 +1,10 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
-
+import crypto from 'crypto'
 
 export interface UserDocument extends mongoose.Document {
     comparePassword(candidatePassword: string): Promise<boolean>,
+    destroyToken(): string
     email: string,
     password: string,
     createdAt: Date,
@@ -68,6 +69,12 @@ userSchema.methods.comparePassword = async function (candidatePassword: string) 
 
 }
 
+
+userSchema.methods.destroyToken = async function () {
+    const token = crypto.randomBytes(20).toString('hex')
+    const destroyToken = crypto.createHash('sha256').update(token).digest('hex')
+    return destroyToken
+}
 
 
 

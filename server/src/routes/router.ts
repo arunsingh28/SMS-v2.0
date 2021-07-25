@@ -43,8 +43,30 @@ const upload = multer({
 
 // base routes
 export default function (router: Express) {
+    /** 
+     * @private routes
+     * @method post
+     * 
+     * for login without token
+     *  
+    */
     router.post('/api/login', register_contollers.login)
+    /** 
+     * @private routes
+     * @method post
+     * 
+     * for register new user
+     *  
+    */
     router.post('/api/register', register_contollers.register)
+    
+    /** 
+     * @private routes
+     * @method get
+     * 
+     * logout and destroy token 
+     *  
+    */
     router.get('/api/logout', register_contollers.logout)
 
 

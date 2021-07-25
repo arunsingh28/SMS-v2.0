@@ -1,6 +1,10 @@
 import { Request, Response, NextFunction } from 'express'
 import getToken from '../utils/token'
 import _user from '../models/user.model'
+import bcrypt from 'bcrypt'
+
+
+
 
 // import sessionID from '../middleware/error'
 
@@ -38,11 +42,7 @@ const login = async (req: Request, res: Response) => {
     if (!email || !password) {
         return res.status(400).json({ message: 'please fill all detail', code: res.statusCode })
     }
-    const user = await _user.findOneAndUpdate({ email }, {
-        $set: {
-            status: true
-        }
-    })
+    const user = await _user.findOne({ email })
     // if user not found
     if (!user) {
         return res.status(203).json({ message: 'User not found', code: res.statusCode })
@@ -50,9 +50,18 @@ const login = async (req: Request, res: Response) => {
         if (user?.status === true) {
             return res.status(203).json({ message: "user alredy logged in diffrent device", code: res.statusCode })
         }
-        // genrate token
-        const token = await getToken(email)
-        return res.json({ message: 'logged in', data: user, token, code: res.statusCode })
+        // check password
+        // const isMatch = await bcrypt.compare(password, user.comparePassword).catch(() => false)
+
+        const isMatch = await user.comparePassword(password)
+        console.log(isMatch)
+        if (isMatch === false) {
+            return res.status(401).json({ message: 'Invalid credinitals', code: res.statusCode })
+        } else {
+            // genrate token
+            const token = await getToken(email)
+            return res.json({ message: 'logged in', data: user, token, code: res.statusCode })
+        }
     }
 }
 

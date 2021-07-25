@@ -3,13 +3,13 @@ import bcrypt from 'bcrypt'
 
 
 export interface UserDocument extends mongoose.Document {
+    comparePassword(candidatePassword: string): Promise<boolean>,
     email: string,
     password: string,
     createdAt: Date,
     updatedAt: Date,
     name: string,
     status: boolean,
-    comparePassword(candidatePassword: string): Promise<boolean>
 }
 
 
@@ -57,11 +57,16 @@ userSchema.pre('save', async function (next: mongoose.HookNextFunction) {
 })
 
 
-// user logged in ? =================
+// check password true || false? =================
 userSchema.methods.comparePassword = async function (candidatePassword: string) {
     const user = this as UserDocument;
     return bcrypt.compare(candidatePassword, user.password).catch((e) => false)
+  
 }
+
+
+
+
 
 const user = mongoose.model<UserDocument>('user', userSchema)
 

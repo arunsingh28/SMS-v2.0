@@ -24,11 +24,7 @@ const authorization = async (req: Request, res: Response, next: NextFunction) =>
     }
     try {
         const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY)
-        const user = await _user.findOneAndUpdate({ email: (<any>decoded).id }, {
-            $set: {
-                status: true
-            }
-        })
+        const user = await _user.findOne({ email: (<any>decoded).id })
         if (!user) {
             return res.status(203).json({ message: 'No user found ', code: res.statusCode })
         }

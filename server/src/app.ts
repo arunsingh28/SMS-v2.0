@@ -4,7 +4,7 @@ import logging from '../config/logger'
 import { connectDB } from './utils/DB'
 import Router from './routes/router'
 // import session from 'express-session'
-import Session from './middleware/session'
+import Session from './middleware/session.middleware'
 
 
 // init express variable to app ==========

@@ -10,8 +10,6 @@ const server = {
     port: SERVER_PORT
 }
 
-const config = {
-    server
-}
 
-export default config
+
+export default server

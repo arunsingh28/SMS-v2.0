@@ -4,10 +4,6 @@ import { Response, Request, NextFunction } from 'express'
 
 
 
-// interface request extends Request{
-//     user: any
-// }
-
 declare var process: {
     env: {
         JWT_SECRET_KEY: string
@@ -15,13 +11,12 @@ declare var process: {
 }
 
 const authorization = async (req: Request, res: Response, next: NextFunction) => {
-    console.log('auth')
     let token;
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
         token = req.headers.authorization.split(" ")[1]
     }
     if (!token) {
-        return res.status(401).json({ message: 'not authorize to access content', code: res.statusCode })
+        return res.status(404).json({ message: 'not authorize to access content', code: res.statusCode })
     }
     try {
         const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY)

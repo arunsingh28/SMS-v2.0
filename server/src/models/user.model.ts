@@ -11,6 +11,7 @@ export interface UserDocument extends mongoose.Document {
     createdAt: Date,
     updatedAt: Date,
     name: string,
+    otp: number,
     status: boolean,
     profile: {
         key: string,
@@ -43,6 +44,9 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    otp: {
+        type: Number,
+    },
     profile: [{
         key: String,
         location: String
@@ -58,6 +62,8 @@ userSchema.pre('save', async function (next: mongoose.HookNextFunction) {
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hashSync(user.password, salt)
     user.password = hash
+    // set or asign otp to user
+    user.otp = Math.floor(100000 + Math.random() * 900000)
     return next()
 })
 

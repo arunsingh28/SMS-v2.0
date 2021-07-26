@@ -79,7 +79,7 @@ const updatePassword = async (req: Request, res: Response) => {
     }
     try {
         if (password != confirmPassword) {
-            return res.status(400).json({ message: 'password not matching', code: res.statusCode })
+            return res.status(401).json({ message: 'password not matching', code: res.statusCode })
         } else {
             // compare old-password with client-password
             const isMatch = await (<any>user).comparePassword(oldPassword)
@@ -102,7 +102,19 @@ const updatePassword = async (req: Request, res: Response) => {
 }
 
 const forgotPassword = async (req: Request, res: Response) => {
-
+    const { email } = req.body
+    if (!email) {
+        return res.status(401).json({ message: 'please enter your email', code: res.statusCode })
+    } else {
+        const user = await _user.findOne({ email })
+        // if user not found in db
+        if (!user) {
+            return res.status(401).json({ message: 'no account found with this email', code: res.statusCode })
+        } else {
+            // if user found in db
+            // ... code here for email or otp
+        }
+    }
 }
 
 

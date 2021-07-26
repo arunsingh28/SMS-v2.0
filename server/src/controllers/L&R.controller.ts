@@ -112,8 +112,18 @@ const forgotPassword = async (req: Request, res: Response) => {
             return res.status(401).json({ message: 'no account found with this email', code: res.statusCode })
         } else {
             // if user found in db
-            // send otp to registerd mail
-            await mailGun('arunsingh@gmail.com','forgot password','hi this testing')
+
+            /** 
+             * send otp to registerd mail
+             * reapir its code for mial cause nodemail not work wit 
+            await mailGun('arun.singh28aug@gmail.com','forgot password','hi this testing')
+            */
+
+            /**
+             * send otp to register mobile number
+             * 
+             */
+            return res.status(500).json({message:'server error v1.0 dont try again.'})
         }
     }
 }

@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import getToken from '../utils/token'
 import _user from '../models/user.model'
 import crypto from 'crypto'
-
+import mailGun from '../utils/mailgun'
 
 const register = async (req: Request, res: Response) => {
     const { email, password, confirmPassword, name } = req.body
@@ -112,7 +112,8 @@ const forgotPassword = async (req: Request, res: Response) => {
             return res.status(401).json({ message: 'no account found with this email', code: res.statusCode })
         } else {
             // if user found in db
-            // ... code here for email or otp
+            // send otp to registerd mail
+            await mailGun('arunsingh@gmail.com','forgot password','hi this testing')
         }
     }
 }

@@ -1,10 +1,16 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import SEO from '../components/SEO'
+import { useState } from 'react'
 
 export default function Home() {
+
+  
+
   return (
-   <>
-   </> 
+    <div className="">
+      <SEO title="Home" description="Home" />
+      <div className="w-100">
+
+      </div>
+    </div>
   )
 }

@@ -69,6 +69,7 @@ userSchema.pre('save', async function (next: mongoose.HookNextFunction) {
 
 
 // check password true || false? =================
+
 userSchema.methods.comparePassword = async function (candidatePassword: string) {
     const user = this as UserDocument;
     console.log(user)
@@ -83,12 +84,6 @@ userSchema.methods.encryptPassword = async function (newPassword: string) {
     const hash = await bcrypt.hashSync(newPassword, salt)
     return hash
 }
-// create new dummy token
-// userSchema.methods.destroyToken = async function () {
-//     const token = crypto.randomBytes(20).toString('hex')
-//     const destroyToken = crypto.createHash('sha256').update(token).digest('hex')
-//     return destroyToken
-// }
 
 
 

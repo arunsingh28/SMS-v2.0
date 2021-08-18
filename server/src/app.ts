@@ -7,22 +7,22 @@ import Router from './routes/router'
 import Session from './middleware/session.middleware'
 
 
-// init express variable to app ==========
+// init express variable to app =====================
 const app = express()
 
 
 const NAMESPACE = 'server'
 
 
-// body parser ============================
+// body parser =======================================
 app.use(express.json())
 app.use(express.text())
 app.use(express.urlencoded({ extended: false }))
 
-// databse connection ======================
+// databse connection =================================
 connectDB()
 
-// logger ===================================
+// logger =============================================
 app.use((req, res, next) => {
     logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]`)
     res.on('finish', () => {
@@ -39,14 +39,14 @@ app.use((req, res, next) => {
 // });
 
 
-// proxy ==================================
+// proxy ==============================================
 app.set("trust proxy", 1)
 
-// session ===================================
+// session ============================================
 Session(app)
 
 
-// inti router ================================
+// inti router ========================================
 Router(app)
 
 
@@ -57,13 +57,13 @@ app.use((req, res, next) => {
 })
 
 
-// server start =================================
+// server start ======================================
 const server = app.listen(config.server.port, () => {
     console.log(`Server started on port ${config.server.port}`);
 })
 
 
-// handle server crash =========================
+// handle server crash ===============================
 process.on("unhandledRejection", (err, promise) => {
     console.log(`logged Error: ${err}`)
     server.close(() => process.exit(1))

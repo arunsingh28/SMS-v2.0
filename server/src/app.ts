@@ -50,7 +50,7 @@ Session(app)
 Router(app)
 
 
-// error handling ===============================
+// invalid url handling ===============================
 app.use((req, res, next) => {
     const error = new Error('Page not found');
     return res.status(404).json({ message: error.message, statusCode: res.statusCode });

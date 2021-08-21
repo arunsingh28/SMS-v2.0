@@ -114,13 +114,13 @@ const forgotPassword = async (req: Request, res: Response) => {
             // if user found in db
 
             /** 
-             * send otp to registerd mail
-             * reapir its code for mial cause nodemail not work wit 
+             * send otp to registered mail
+             * reapir this code for mail cause nodemail not working with it 
             await mailGun('arun.singh28aug@gmail.com','forgot password','hi this testing')
             */
 
             /**
-             * send otp to register mobile number
+             *@override send otp to register mobile number
              * 
              */
             return res.status(500).json({message:'server error v1.0 dont try again.'})

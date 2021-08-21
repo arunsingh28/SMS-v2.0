@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import SEO from "./SEO";
 
@@ -6,10 +6,30 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const Alert = useRef();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email, password);
+    // api call
+    const data = {
+      method: "post",
+      headers: {
+        "Content-Type": "Application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+      mode: "cors",
+    };
+    const result = await fetch("http://localhost:8080/api/login", data);
+    if (result.ok === true) {
+      // logged in
+    } else {
+      Alert.current.style.display = "block";
+    }
   };
+
   return (
     <>
       <SEO
@@ -27,8 +47,14 @@ export const Login = () => {
         <p className="text-sm font-medium my-2">
           Hello There ! Sign in and start managing your TEA account
         </p>
+        <div
+          className="mt-4 shadow-lg hidden bg-red-400 py-3 px-20 rounded-md text-white"
+          ref={Alert}
+        >
+          Unauthorized Access
+        </div>
         <form
-          className="w-1/3 mt-10 flex flex-col justify-center"
+          className="w-2/3 lg:w-1/3 md:w-2/3 mt-10 flex flex-col justify-center"
           onSubmit={handleSubmit}
         >
           <div className="input-row flex flex-col py-2">
@@ -37,7 +63,7 @@ export const Login = () => {
             </label>
             <input
               type="text"
-              className="h-12 border-2 p-1 rounded-lg outline-none"
+              className="h-12 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl"
               placeholder="email/@username"
               id="email"
               value={email}
@@ -50,7 +76,7 @@ export const Login = () => {
             </label>
             <input
               type="password"
-              className="h-12 border-2 p-1 rounded-lg outline-none"
+              className="h-12 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl"
               placeholder="password"
               id="password"
               value={password}
@@ -59,7 +85,7 @@ export const Login = () => {
           </div>
           <button
             type="submit"
-            className="rounded-full bg-blue-500 text-white px-10 py-3 my-10"
+            className="rounded-full w-1/2 m-auto bg-blue-500 text-white px-10 py-3 my-10 hover:bg-blue-600"
           >
             SIGN IN
           </button>

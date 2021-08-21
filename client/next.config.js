@@ -1,3 +1,7 @@
 module.exports = {
-  reactStrictMode: true,
-}
+    reactStrictMode: true,
+    images: {
+        // domains: ["image.shutterstock.com"],
+        // path: "image.shutterstock.com",
+    },
+};

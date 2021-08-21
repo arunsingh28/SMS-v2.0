@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import SEO from "./SEO";
 
 export const Login = () => {
@@ -41,6 +42,7 @@ export const Login = () => {
           src="https://image.shutterstock.com/image-vector/student-book-logo-600w-334176206.jpg"
           alt="logo"
           width="100"
+          height="100"
           className="rounded-full shadow-lg"
         />
         <h3 className="font-black text-3xl my-5">SIGN IN</h3>

@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="bg-grey-800 antialiased">
+    <div className="antialiased">
       <Component {...pageProps} />
     </div>
   );

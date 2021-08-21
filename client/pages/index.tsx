@@ -6,6 +6,6 @@ export default function Home() {
   const [isLogin, setIsLogin] = useState(false);
 
   return (
-    <div className="bg-blue-100">{isLogin ? <Dashboard /> : <Login />}</div>
+    <div className="default_bg">{isLogin ? <Dashboard /> : <Login />}</div>
   );
 }

@@ -1,16 +1,11 @@
-import SEO from '../components/SEO'
-import { useState } from 'react'
+import { Login } from "../components/login";
+import { Dashboard } from "../components/Dashboard";
+import { useState } from "react";
 
 export default function Home() {
-
-  
+  const [isLogin, setIsLogin] = useState(false);
 
   return (
-    <div className="">
-      <SEO title="Home" description="Home" />
-      <div className="w-100">
-
-      </div>
-    </div>
-  )
+    <div className="bg-blue-100">{isLogin ? <Dashboard /> : <Login />}</div>
+  );
 }

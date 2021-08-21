@@ -24,7 +24,7 @@ export const Login = () => {
     };
     const result = await fetch("http://localhost:8080/api/login", data);
     if (result.ok === true) {
-      // logged in
+      // logged in manage logged in state
     } else {
       Alert.current.style.display = "block";
     }

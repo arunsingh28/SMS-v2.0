@@ -24,8 +24,11 @@ export const Login = () => {
     };
     const Data = await fetch(`${Address.production.URI}/api/login`, data);
     const load = await Data.json();
+    console.log(load.token);
     if (load.code == 200) {
-      // logged in manage logged in state
+      // set token to localstorage
+      localStorage.setItem("token", load.token);
+      window.location.reload();
     } else {
       setError(load.message);
       Alert.current.style.display = "block";

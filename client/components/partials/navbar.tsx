@@ -11,8 +11,14 @@ const Navbar = () => {
           />
         </div>
         <div className="">
-          <button className="px-6 py-2 bg-blue-600 rounded text-white">
-            Docs
+          <button
+            className="px-6 py-2 bg-blue-600 rounded text-white"
+            onClick={() => {
+              localStorage.clear();
+              window.location.reload();
+            }}
+          >
+            Logout
           </button>
         </div>
       </div>

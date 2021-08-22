@@ -2,13 +2,12 @@ import React, { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import SEO from "./SEO";
-
+import Address from "../util/api";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [error, setError] = useState("");
   const Alert = useRef();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     // api call
@@ -23,11 +22,17 @@ export const Login = () => {
       }),
       mode: "cors",
     };
-    const result = await fetch("http://localhost:8080/api/login", data);
-    if (result.ok === true) {
+    const Data = await fetch(`${Address.production.URI}/api/login`, data);
+    const load = await Data.json();
+    if (load.code == 200) {
       // logged in manage logged in state
     } else {
+      setError(load.message);
       Alert.current.style.display = "block";
+      // hide error message after 4 second
+      setTimeout(() => {
+        Alert.current.style.display = "none";
+      }, 4000);
     }
   };
 
@@ -53,7 +58,7 @@ export const Login = () => {
           className="mt-4 shadow-lg hidden bg-red-400 py-3 px-20 rounded-md text-white"
           ref={Alert}
         >
-          Unauthorized Access
+          <h5 className="font-medium"> {error.toUpperCase()}</h5>
         </div>
         <form
           className="w-2/3 lg:w-1/3 md:w-2/3 mt-10 flex flex-col justify-center"
@@ -95,7 +100,9 @@ export const Login = () => {
         <p className="font-medium">
           Forgot Password?{" "}
           <Link href="/reset">
-            <span className="font-bold">Reset</span>
+            <span className="font-bold cursor-pointer hover:text-gray-500">
+              Reset
+            </span>
           </Link>
         </p>
         <div className="fixed bottom-0 bg-gray-400 w-full">

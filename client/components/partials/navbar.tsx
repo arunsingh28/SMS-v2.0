@@ -5,6 +5,10 @@ const Navbar = () => {
   const [admin, setAdmin] = useState(false);
   const [message, setMessage] = useState(false);
   const [setting, setSetting] = useState(false);
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
   return (
     <div className="bg-blue-500 overflow-scroll h-screen text-start hover:shadow-lg">
       {/* header */}
@@ -15,7 +19,7 @@ const Navbar = () => {
       <div className="py-5 mb-10">
         <ul>
           <Link href="/">
-            <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
+            <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex active">
               <span className="material-icons-outlined">grid_view</span>{" "}
               <span className="ml-1">Dashboard</span>
             </li>
@@ -201,7 +205,10 @@ const Navbar = () => {
             </li>
           </Link>
 
-          <button className=" bg-white py-5 w-full px-10 font-bold hover:bg-gray-200 flex justify-center">
+          <button
+            className=" bg-white py-5 w-full px-10 font-bold hover:bg-gray-200 flex justify-center"
+            onClick={handleLogout}
+          >
             <span className="material-icons-outlined">logout</span> Logout
           </button>
         </ul>

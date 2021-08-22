@@ -57,12 +57,12 @@ const login = async (req: Request, res: Response) => {
       .status(203)
       .json({ message: "User not found", code: res.statusCode });
   } else {
-    if (user?.status === true) {
-      return res.status(203).json({
-        message: "user alredy logged in diffrent device",
-        code: res.statusCode,
-      });
-    }
+    // if (user?.status === true) {
+    //   return res.status(203).json({
+    //     message: "user alredy logged in diffrent device",
+    //     code: res.statusCode,
+    //   });
+    // }
     // checking user password
     const isMatch = await user.comparePassword(password);
     if (isMatch === false) {

@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import SEO from "./SEO";
 import Address from "../util/api";
 export const Login = () => {
@@ -61,7 +60,7 @@ export const Login = () => {
           className="mt-4 shadow-lg hidden bg-red-400 py-3 px-20 rounded-md text-white"
           ref={Alert}
         >
-          <h5 className="font-medium"> {error.toUpperCase()}</h5>
+          <h5 className="font-medium"> {error && error.toUpperCase()}</h5>
         </div>
         <form
           className="w-2/3 lg:w-1/3 md:w-2/3 mt-10 flex flex-col justify-center"
@@ -109,7 +108,7 @@ export const Login = () => {
           </Link>
         </p>
         <div className="fixed bottom-0 bg-gray-400 w-full">
-          <p className="text-center">
+          <p className="text-center text-gray-200">
             ©TEA All right reserve {new Date().getFullYear()}
           </p>
         </div>

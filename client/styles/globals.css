@@ -23,6 +23,15 @@ a {
     background: #1d4ed8;
 }
 
+._ {
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.navbar {
+    width: 100%;
+}
+
 
 /* tailwindss configs */
 

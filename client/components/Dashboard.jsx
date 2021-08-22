@@ -6,11 +6,11 @@ export const Dashboard = () => {
   return (
     <>
       <SEO title="Dashbaord" description="dashboard" />
-      <div className="flex">
-        <div className="w-1/5">
+      <div className="_">
+        <div className="navbar">
           <Navbar />
         </div>
-        <div className="w-5/6">
+        <div className="workspac">
           <WorkSpace />
         </div>
       </div>

@@ -13,7 +13,7 @@ const Navbar = () => {
     <div className="bg-blue-500 overflow-scroll h-screen text-start hover:shadow-lg">
       {/* header */}
       <h2 className="font-bold text-4xl text-white border-b-2 py-4 px-2">
-        IPS <span className="font-light text-xl">Mangement</span>
+        SMS <span className="font-light text-xl">Mangement</span>
       </h2>
       {/* menu item */}
       <div className="py-5 mb-10">

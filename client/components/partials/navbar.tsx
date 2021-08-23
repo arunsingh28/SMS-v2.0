@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Router from "next/router";
 import "../../styles/Nav.module.css";
 const Navbar = () => {
   const [student, setStudent] = useState(false);
@@ -8,7 +9,7 @@ const Navbar = () => {
   const [setting, setSetting] = useState(false);
   const handleLogout = () => {
     localStorage.clear();
-    window.location.reload();
+    Router.push("/");
   };
   return (
     <div className="bg-blue-500 overflow-scroll h-screen text-start hover:shadow-lg">
@@ -161,7 +162,7 @@ const Navbar = () => {
             </li>
           </ul>
 
-          <Link href="/">
+          <Link href="/profile">
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
               <span className="material-icons-outlined">person</span>{" "}
               <span className="ml-1">My Profile</span>

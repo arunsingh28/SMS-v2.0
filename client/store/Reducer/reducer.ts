@@ -1,21 +1,23 @@
+import { ActionType } from "../Actions";
+
 export interface IUser {
   name: String;
   role: String;
 }
+
+type Action = {
+  type: String;
+  payload: IUser;
+};
 
 const initalState = {
   name: "",
   role: "",
 };
 
-type Action = {
-  type: "ADD";
-  payload: IUser;
-};
-
 export const userReducer = (state: IUser = initalState, action: Action) => {
   switch (action.type) {
-    case "ADD":
+    case ActionType.ADD:
       return {
         ...state,
         name: action.payload.name,

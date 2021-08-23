@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { IUser } from "../redux/reducer/reducer";
+import { IUser } from "../../store/Reducer/reducer";
 
 const Submenu = () => {
   const userName = useSelector<IUser, IUser["name"]>((state) => state.name);

@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import SEO from "./SEO";
 import api from "../util/api";
 import { useDispatch } from "react-redux";
 import Router from "next/router";
+import { ActionType } from "../store/Actions";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,8 +13,6 @@ export const Login = () => {
   const Alert = useRef<any>();
 
   const dispatch = useDispatch();
-
-  useEffect(() => {});
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -34,7 +33,7 @@ export const Login = () => {
       // set token to localstorage
       localStorage.setItem("token", `Bearer ${load.token}`);
       dispatch({
-        type: "ADD",
+        type: ActionType.ADD,
         payload: {
           name: load.data.name,
           role: load.data.role,

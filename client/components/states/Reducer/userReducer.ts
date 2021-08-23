@@ -1,19 +1,11 @@
 const intialState = 0;
-
-interface LoginAction {
-  type: "login";
-  payload: number;
-}
-interface Logout {
-  type: "logout";
-}
-type Action = LoginAction | Logout;
-
+import { Action } from "../actions/index.action";
+import { ActionType } from "../action-type/index";
 const reducer = (state: number = intialState, action: Action) => {
   switch (action.type) {
-    case "login":
+    case ActionType.LOGIN:
       return state + action.payload;
-    case "logout":
+    case ActionType.LOGOUT:
       return 0;
     default:
       return state;

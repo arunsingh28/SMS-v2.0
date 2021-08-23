@@ -1,12 +1,24 @@
 import { Action } from "../actions/index.action";
 import { ActionType } from "../action-type/index";
 
-const intialState = 0;
+interface IUser {
+  name: String;
+  email: String;
+  role: String;
+  profile: String;
+}
 
-const reducer = (state: number = intialState, action: Action) => {
+const intialState = {
+  name: "",
+  email: "",
+  role: "",
+  profile: "",
+};
+
+const reducer = (state: IUser = intialState, action: Action) => {
   switch (action.type) {
     case ActionType.LOGIN:
-      return state + action.payload;
+      return state;
     case ActionType.LOGOUT:
       return 0;
     default:

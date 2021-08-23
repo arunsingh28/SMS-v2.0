@@ -6,8 +6,8 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const Alert = useRef();
-  const handleSubmit = async (e) => {
+  const Alert = useRef<any>();
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     // api call
     const data = {
@@ -19,7 +19,6 @@ export const Login = () => {
         email,
         password,
       }),
-      mode: "cors",
     };
     const Data = await fetch(`${api.production.URI}/api/login`, data);
     const load = await Data.json();

@@ -3,6 +3,7 @@ import getToken from "../utils/token";
 import _user from "../models/user.model";
 import crypto from "crypto";
 import mailGun from "../utils/mailgun";
+import jwt from "jsonwebtoken";
 
 const register = async (req: Request, res: Response) => {
   const { email, password, confirmPassword, name } = req.body;

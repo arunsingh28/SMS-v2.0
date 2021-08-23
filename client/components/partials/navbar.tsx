@@ -200,6 +200,15 @@ const Navbar = () => {
           </ul>
 
           <Link href="/">
+            <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
+              <span className="material-icons-outlined">
+                home_repair_service
+              </span>{" "}
+              <span className="ml-1">Matanance</span>
+            </li>
+          </Link>
+
+          <Link href="/">
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-red-400 px-2 flex">
               <span className="material-icons-outlined">report</span>{" "}
               <span className="ml-1">Report</span>

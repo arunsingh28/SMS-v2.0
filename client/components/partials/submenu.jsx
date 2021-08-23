@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const Submenu = () => {
   return (
-    <div className="h-16 bg-gray-300 flex justify-between items-center px-5 shadow-sm subMenu">
+    <div className="h-16 bg-gray-300 flex justify-between items-center px-5 shadow-sm">
       <div className="time">{/* clock here */}</div>
       <div className="profile flex items-center">
         <h3 className="mr-2 font-medium">

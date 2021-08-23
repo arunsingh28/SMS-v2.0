@@ -117,7 +117,7 @@ const Navbar = () => {
             </li>
           </ul>
 
-          <Link href="/fees">
+          <Link href="/">
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
               <span className="material-icons-outlined">mms</span>{" "}
               <span className="ml-1">Media Gallary</span>
@@ -161,7 +161,7 @@ const Navbar = () => {
             </li>
           </ul>
 
-          <Link href="/fees">
+          <Link href="/">
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
               <span className="material-icons-outlined">person</span>{" "}
               <span className="ml-1">My Profile</span>
@@ -199,7 +199,7 @@ const Navbar = () => {
             </li>
           </ul>
 
-          <Link href="/fees">
+          <Link href="/">
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-red-400 px-2 flex">
               <span className="material-icons-outlined">report</span>{" "}
               <span className="ml-1">Report</span>

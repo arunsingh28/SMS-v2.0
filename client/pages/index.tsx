@@ -1,5 +1,5 @@
 import { Login } from "../components/login";
-import { Dashboard } from "../components/Dashboard";
+import { Dashboard } from "../components/Dashboard/Dashboard";
 import { useState, useEffect } from "react";
 
 export default function Home() {

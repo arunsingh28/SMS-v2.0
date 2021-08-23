@@ -49,7 +49,7 @@ a {
 .workArea {
     position: absolute;
     top: 60px;
-    right: 0;
+    left: 0;
     padding: 10px;
 }
 

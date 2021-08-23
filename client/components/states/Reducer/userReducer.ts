@@ -1,6 +1,8 @@
-const intialState = 0;
 import { Action } from "../actions/index.action";
 import { ActionType } from "../action-type/index";
+
+const intialState = 0;
+
 const reducer = (state: number = intialState, action: Action) => {
   switch (action.type) {
     case ActionType.LOGIN:

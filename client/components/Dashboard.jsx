@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./partials/navbar";
 import SEO from "./SEO";
-import WorkSpace from "./Workspace";
+import Info from "./Info";
 import Submenu from "./partials/submenu";
 
 export const Dashboard = () => {
@@ -15,7 +15,7 @@ export const Dashboard = () => {
         <div className="workspace">
           <Submenu />
           <div className="workArea">
-            <WorkSpace />
+            <Info />
           </div>
         </div>
       </div>

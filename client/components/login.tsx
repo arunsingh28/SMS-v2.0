@@ -1,8 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import SEO from "./SEO";
 import api from "../util/api";
 import { useDispatch } from "react-redux";
+import Router from "next/router";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,10 +12,9 @@ export const Login = () => {
   const Alert = useRef<any>();
 
   const dispatch = useDispatch();
-  // dispatch({
-  //   type: "ADD",
-  //   payload: "Arun Pratap Singh",
-  // });
+
+  useEffect(() => {});
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     // api call
@@ -30,12 +30,17 @@ export const Login = () => {
     };
     const Data = await fetch(`${api.production.URI}/api/login`, data);
     const load = await Data.json();
-
     if (load.code == 200) {
       // set token to localstorage
       localStorage.setItem("token", `Bearer ${load.token}`);
-      window.location.reload();
-      //send data to store
+      dispatch({
+        type: "ADD",
+        payload: {
+          name: load.data.name,
+          role: load.data.role,
+        },
+      });
+      Router.push("/");
     } else {
       setError(load.message);
       Alert.current.style.display = "block";

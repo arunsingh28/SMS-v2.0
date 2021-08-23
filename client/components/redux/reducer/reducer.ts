@@ -1,23 +1,27 @@
 export interface IUser {
   name: String;
+  role: String;
 }
 
 const initalState = {
   name: "",
+  role: "",
 };
 
 type Action = {
   type: "ADD";
-  payload: String;
+  payload: IUser;
 };
 
 export const userReducer = (state: IUser = initalState, action: Action) => {
-  console.log(action.payload);
   switch (action.type) {
     case "ADD":
-      return action.payload;
+      return {
+        ...state,
+        name: action.payload.name,
+        role: action.payload.role,
+      };
     default:
-      console.log(state);
       return state;
   }
 };

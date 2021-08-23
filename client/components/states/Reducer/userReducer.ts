@@ -15,15 +15,11 @@ const intialState = {
   profile: "",
 };
 
-const reducer = (state: IUser = intialState, action: Action) => {
+export const reducer = (state: IUser = intialState, action: Action) => {
   switch (action.type) {
     case ActionType.LOGIN:
       return state;
-    case ActionType.LOGOUT:
-      return 0;
     default:
       return state;
   }
 };
-
-export default reducer;

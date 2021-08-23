@@ -2,6 +2,8 @@ import React from "react";
 import Navbar from "./partials/navbar";
 import SEO from "./SEO";
 import WorkSpace from "./Workspace";
+import Submenu from "./partials/submenu";
+
 export const Dashboard = () => {
   return (
     <>
@@ -10,8 +12,11 @@ export const Dashboard = () => {
         <div className="navbar">
           <Navbar />
         </div>
-        <div className="workspac">
-          <WorkSpace />
+        <div className="workspace">
+          <Submenu />
+          <div className="workArea">
+            <WorkSpace />
+          </div>
         </div>
       </div>
     </>

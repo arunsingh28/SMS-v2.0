@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import "../../styles/Nav.module.css";
 const Navbar = () => {
   const [student, setStudent] = useState(false);
   const [admin, setAdmin] = useState(false);
@@ -199,7 +200,7 @@ const Navbar = () => {
           </ul>
 
           <Link href="/fees">
-            <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
+            <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-red-400 px-2 flex">
               <span className="material-icons-outlined">report</span>{" "}
               <span className="ml-1">Report</span>
             </li>

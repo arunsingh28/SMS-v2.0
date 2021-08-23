@@ -6,11 +6,11 @@ export default function Home() {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    chekcToken();
+    isAuth();
   });
 
   // check token isVaid
-  const chekcToken = () => {
+  const isAuth = () => {
     const token = localStorage.getItem("token");
     if (!token) {
       setIsLogin(false);

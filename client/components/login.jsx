@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
 import SEO from "./SEO";
-import Address from "../util/api";
+import api from "../util/api";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,12 +21,12 @@ export const Login = () => {
       }),
       mode: "cors",
     };
-    const Data = await fetch(`${Address.production.URI}/api/login`, data);
+    const Data = await fetch(`${api.production.URI}/api/login`, data);
     const load = await Data.json();
     console.log(load.token);
     if (load.code == 200) {
       // set token to localstorage
-      localStorage.setItem("token", load.token);
+      localStorage.setItem("token", `Bearer ${load.token}`);
       window.location.reload();
     } else {
       setError(load.message);

@@ -2,11 +2,19 @@ import React, { useState, useRef } from "react";
 import Link from "next/link";
 import SEO from "./SEO";
 import api from "../util/api";
+import { useDispatch } from "react-redux";
+
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const Alert = useRef<any>();
+
+  const dispatch = useDispatch();
+  // dispatch({
+  //   type: "ADD",
+  //   payload: "Arun Pratap Singh",
+  // });
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     // api call
@@ -22,15 +30,15 @@ export const Login = () => {
     };
     const Data = await fetch(`${api.production.URI}/api/login`, data);
     const load = await Data.json();
-    console.log(load.token);
+
     if (load.code == 200) {
       // set token to localstorage
       localStorage.setItem("token", `Bearer ${load.token}`);
       window.location.reload();
+      //send data to store
     } else {
       setError(load.message);
       Alert.current.style.display = "block";
-      // hide error message after 4 second
       setTimeout(() => {
         Alert.current.style.display = "none";
       }, 4000);

@@ -38,6 +38,12 @@
         "multer-s3": "^2.9.0"
     },
     "scripts": {
+        "start": "ts-node src/app.ts",
         "dev": "nodemon -L --config nodemon.json src/app.ts"
+    },
+    "engines": {
+        "node": "14.17.4",
+        "npm": "6.14.14",
+        "git": "2.32.0"
     }
 }

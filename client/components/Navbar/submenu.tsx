@@ -11,9 +11,10 @@ const Submenu = () => {
     <div className="h-16 bg-gray-300 flex justify-between items-center px-5 shadow-sm">
       <div className="time">{/* clock here */}</div>
       <div className="profile flex items-center">
-        <h4 className="mr-2 font-medium">
-          <span className="italic font-normal">Goodmorning</span> {userName}
-          <h3 className="text-right">{userRole}</h3>
+        <h4 className="mr-2 font-medium text-gray-600">
+          <span className="italic font-normal">Goodmorning</span>{" "}
+          {userName ? userName : "Client Error"}
+          <h3 className="text-right">{userRole ? userRole : "Client Error"}</h3>
         </h4>
         <img
           src="https://avatars.githubusercontent.com/u/48112517?v=4"

@@ -36,7 +36,7 @@ export default function Profile() {
                     spellCheck="false"
                     disabled
                     className="h-12 px-2 rounded-md text-lg font-medium text-gray-600 shadow-md outline-none border-2 border-gray-400 text-center capitalize"
-                    value={userRole}
+                    value={userRole ? userRole : "Client Error"}
                   />
                 </div>
                 <div className="w-1/2 flex flex-col gap-5">
@@ -53,7 +53,7 @@ export default function Profile() {
                       autoComplete="off"
                       spellCheck="false"
                       className="w-full h-12 px-2 rounded-md text-lg font-medium text-gray-600 shadow-mdoutline-none border-2 border-gray-400 outline-none"
-                      value={userName}
+                      value={userName ? userName : "Client Error"}
                     />
                   </div>
                   <div className="bg-gray-300 p-2 rounded-md">
@@ -67,7 +67,7 @@ export default function Profile() {
                       type="text"
                       spellCheck="false"
                       className="w-full h-12 px-2 rounded-md text-lg font-medium text-gray-600 shadow-md outline-none border-2 border-gray-400"
-                      value={userRole}
+                      value={userRole ? userRole : "Client Error"}
                     />
                   </div>
                   <div className="bg-gray-300 p-2 rounded-md">
@@ -81,7 +81,7 @@ export default function Profile() {
                       type="text"
                       spellCheck="false"
                       className="w-full h-12 px-2 rounded-md text-lg font-medium text-gray-600 shadow-md outline-none border-2 border-gray-400"
-                      value={userRole}
+                      value={userRole ? userRole : "Client Error"}
                     />
                   </div>
                   <div className="bg-gray-300 p-2 rounded-md">
@@ -95,7 +95,7 @@ export default function Profile() {
                       type="text"
                       spellCheck="false"
                       className="w-full h-12 px-2 rounded-md text-lg font-medium text-gray-600 shadow-md outline-none border-2 border-gray-400"
-                      value={userRole}
+                      value={userRole ? userRole : "Client Error"}
                     />
                   </div>
                 </div>

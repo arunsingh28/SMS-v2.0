@@ -14,6 +14,8 @@ for javascript
 - build `yarn build`
   then `yarn start`
 
+default with typescript
+
 - dev `yarn dev`
 
 ## api

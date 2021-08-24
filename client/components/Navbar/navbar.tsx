@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Router from "next/router";
-import "../../styles/Nav.module.css";
+
 const Navbar = () => {
   const [student, setStudent] = useState(false);
   const [admin, setAdmin] = useState(false);
@@ -13,7 +13,7 @@ const Navbar = () => {
     Router.push("/");
   };
   return (
-    <div className="bg-blue-500 overflow-scroll h-screen text-start hover:shadow-lg">
+    <div className="bg-blue-500 overflow-scroll h-screen text-start hover:shadow-lg hide-scroll">
       {/* header */}
       <h2 className="font-bold text-4xl text-white border-b-2 py-4 px-2">
         SMS <span className="font-light text-xl">Mangement</span>
@@ -47,10 +47,12 @@ const Navbar = () => {
             )}
           </li>
           <ul className={student ? "block py-1 px-2 bg-blue-100" : "hidden"}>
-            <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
-              <span className="material-icons-outlined mr-1">info</span>
-              Student Detail
-            </li>
+            <Link href="/student/detail">
+              <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
+                <span className="material-icons-outlined mr-1">info</span>
+                Student Detail
+              </li>
+            </Link>
             <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
               <span className="material-icons-outlined mr-1">add</span>
               Addimission

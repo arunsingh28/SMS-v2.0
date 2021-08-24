@@ -10,12 +10,14 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [show, setShow] = useState(false);
   const Alert = useRef<any>();
 
   const dispatch = useDispatch();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
     // api call
     const data = {
       method: "post",
@@ -30,7 +32,6 @@ export const Login = () => {
     const Data = await fetch(`${api.production.URI}/api/login`, data);
     const load = await Data.json();
     if (load.code == 200) {
-      // set token to localstorage
       localStorage.setItem("token", `Bearer ${load.token}`);
       dispatch({
         type: ActionType.ADD,
@@ -42,9 +43,9 @@ export const Login = () => {
       Router.push("/");
     } else {
       setError(load.message);
-      Alert.current.style.display = "block";
+      Alert.current.style.display! = "block";
       setTimeout(() => {
-        Alert.current.style.display = "none";
+        Alert.current.style.display! = "none";
       }, 4000);
     }
   };
@@ -56,16 +57,17 @@ export const Login = () => {
         description="Login page for Indian public school mangement"
       />
       <div className="flex flex-col justify-center items-center h-screen">
-        <img
+        {/* <img
           src="https://image.shutterstock.com/image-vector/student-book-logo-600w-334176206.jpg"
           alt="logo"
           width="100"
           height="100"
           className="rounded-full shadow-lg"
-        />
-        <h3 className="font-black text-3xl my-5">SIGN IN</h3>
+        /> */}
+        <h1 className="text-4xl my-10">SMS</h1>
+        {/* <h3 className="font-black text-3xl my-5">SIGN IN</h3> */}
         <p className="text-sm font-medium my-2">
-          Hello There ! Sign in and start managing your TEA account
+          Hello There ! Sign in and start managing your SMS account
         </p>
         <div
           className="mt-4 shadow-lg hidden bg-red-400 py-3 px-20 rounded-md text-white"
@@ -83,25 +85,41 @@ export const Login = () => {
             </label>
             <input
               type="text"
-              className="h-12 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl"
+              className="h-12 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl focus:border-blue-600"
               placeholder="email/@username"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="input-row flex flex-col py-2">
+          <div className="input-row flex flex-col py-2 relative">
             <label htmlFor="password" className="font-bold text-gray-600 py-1">
               Password
             </label>
             <input
-              type="password"
-              className="h-12 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl"
+              type={show ? "text" : "password"}
+              className={
+                show
+                  ? "h-12 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl border-1 border-blue-600"
+                  : "h-12 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl"
+              }
               placeholder="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <span
+              className={
+                show
+                  ? "material-icons-outlined absolute right-2 bottom-5 cursor-pointer text-blue-600"
+                  : "material-icons-outlined absolute right-2 bottom-5 cursor-pointer hover:text-blue-600"
+              }
+              onClick={() => {
+                setShow(!show);
+              }}
+            >
+              visibility_off
+            </span>
           </div>
           <button
             type="submit"
@@ -111,10 +129,10 @@ export const Login = () => {
           </button>
         </form>
         <p className="font-medium">
-          Forgot Password?{" "}
+          Have any Issue?{" "}
           <Link href="/reset">
             <span className="font-bold cursor-pointer hover:text-gray-500">
-              Reset
+              Contact us
             </span>
           </Link>
         </p>

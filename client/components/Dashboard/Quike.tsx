@@ -1,5 +1,5 @@
 import React from "react";
-import SubMenu from "../partials/submenu";
+import SubMenu from "../Navbar/submenu";
 const Quike = () => {
   return (
     <div className="bg-gray-100 py-5 rounded-md shadow-md mx-5 my-5 px-20">

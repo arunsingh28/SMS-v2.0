@@ -7,6 +7,7 @@ const Navbar = () => {
   const [admin, setAdmin] = useState(false);
   const [message, setMessage] = useState(false);
   const [setting, setSetting] = useState(false);
+
   const handleLogout = () => {
     localStorage.clear();
     Router.push("/");
@@ -21,8 +22,8 @@ const Navbar = () => {
       <div className="py-5 mb-10">
         <ul>
           <Link href="/">
-            <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex active">
-              <span className="material-icons-outlined">grid_view</span>{" "}
+            <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
+              <span className="material-icons-outlined">grid_view</span>
               <span className="ml-1">Dashboard</span>
             </li>
           </Link>
@@ -164,7 +165,7 @@ const Navbar = () => {
 
           <Link href="/profile">
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
-              <span className="material-icons-outlined">person</span>{" "}
+              <span className="material-icons-outlined">person</span>
               <span className="ml-1">My Profile</span>
             </li>
           </Link>

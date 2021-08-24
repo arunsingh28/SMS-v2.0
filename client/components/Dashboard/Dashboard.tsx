@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../partials/navbar";
+import Navbar from "../Navbar/navbar";
 import SEO from "../SEO";
-import Submenu from "../partials/submenu";
+import Submenu from "../Navbar/submenu";
 import Quike from "./Quike";
 import RecentActivity from "./RecentActivity";
 

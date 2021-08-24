@@ -21,7 +21,7 @@ const Navbar = () => {
       {/* menu item */}
       <div className="py-5 mb-10">
         <ul>
-          <Link href="/">
+          <Link href="/" passHref>
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
               <span className="material-icons-outlined">grid_view</span>
               <span className="ml-1">Dashboard</span>
@@ -47,7 +47,7 @@ const Navbar = () => {
             )}
           </li>
           <ul className={student ? "block py-1 px-2 bg-blue-100" : "hidden"}>
-            <Link href="/student/detail">
+            <Link href="/student/detail" passHref>
               <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
                 <span className="material-icons-outlined mr-1">info</span>
                 Student Detail
@@ -75,7 +75,7 @@ const Navbar = () => {
             </li>
           </ul>
 
-          <Link href="/">
+          <Link href="/" passHref>
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
               <span className="material-icons-outlined">local_library</span>{" "}
               <span className="ml-1">Academic</span>
@@ -121,7 +121,7 @@ const Navbar = () => {
             </li>
           </ul>
 
-          <Link href="/">
+          <Link href="/" passHref>
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
               <span className="material-icons-outlined">mms</span>{" "}
               <span className="ml-1">Media Gallary</span>
@@ -165,7 +165,7 @@ const Navbar = () => {
             </li>
           </ul>
 
-          <Link href="/profile">
+          <Link href="/profile" passHref>
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
               <span className="material-icons-outlined">person</span>
               <span className="ml-1">My Profile</span>
@@ -203,7 +203,7 @@ const Navbar = () => {
             </li>
           </ul>
 
-          <Link href="/">
+          <Link href="/" passHref>
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
               <span className="material-icons-outlined">
                 home_repair_service
@@ -212,7 +212,7 @@ const Navbar = () => {
             </li>
           </Link>
 
-          <Link href="/">
+          <Link href="/" passHref>
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-red-400 px-2 flex">
               <span className="material-icons-outlined">report</span>{" "}
               <span className="ml-1">Report</span>

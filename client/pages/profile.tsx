@@ -26,11 +26,11 @@ export default function Profile() {
             <div className="px-10 py-10 bg-gray-200 rounded-md shadow-lg m-10">
               <div className=" flex justify-between items-center gap-4 ">
                 <div className="w-1/2 flex flex-col items-center gap-5">
-                  <img
+                  {/* <img
                     src="https://avatars.githubusercontent.com/u/48112517?v=4"
                     alt="userProfile"
                     className="h-60 rounded-md"
-                  />
+                  /> */}
                   <input
                     type="text"
                     spellCheck="false"

@@ -16,11 +16,11 @@ const Submenu = () => {
           {userName ? userName : "Client Error"}
           <h3 className="text-right">{userRole ? userRole : "Client Error"}</h3>
         </h4>
-        <img
+        {/* <img
           src="https://avatars.githubusercontent.com/u/48112517?v=4"
           alt="profile"
           className="rounded-full h-12"
-        />
+        /> */}
       </div>
     </div>
   );

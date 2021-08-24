@@ -130,7 +130,7 @@ export const Login = () => {
         </form>
         <p className="font-medium">
           Have any Issue?{" "}
-          <Link href="/reset">
+          <Link href="/reset" passHref>
             <span className="font-bold cursor-pointer hover:text-gray-500">
               Contact us
             </span>

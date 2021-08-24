@@ -1,7 +1,7 @@
 {
     "name": "server",
     "version": "1.0.0",
-    "main": "index.js",
+    "main": "app.js",
     "license": "MIT",
     "devDependencies": {
         "@types/aws-sdk": "^2.7.0",
@@ -38,7 +38,8 @@
         "multer-s3": "^2.9.0"
     },
     "scripts": {
-        "start": "ts-node src/app.ts",
+        "start": "node build/src/app.js",
+        "build": "tsc -p .",
         "dev": "nodemon -L --config nodemon.json src/app.ts"
     },
     "engines": {

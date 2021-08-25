@@ -1,9 +1,10 @@
-const api = {
-  // change uri for production mode
+const Production = false;
 
+const api = {
   production: {
-    // URI: "http://localhost:8080",
-    URI: "https://sms-rest-api-v1.herokuapp.com",
+    URI: Production
+      ? "https://sms-rest-api-v1.herokuapp.com"
+      : "http://localhost:8080",
   },
 };
 

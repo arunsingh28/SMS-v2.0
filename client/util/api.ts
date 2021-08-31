@@ -3,8 +3,8 @@ const Production = true;
 const api = {
   production: {
     URI: Production
-      ? "http://localhost:8080"
-       :"https://sms-rest-api-v1.herokuapp.com"
+      ? "https://sms-rest-api-v1.herokuapp.com"
+      : "http://localhost:8080"
       ,
   },
 };

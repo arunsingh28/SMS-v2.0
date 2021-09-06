@@ -4,10 +4,11 @@ import Image from "next/image";
 import SEO from "./SEO";
 import api from "../util/api";
 import { useDispatch } from "react-redux";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { ActionType } from "../store/Actions";
 import Loader from "./loader";
 import spinner from "../public/circle4.svg";
+import router from "next/router";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +18,7 @@ export const Login = () => {
   const Alert = useRef<any>();
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -35,7 +37,6 @@ export const Login = () => {
     const Data = await fetch(`${api.production.URI}/api/login`, data);
     const load = await Data.json();
     if (load.code == 200) {
-      setLoader(false);
       localStorage.setItem("token", `Bearer ${load.token}`);
       dispatch({
         type: ActionType.ADD,
@@ -44,13 +45,15 @@ export const Login = () => {
           role: load.data.role,
         },
       });
-    } else {
+      router.push("/");
       setLoader(false);
+    } else {
       setError(load.message);
       Alert.current.style.display! = "block";
       setTimeout(() => {
         Alert.current.style.display! = "none";
       }, 4000);
+      setLoader(false);
     }
   };
 
@@ -138,7 +141,7 @@ export const Login = () => {
         </form>
         <p className="font-medium">
           Have any Issue?{" "}
-          <Link href="/reset" passHref>
+          <Link href="/contact_us" passHref>
             <span className="font-bold cursor-pointer hover:text-gray-500">
               Contact us
             </span>

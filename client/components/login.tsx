@@ -1,18 +1,19 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import SEO from "./SEO";
 import api from "../util/api";
 import { useDispatch } from "react-redux";
 import Router from "next/router";
 import { ActionType } from "../store/Actions";
 import Loader from "./loader";
-
+import spinner from "../public/circle4.svg";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [show, setShow] = useState(false);
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(false);
   const Alert = useRef<any>();
 
   const dispatch = useDispatch();
@@ -126,9 +127,13 @@ export const Login = () => {
           </div>
           <button
             type="submit"
-            className="rounded-full w-1/2 m-auto bg-blue-500 text-white px-10 py-3 my-10 hover:bg-blue-600"
+            className="rounded-full transition-all w-1/2 m-auto bg-blue-500 text-white px-10 py-3 my-10 hover:bg-blue-600"
           >
-            {loader ? <Loader /> : "SIGN IN "}
+            {loader ? (
+              <Image src={spinner} alt="image" height="30" width="30" />
+            ) : (
+              "SIGN IN "
+            )}
           </button>
         </form>
         <p className="font-medium">

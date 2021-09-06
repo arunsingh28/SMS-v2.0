@@ -1,5 +1,6 @@
 import register_contollers from "../controllers/L&R.controller";
 import user_contollers from "../controllers/user.private";
+import student from "../controllers/student";
 import { Express } from "express";
 import authorization from "../middleware/shield.middleware";
 
@@ -133,4 +134,6 @@ export default function (router: Express) {
     upload.single("file"),
     user_contollers.updateProfile
   );
+
+  router.post("/api/student/detail", authorization, student.Detail);
 }

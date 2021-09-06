@@ -1,25 +1,36 @@
-import React, { MutableRefObject } from "react";
+import React, { MutableRefObject, useState } from "react";
+import Alert from "../../components/Alert_Message";
 import Navbar from "../../components/Navbar/navbar";
 import Submenu from "../../components/Navbar/submenu";
 import SEO from "../../components/SEO";
+import api from "../../util/api";
 
 export default function StudentDetail() {
   const [reg, setReg] = React.useState("");
+  const [error_msg, setError_msg] = useState("");
   const [error, setError] = React.useState(false);
   const message = React.useRef<any>();
-  const handleDetail = () => {
+  const handleDetail = async () => {
     if (reg.length < 3) {
-      message.current.classList.add("block");
-      message.current.innerHTML = "Invalid Registration Number";
+      setError_msg("Invalid Registration number");
     } else {
+      const token: any = localStorage.getItem("token");
+      const Header: HeadersInit = new Headers();
+      Header.set("authorization", token);
+      Header.set("content-type", "application/json");
+      const data = {
+        method: "post",
+        headers: Header,
+        body: JSON.stringify({
+          reg,
+        }),
+      };
       // show student data
+      const cb = await fetch(`${api.production.URI}/api/student/detail`, data);
+      const message_from_serve: any = await cb.json();
+      setError_msg(message_from_serve.message);
     }
   };
-
-  // setTimeout(() => {
-  //   message.current.classList.add("hide");
-  //   message.current.style.display! = "none";
-  // }, 4000);
 
   return (
     <>
@@ -30,6 +41,7 @@ export default function StudentDetail() {
         </div>
         <div className="workspace">
           <Submenu />
+
           <div className="workArea w-full">
             <div className="bg-gray-100 mx-5 py-10 rounded-md my-5 shadow-md">
               <div

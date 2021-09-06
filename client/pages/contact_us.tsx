@@ -7,9 +7,17 @@ const Contact = () => {
   return (
     <div className="h-screen">
       <SEO title="Contact us" description="Contact us page" />
-      <div className="h-1/3 bg-blue-700"></div>
+      <div className="h-1/3 bg-blue-700 flex justify-center items-center">
+        <img
+          src="https://ouch-cdn2.icons8.com/cRcyWU3CWZRI0Vmed5qNqLu-61XofFBJhfW6UGkZrFI/rs:fit:1420:912/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNDM5/L2Y1MDIwMTA3LTIz/ZWMtNGNiNi04OTli/LWJlODA2MWJlYWE0/Mi5zdmc.png"
+          alt="logo"
+          height="200"
+          width="200"
+          className="absolute top-10 pointer-events-none"
+        />
+      </div>
       <div className="flex justify-center items-start -mt-40">
-        <div className="bg-white w-1/2 rounded-md shadow-lg py-10">
+        <div className="bg-white w-2/3 rounded-md shadow-lg py-10">
           <div className="m-auto flex justify-center items-center">
             <img
               src="https://ouch-cdn2.icons8.com/5i6_E8WXRbDNaweOEJSsWnluUH8rfFfNTEv7g9m06fU/rs:fit:579:912/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvOTA4/L2IwYWIzZGE2LTA0/ZWItNDJlYy1iNjMz/LTE4MmQ5YmVlMTY0/MS5zdmc.png"
@@ -24,7 +32,7 @@ const Contact = () => {
             <div className="flex-1">
               <div className="flex flex-col">
                 <label htmlFor="name" className="text-gray-400 font-semibold">
-                  Your name*
+                  Your name *
                 </label>
                 <input
                   type="text"
@@ -34,11 +42,11 @@ const Contact = () => {
               </div>
               <div className="flex flex-col mt-3">
                 <label htmlFor="name" className="text-gray-400 font-semibold">
-                  Name*
+                  City name *
                 </label>
                 <input
                   type="text"
-                  placeholder="awsomename"
+                  placeholder="City"
                   className="border h-12 mt-2 rounded-md pl-2"
                 />
               </div>
@@ -46,7 +54,7 @@ const Contact = () => {
             <div className="flex-1">
               <div className="flex flex-col">
                 <label htmlFor="name" className="text-gray-400 font-semibold">
-                  Contact email*
+                  Contact email *
                 </label>
                 <input
                   type="text"
@@ -56,7 +64,7 @@ const Contact = () => {
               </div>
               <div className="flex flex-col mt-3">
                 <label htmlFor="name" className="text-gray-400 font-semibold">
-                  School name*
+                  School name *
                 </label>
                 <input
                   type="text"

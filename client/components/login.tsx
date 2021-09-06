@@ -5,19 +5,21 @@ import api from "../util/api";
 import { useDispatch } from "react-redux";
 import Router from "next/router";
 import { ActionType } from "../store/Actions";
+import Loader from "./loader";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [show, setShow] = useState(false);
+  const [loader, setLoader] = useState(true);
   const Alert = useRef<any>();
 
   const dispatch = useDispatch();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
+    setLoader(true);
     // api call
     const data = {
       method: "post",
@@ -32,6 +34,7 @@ export const Login = () => {
     const Data = await fetch(`${api.production.URI}/api/login`, data);
     const load = await Data.json();
     if (load.code == 200) {
+      setLoader(false);
       localStorage.setItem("token", `Bearer ${load.token}`);
       dispatch({
         type: ActionType.ADD,
@@ -40,8 +43,8 @@ export const Login = () => {
           role: load.data.role,
         },
       });
-      Router.push("/");
     } else {
+      setLoader(false);
       setError(load.message);
       Alert.current.style.display! = "block";
       setTimeout(() => {
@@ -118,14 +121,14 @@ export const Login = () => {
                 setShow(!show);
               }}
             >
-              visibility_off
+              {show ? "visibility" : "visibility_off"}
             </span>
           </div>
           <button
             type="submit"
             className="rounded-full w-1/2 m-auto bg-blue-500 text-white px-10 py-3 my-10 hover:bg-blue-600"
           >
-            SIGN IN
+            {loader ? <Loader /> : "SIGN IN "}
           </button>
         </form>
         <p className="font-medium">

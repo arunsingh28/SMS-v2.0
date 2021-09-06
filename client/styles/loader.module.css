@@ -1,94 +1,8 @@
-html,
-body {
-    padding: 0;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    position: relative;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-.default_bg {
-    background: #eeeeee;
-    /* background: #111827; */
-}
-
-.active {
-    background: #1d4ed8;
-}
-
-._ {
-    display: grid;
-    grid-template-columns: 20% 80%;
-}
-
-.navbar {
-    position: fixed;
-    width: 20%;
-}
-
-.workspace {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 80%;
-}
-
-.subMenu {
-    position: fixed;
-    width: 80%;
-    z-index: 1;
-}
-
-.workArea {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    padding: 10px;
-}
-
-.hide-scroll::-webkit-scrollbar {
-    display: none;
-}
-
-.hide {
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1);
-}
-
-@keyframes pulse {
-    0%,
-    100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
-    100% {
-        display: none;
-    }
-}
-
-
-/* tailwindss configs */
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* for large screen */
-
 .lds-roller {
-    /* display: inline-block; */
+    display: inline-block;
     position: relative;
-    width: 20px;
-    height: 20px;
+    width: 80px;
+    height: 80px;
 }
 
 .lds-roller div {
@@ -100,8 +14,8 @@ a {
     content: " ";
     display: block;
     position: absolute;
-    width: 5px;
-    height: 5px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: #fff;
     margin: -4px 0 0 -4px;

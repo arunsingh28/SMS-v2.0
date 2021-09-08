@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 function App() {
   return (
     <Router>
-      <Contact />
+      <Route component={Contact} path="/contact-us" />
     </Router>
   );
 }

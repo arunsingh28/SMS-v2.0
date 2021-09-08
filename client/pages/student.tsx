@@ -1,9 +1,9 @@
 import React, { MutableRefObject, useState } from "react";
-import Alert from "../../components/Alert_Message";
-import Navbar from "../../components/Navbar/navbar";
-import Submenu from "../../components/Navbar/submenu";
-import SEO from "../../components/SEO";
-import api from "../../util/api";
+import Alert from "../components/Alert_Message";
+import Navbar from "../components/Navbar/navbar";
+import Submenu from "../components/Navbar/submenu";
+import SEO from "../components/SEO";
+import api from "../util/api";
 
 export default function StudentDetail() {
   const [reg, setReg] = React.useState("");
@@ -29,6 +29,7 @@ export default function StudentDetail() {
       const cb = await fetch(`${api.production.URI}/api/student/detail`, data);
       const message_from_serve: any = await cb.json();
       setError_msg(message_from_serve.message);
+      console.log(message_from_serve.message);
     }
   };
 

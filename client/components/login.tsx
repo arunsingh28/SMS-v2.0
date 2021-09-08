@@ -92,7 +92,7 @@ export const Login = () => {
             </label>
             <input
               type="text"
-              className="h-12 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl focus:border-blue-600"
+              className="h-14 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl focus:border-blue-600"
               placeholder="email/@username"
               id="email"
               value={email}
@@ -107,8 +107,8 @@ export const Login = () => {
               type={show ? "text" : "password"}
               className={
                 show
-                  ? "h-12 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl border-1 border-blue-600"
-                  : "h-12 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl"
+                  ? "h-14 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl border-1 border-blue-600"
+                  : "h-14 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl"
               }
               placeholder="password"
               id="password"

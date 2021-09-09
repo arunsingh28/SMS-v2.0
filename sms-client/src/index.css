@@ -3,3 +3,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.app-outer-wapper {
+    background: rgb(87, 158, 252);
+}

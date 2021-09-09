@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import api from "../utils/api";
 import spinner from "../Assets/images/loader.svg";
 
@@ -10,6 +11,12 @@ export const Login = () => {
   const [show, setShow] = useState(false);
   const [loader, setLoader] = useState(false);
   const Alert = useRef<any>();
+
+  useEffect(() => {
+    document.title = "Login";
+  });
+
+  const history = useHistory();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -30,7 +37,7 @@ export const Login = () => {
     if (load.code == 200) {
       localStorage.setItem("token", `Bearer ${load.token}`);
       // routing to dashboad
-
+      history.push("/");
       setLoader(false);
     } else {
       setError(load.message);
@@ -111,7 +118,7 @@ export const Login = () => {
           </div>
           <button
             type="submit"
-            className="rounded-full transition-all w-1/2 m-auto bg-blue-500 text-white px-10 py-3 my-10 hover:bg-blue-600"
+            className="rounded-full transition-all w-1/2 m-auto bg-blue-500 text-white px-10 py-3 my-10 hover:bg-blue-600 flex items-center justify-center"
           >
             {loader ? (
               <img src={spinner} alt="image" height="30" width="30" />
@@ -122,7 +129,7 @@ export const Login = () => {
         </form>
         <p className="font-medium">
           Have any Issue?{" "}
-          <Link to="/contact_us">
+          <Link to="/contact-us">
             <span className="font-bold cursor-pointer hover:text-gray-500">
               Contact us
             </span>

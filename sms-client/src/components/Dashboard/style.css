@@ -1,0 +1,24 @@
+@media screen and (min-width: 1500px) {
+    .app-wrapper {
+        margin: 0px 200px;
+    }
+}
+
+.hide-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-bg {
+    background: linear-gradient(45deg, #406eef, #1e3a8a);
+}
+
+.bg-image {
+    background-image: url(https://images.pexels.com/photos/1292998/pexels-photo-1292998.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500);
+    background-size: cover;
+}
+
+@media screen and (min-width: 1700px) {
+    .app-wrapper {
+        margin: 0px 300px;
+    }
+}

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Redirect, useHistory } from "react-router-dom";
 import api from "../utils/api";
 import spinner from "../Assets/images/loader.svg";
+import AlertBox from "../utils/Alert";
+import Snackbar from "./Snackbar/Snackbar";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -41,10 +43,6 @@ export const Login = () => {
       setLoader(false);
     } else {
       setError(load.message);
-      Alert.current.style.display! = "block";
-      setTimeout(() => {
-        Alert.current.style.display! = "none";
-      }, 4000);
       setLoader(false);
     }
   };
@@ -52,24 +50,21 @@ export const Login = () => {
   return (
     <>
       <div className="flex flex-col justify-center items-center h-screen">
-        {/* <img
-          src="https://image.shutterstock.com/image-vector/student-book-logo-600w-334176206.jpg"
+        <img
+          src="https://ouch-cdn2.icons8.com/cRcyWU3CWZRI0Vmed5qNqLu-61XofFBJhfW6UGkZrFI/rs:fit:1420:912/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNDM5/L2Y1MDIwMTA3LTIz/ZWMtNGNiNi04OTli/LWJlODA2MWJlYWE0/Mi5zdmc.png"
           alt="logo"
           width="100"
-          height="100"
-          className="rounded-full shadow-lg"
-        /> */}
+          height="150"
+          className="rounded-full shadow-lg pointer-events-none"
+        />
         <h1 className="text-4xl my-10">SMS</h1>
         {/* <h3 className="font-black text-3xl my-5">SIGN IN</h3> */}
         <p className="text-sm font-medium my-2">
           Hello There ! Sign in and start managing your SMS account
         </p>
-        <div
-          className="mt-4 shadow-lg hidden bg-red-400 py-3 px-20 rounded-md text-white"
-          ref={Alert}
-        >
-          <h5 className="font-medium"> {error && error.toUpperCase()}</h5>
-        </div>
+
+        <Snackbar message={error} ref={Alert} />
+
         <form
           className="w-2/3 lg:w-1/3 md:w-2/3 mt-10 flex flex-col justify-center"
           onSubmit={handleSubmit}

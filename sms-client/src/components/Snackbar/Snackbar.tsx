@@ -1,17 +1,17 @@
-import React, { useState, forwardRef,useImperativeHandle } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 import "./snakebar.css";
 
 interface IProps {
   message: string;
 }
 
-const Index = forwardRef((props: IProps,ref) => {
+const Index = forwardRef((props: IProps, ref) => {
   const [showBar, setShowBar] = useState(true);
 
   useImperativeHandle(ref, () => ({
     show() {
-      alert('show')
-    }
+      alert("show");
+    },
   }));
 
   return (
@@ -36,6 +36,6 @@ const Index = forwardRef((props: IProps,ref) => {
       </div>
     </div>
   );
-};
+});
 
 export default Index;

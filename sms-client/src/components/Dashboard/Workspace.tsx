@@ -1,12 +1,14 @@
 import React from "react";
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
 const Workspace = () => {
   return (
-    <div className="bg-white h-screen">
-      <BrowserRouter>
-        <Route path="/student" component={Student} exact />
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <div className="bg-white h-screen">
+        <Switch>
+          <Route path="/student" component={Student} exact />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 };
 

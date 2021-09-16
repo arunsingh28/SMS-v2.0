@@ -4,7 +4,6 @@ import { Redirect, useHistory } from "react-router-dom";
 import api from "../utils/api";
 import spinner from "../Assets/images/loader.svg";
 import AlertBox from "../utils/Alert";
-import Snackbar from "./Snackbar/Snackbar";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -62,9 +61,7 @@ export const Login = () => {
         <p className="text-sm font-medium my-2">
           Hello There ! Sign in and start managing your SMS account
         </p>
-
-        <Snackbar message={error} ref={Alert} />
-
+        <AlertBox message={error} type="successfull" />
         <form
           className="w-2/3 lg:w-1/3 md:w-2/3 mt-10 flex flex-col justify-center"
           onSubmit={handleSubmit}
@@ -90,7 +87,7 @@ export const Login = () => {
               type={show ? "text" : "password"}
               className={
                 show
-                  ? "h-14 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl border-1 border-blue-600"
+                  ? "pr-1 h-14 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl border-1 border-blue-600"
                   : "h-14 border-2 p-1 rounded-lg outline-none shadow-md hover:shadow-xl"
               }
               placeholder="password"

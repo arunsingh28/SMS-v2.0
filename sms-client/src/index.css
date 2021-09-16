@@ -6,3 +6,7 @@
 .app-outer-wapper {
     background: rgb(87, 158, 252);
 }
+
+.text-uppercase {
+    text-transform: capitalize;
+}

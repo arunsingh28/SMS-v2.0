@@ -48,7 +48,7 @@ export const Login = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center h-screen">
+      <div className="flex flex-col justify-center items-center h-screen relative">
         <img
           src="https://ouch-cdn2.icons8.com/cRcyWU3CWZRI0Vmed5qNqLu-61XofFBJhfW6UGkZrFI/rs:fit:1420:912/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNDM5/L2Y1MDIwMTA3LTIz/ZWMtNGNiNi04OTli/LWJlODA2MWJlYWE0/Mi5zdmc.png"
           alt="logo"
@@ -61,7 +61,9 @@ export const Login = () => {
         <p className="text-sm font-medium my-2">
           Hello There ! Sign in and start managing your SMS account
         </p>
-        <AlertBox message={error} type="successfull" />
+        <div className="relative pt-32 inset-10">
+          <AlertBox message={error} type="successfull" />
+        </div>
         <form
           className="w-2/3 lg:w-1/3 md:w-2/3 mt-10 flex flex-col justify-center"
           onSubmit={handleSubmit}

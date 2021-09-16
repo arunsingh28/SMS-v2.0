@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 
 interface MProp {
   message: string;
@@ -6,9 +6,23 @@ interface MProp {
 }
 
 const AlertBox = ({ message, type }: MProp) => {
-  console.log(type);
+  const box = useRef<any>();
+
+  const [isType, setIsType] = useState(false);
+
+  if (type === "sucessfull") {
+    setIsType(true);
+  }
+
   return (
-    <div className="shadow-2xl py-3 px-20 rounded-md text-white bg-gray-600 absolute bottom-5 left-5 z-10 text-uppercase">
+    <div
+      className={
+        isType
+          ? "bg-red-900 px-20 py-4 text-white rounded-md shadow-lg z-20"
+          : "px-20 py-4 text-white rounded-md shadow-lg z-20 absolute bottom-5 left-5 bg-green-500"
+      }
+      ref={box}
+    >
       <p>{message}</p>
     </div>
   );

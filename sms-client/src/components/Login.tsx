@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Redirect, useHistory } from "react-router-dom";
 import api from "../utils/api";
 import spinner from "../Assets/images/loader.svg";
-import AlertBox from "../utils/Alert";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +12,6 @@ export const Login = () => {
   const [error, setError] = useState("");
   const [show, setShow] = useState(false);
   const [loader, setLoader] = useState(false);
-  const Alert = useRef<any>();
 
   useEffect(() => {
     document.title = "Login";
@@ -22,6 +22,9 @@ export const Login = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoader(true);
+    if (!email && !password) {
+      toast.warn("Fill all detail.");
+    }
     // api call
     const data = {
       method: "post",
@@ -42,12 +45,14 @@ export const Login = () => {
       setLoader(false);
     } else {
       setError(load.message);
+      toast.warn(error);
       setLoader(false);
     }
   };
 
   return (
     <>
+      <ToastContainer />
       <div className="flex flex-col justify-center items-center h-screen relative">
         <img
           src="https://ouch-cdn2.icons8.com/cRcyWU3CWZRI0Vmed5qNqLu-61XofFBJhfW6UGkZrFI/rs:fit:1420:912/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNDM5/L2Y1MDIwMTA3LTIz/ZWMtNGNiNi04OTli/LWJlODA2MWJlYWE0/Mi5zdmc.png"
@@ -61,9 +66,6 @@ export const Login = () => {
         <p className="text-sm font-medium my-2">
           Hello There ! Sign in and start managing your SMS account
         </p>
-        <div className="relative pt-32 inset-10">
-          <AlertBox message={error} type="successfull" />
-        </div>
         <form
           className="w-2/3 lg:w-1/3 md:w-2/3 mt-10 flex flex-col justify-center"
           onSubmit={handleSubmit}

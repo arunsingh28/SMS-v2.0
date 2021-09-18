@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 .app-outer-wapper {
-    background: rgb(87, 158, 252);
+    background: rgb(51, 54, 56);
 }
 
 .text-uppercase {

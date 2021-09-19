@@ -57,13 +57,13 @@ const Navbar = () => {
             )}
           </li>
           <ul className={student ? "block py-1 px-2 bg-blue-100" : "hidden"}>
-            <Link to="/student">
+            <Link to="/student-detail">
               <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
                 <span className="material-icons-outlined mr-1">info</span>
                 Student Detail
               </li>
             </Link>
-            <Link to="/add">
+            <Link to="/addmission">
               <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
                 <span className="material-icons-outlined mr-1">add</span>
                 Addimission
@@ -219,14 +219,14 @@ const Navbar = () => {
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
               <span className="material-icons-outlined">
                 home_repair_service
-              </span>{" "}
+              </span>
               <span className="ml-1">Matanance</span>
             </li>
           </Link>
 
-          <Link to="/">
+          <Link to="/contact-us">
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-red-400 px-2 flex">
-              <span className="material-icons-outlined">report</span>{" "}
+              <span className="material-icons-outlined">report</span>
               <span className="ml-1">Report</span>
             </li>
           </Link>

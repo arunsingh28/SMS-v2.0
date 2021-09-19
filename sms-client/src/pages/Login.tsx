@@ -64,7 +64,7 @@ export const Login = () => {
           Hello There ! Sign in and start managing your SMS account
         </p>
         <form
-          className="w-2/3 lg:w-1/3 md:w-2/3 mt-10 flex flex-col justify-center"
+          className="w-full px-8 lg:w-1/3 md:w-2/3 mt-10 flex flex-col justify-center"
           onSubmit={handleSubmit}
         >
           <div className="input-row flex flex-col py-2">

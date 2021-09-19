@@ -69,22 +69,28 @@ const Navbar = () => {
                 Addimission
               </li>
             </Link>
-            <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
-              <span className="material-icons-outlined mr-1">
-                delete_forever
-              </span>
-              Cancel Addmission
-            </li>
-            <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
-              <span className="material-icons-outlined mr-1">filter_alt</span>
-              Filter
-            </li>
-            <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
-              <span className="material-icons-outlined mr-1">
-                align_vertical_bottom
-              </span>
-              Performance
-            </li>
+            <Link to="/cancel-addmission">
+              <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
+                <span className="material-icons-outlined mr-1">
+                  delete_forever
+                </span>
+                Cancel Addmission
+              </li>
+            </Link>
+            <Link to="/filter">
+              <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
+                <span className="material-icons-outlined mr-1">filter_alt</span>
+                Filter
+              </li>
+            </Link>
+            <Link to="/performace">
+              <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
+                <span className="material-icons-outlined mr-1">
+                  align_vertical_bottom
+                </span>
+                Performance
+              </li>
+            </Link>
           </ul>
 
           <Link to="/">

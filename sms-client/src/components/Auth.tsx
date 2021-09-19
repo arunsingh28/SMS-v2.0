@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Dashboard from "./Layout";
+import Application from "./Layout";
 import { Login } from "../pages/Login";
 
 const Home = () => {
@@ -15,11 +15,12 @@ const Home = () => {
       setIsToken(true);
     }
   };
+  window.scrollTo(0, 1);
   return (
     <div>
       {isToken ? (
         <div className="app-outer-wapper">
-          <Dashboard isAuth={isToken} />
+          <Application isAuth={isToken} />
         </div>
       ) : (
         <Login />

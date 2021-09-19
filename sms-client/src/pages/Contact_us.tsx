@@ -13,11 +13,11 @@ const Contact = () => {
           alt="logo"
           height="200"
           width="200"
-          className="absolute top-10 pointer-events-none"
+          className="absolute top-7 pointer-events-none"
         />
       </div>
       <div className="flex justify-center items-start -mt-40">
-        <div className="bg-white w-2/3 rounded-md shadow-lg py-10">
+        <div className="bg-white w-full px-1 mx-4 mb-10 md:w-2/3 rounded-md shadow-lg py-10">
           <div className="m-auto flex justify-center items-center">
             <img
               src="https://ouch-cdn2.icons8.com/5i6_E8WXRbDNaweOEJSsWnluUH8rfFfNTEv7g9m06fU/rs:fit:579:912/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvOTA4/L2IwYWIzZGE2LTA0/ZWItNDJlYy1iNjMz/LTE4MmQ5YmVlMTY0/MS5zdmc.png"
@@ -28,7 +28,7 @@ const Contact = () => {
             />
             <h1 className="font-thin text-4xl">Say Hello!</h1>
           </div>
-          <div className="flex gap-5 mt-10 py-1 px-5">
+          <div className="flex gap-5 mt-10 py-1 px-5 flex-col md:flex-row">
             <div className="flex-1">
               <div className="flex flex-col">
                 <label htmlFor="name" className="text-gray-400 font-semibold">

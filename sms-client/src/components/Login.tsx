@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import api from "../utils/api";
 import spinner from "../Assets/images/loader.svg";
 import { ToastContainer, toast } from "react-toastify";
@@ -22,9 +22,6 @@ export const Login = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoader(true);
-    if (!email && !password) {
-      toast.warn("Fill all detail.");
-    }
     // api call
     const data = {
       method: "post",
@@ -45,7 +42,7 @@ export const Login = () => {
       setLoader(false);
     } else {
       setError(load.message);
-      toast.warn(error);
+      toast(error, { type: "error" });
       setLoader(false);
     }
   };

@@ -57,16 +57,18 @@ const Navbar = () => {
             )}
           </li>
           <ul className={student ? "block py-1 px-2 bg-blue-100" : "hidden"}>
-            <Link to="/student/detail">
+            <Link to="/student">
               <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
                 <span className="material-icons-outlined mr-1">info</span>
                 Student Detail
               </li>
             </Link>
-            <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
-              <span className="material-icons-outlined mr-1">add</span>
-              Addimission
-            </li>
+            <Link to="/add">
+              <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
+                <span className="material-icons-outlined mr-1">add</span>
+                Addimission
+              </li>
+            </Link>
             <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
               <span className="material-icons-outlined mr-1">
                 delete_forever

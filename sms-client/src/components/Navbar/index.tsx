@@ -1,5 +1,25 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Link, useHistory, BrowserRouter as Router } from "react-router-dom";
+import { useState, useRef } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { menuData } from "./Item";
+
+interface IMporps {
+  icon: string;
+  title: string;
+  path: string;
+  isOpen: string;
+  isClose: string;
+  submenu?: undefined;
+  menuName?: undefined;
+}
+
+const MenuItem = (data: IMporps) => {
+  return (
+    <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
+      <span className="material-icons-outlined">{data.icon}</span>
+      <span className="ml-1">{data.title}</span>
+    </li>
+  );
+};
 
 const Navbar = () => {
   const [student, setStudent] = useState(false);
@@ -7,6 +27,8 @@ const Navbar = () => {
   const [message, setMessage] = useState(false);
   const [setting, setSetting] = useState(false);
   const [toggle, setToggle] = useState(false);
+
+  const [subnav, setSubnav] = useState(false);
 
   const history = useHistory();
   const bg = useRef<any>();
@@ -31,14 +53,11 @@ const Navbar = () => {
       {/* menu item */}
       <div className="py-5 mb-10 flex flex-col">
         <ul>
-          <Link to="/">
-            <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-blue-700 px-2 flex">
-              <span className="material-icons-outlined">grid_view</span>
-              <span className="ml-1">Dashboard</span>
-            </li>
-          </Link>
+          {menuData.map((info) => {
+            return <MenuItem data={info} />;
+          })}
 
-          <li
+          {/* <li
             className={
               student
                 ? "cursor-pointer py-3 bg-blue-700 text-gray-200 font-medium px-2 relative flex justify-between"
@@ -111,7 +130,7 @@ const Navbar = () => {
             ) : (
               <span className="material-icons-outlined">expand_more</span>
             )}
-          </li>
+          </li> 
           <ul className={admin ? "block py-1 px-2 bg-blue-100" : "hidden"}>
             <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
               <span className="material-icons-outlined mr-1">payments</span>
@@ -130,32 +149,14 @@ const Navbar = () => {
               Status
             </li>
           </ul>
+*/}
 
-          <ul className={message ? "block py-1 px-2 bg-blue-100" : "hidden"}>
-            <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
-              <span className="material-icons-outlined mr-1">drafts</span>
-              Read Mail
-            </li>
-            <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
-              <span className="material-icons-outlined mr-1">
-                forward_to_inbox
-              </span>
-              Send Mail
-            </li>
-            <li className="py-2 text-gray-600 font-medium mt-1 bg-blue-200 rounded-sm px-2 hover:bg-blue-500 hover:text-white cursor-pointer flex">
-              <span className="material-icons-outlined mr-1">
-                mobile_screen_share
-              </span>
-              Watsapp Circular
-            </li>
-          </ul>
-
-          <Link to="/">
+          {/* <Link to="/">
             <li className="cursor-pointer py-3 text-gray-200 font-medium hover:bg-red-400 px-2 flex">
               <span className="material-icons-outlined">report</span>{" "}
               <span className="ml-1">Report</span>
             </li>
-          </Link>
+          </Link> */}
         </ul>
       </div>
     </div>

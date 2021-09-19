@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const userQuerySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -23,6 +23,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const newUser = mongoose.model("query", userSchema);
+const newQuery = mongoose.model("query", userQuerySchema);
 
-export default newUser;
+export default newQuery;

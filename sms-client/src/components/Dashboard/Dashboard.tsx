@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Navbar from "../Navbar";
 import Workspace from "./Workspace";
 import "./style.css";
 import { Login } from "../Login";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, HashRouter } from "react-router-dom";
 
 interface IAuth {
   isAuth: boolean;
@@ -17,7 +17,7 @@ const Dashboard = ({ isAuth }: IAuth) => {
     }
   });
   return (
-    <Router>
+    <HashRouter>
       <div className="flex app-wrapper">
         <div className="flex-2">
           <Navbar />
@@ -26,7 +26,7 @@ const Dashboard = ({ isAuth }: IAuth) => {
           <Workspace />
         </div>
       </div>
-    </Router>
+    </HashRouter>
   );
 };
 

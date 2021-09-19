@@ -231,12 +231,11 @@ const Navbar = () => {
             </li>
           </Link>
 
-          <button
-            className=" bg-white py-5 w-full px-10 font-bold hover:bg-gray-200 flex justify-center"
-            onClick={handleLogout}
-          >
-            <span className="material-icons-outlined">logout</span> Logout
-          </button>
+          <Link to="/logout" onClick={handleLogout}>
+            <button className=" bg-white py-5 w-full px-10 font-bold hover:bg-gray-200 flex justify-center">
+              <span className="material-icons-outlined">logout</span> Logout
+            </button>
+          </Link>
         </ul>
       </div>
       {/* down menu */}

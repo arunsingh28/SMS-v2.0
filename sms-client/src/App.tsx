@@ -1,8 +1,7 @@
-import React from "react";
-import Router from "./Router";
+import OutterRouter from "./Router/OuterRouting";
 
 function App() {
-  return <Router />;
+  return <OutterRouter />;
 }
 
 export default App;

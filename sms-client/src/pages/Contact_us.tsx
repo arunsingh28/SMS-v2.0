@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 // import l from "";
 const Contact = () => {
+  useEffect(() => {
+    document.title = "Contact us";
+  });
   return (
     <div className="h-screen">
       <div className="h-1/3 bg-blue-700 flex justify-center items-center">

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import Navbar from "../Navbar";
-import Workspace from "./Workspace";
-import "./style.css";
-import { Login } from "../../pages/Login";
+import Navbar from "./Navbar";
+import Workspace from "./Dashboard/Workspace";
+import "../styles/style.css";
+import { Login } from "../pages/Login";
 import { HashRouter } from "react-router-dom";
 
 interface IAuth {

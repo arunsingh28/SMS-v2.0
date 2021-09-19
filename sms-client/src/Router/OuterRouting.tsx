@@ -1,7 +1,7 @@
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import WrongRoute from "../pages/404";
 import Contact from "../pages/Contact_us";
-import Home from "../components/Home";
+import Home from "../components/Auth";
 
 const OutterRouter = () => {
   return (

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Dashboard from "./Dashboard/Dashboard";
+import Dashboard from "./Layout";
 import { Login } from "../pages/Login";
 
 const Home = () => {

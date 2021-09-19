@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import api from "../utils/api";
 import spinner from "../Assets/images/loader.svg";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,12 +12,13 @@ export const Login = () => {
   const [show, setShow] = useState(false);
   const [loader, setLoader] = useState(false);
 
+  const history = useHistory();
+
   useEffect(() => {
     document.title = "Login";
   });
 
-  const history = useHistory();
-
+  console.log(history.location.hash);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoader(true);

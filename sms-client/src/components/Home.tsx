@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Dashboard from "../components/Dashboard/Dashboard";
-import { Login } from "../components/Login";
+import { useState, useEffect } from "react";
+import Dashboard from "./Dashboard/Dashboard";
+import { Login } from "../pages/Login";
 
 const Home = () => {
   const [isToken, setIsToken] = useState(false);

@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import Navbar from "../Navbar";
 import Workspace from "./Workspace";
 import "./style.css";
-import { Login } from "../Login";
-import { BrowserRouter as Router, HashRouter } from "react-router-dom";
+import { Login } from "../../pages/Login";
+import { HashRouter } from "react-router-dom";
 
 interface IAuth {
   isAuth: boolean;

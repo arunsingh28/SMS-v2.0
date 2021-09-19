@@ -1,5 +1,6 @@
 import register_contollers from "../controllers/L&R.controller";
 import user_contollers from "../controllers/user.private";
+import contact from "../controllers/contact-us";
 import student from "../controllers/student";
 import { Express } from "express";
 import authorization from "../middleware/shield.middleware";
@@ -136,4 +137,13 @@ export default function (router: Express) {
   );
 
   router.post("/api/student/detail", authorization, student.Detail);
+
+  /**
+   * @public routes
+   * @method post
+   *
+   * for query or contact-us
+   *
+   */
+  router.post("/api/contact-us", contact.newQuery);
 }

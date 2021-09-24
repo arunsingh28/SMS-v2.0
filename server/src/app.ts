@@ -4,7 +4,6 @@ import logging from "../config/logger";
 import { connectDB } from "./utils/DB";
 import Router from "./routes/router";
 import Cors from "cors";
-// import session from 'express-session'
 import Session from "./middleware/session.middleware";
 
 // init express variable to app =====================
@@ -53,6 +52,9 @@ Session(app);
 
 // inti router ========================================
 Router(app);
+
+// Admin router ========================================
+// app.use("/admin/v1", require("./routes/admin"));
 
 // invalid url handling ===============================
 app.use((req, res, next) => {

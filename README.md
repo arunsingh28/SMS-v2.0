@@ -5,6 +5,7 @@ school management system (SMS)
 ## Framework use
 
 - Frontend (Next)
+- Frontend (React)[v1.2]
 - Backend (Express)
 
 ## Script

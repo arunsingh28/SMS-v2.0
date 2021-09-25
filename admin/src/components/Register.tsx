@@ -1,23 +1,25 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import Call from "../../api";
+import Call from "../api";
 
-const Auth = () => {
-  const [username, setUsername] = useState("");
+const Register = () => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [state, setState] = useState(false);
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
     setState(true);
-    const info = await fetch(Call.Production.URI + "/login", {
+    const info = await fetch(Call.Production.URI + "/register", {
       method: "POST",
       headers: {
         "Content-Type": "Application/json",
       },
       body: JSON.stringify({
-        username,
+        email,
         password,
+        name,
       }),
     });
     const data = await info.json();
@@ -27,16 +29,19 @@ const Auth = () => {
   return (
     <div className="text-center mt-5">
       <ToastContainer />
-      <h1 className="text-2xl font-extrabold">Admin Panel</h1>
-      <div className="flex justify-center items-center py-48">
+      <h1 className="text-2xl font-extrabold text-gray-600">Admin Panel</h1>
+      <div className="py-40">
+        <h1 className="mb-10 text-gray-600 text-xl font-bold">
+          Add new account
+        </h1>
         <form
           onSubmit={handleLogin}
-          className="flex flex-col justify-center items-center"
+          className="w-1/2 m-auto p-5 pt-10 flex flex-col justify-center items-center shadow-2xl"
         >
           <input
             type="email"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="pl-2 h-16 w-80 bg-gray-100 rounded-md shadow-md outline-none"
             placeholder="username"
             required={true}
@@ -47,6 +52,14 @@ const Auth = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="pl-2 h-16 w-80 bg-gray-100 mt-10 rounded-md shadow-md outline-none"
             placeholder="password"
+            required={true}
+          />
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="pl-2 h-16 w-80 bg-gray-100 mt-10 rounded-md shadow-md outline-none"
+            placeholder="Name"
             required={true}
           />
           <button
@@ -65,4 +78,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default Register;

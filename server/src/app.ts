@@ -3,6 +3,7 @@ import config from "../config/config";
 import logging from "../config/logger";
 import { connectDB } from "./utils/DB";
 import Router from "./routes/router";
+import AdminRouter from "./routes/admin";
 import Cors from "cors";
 import Session from "./middleware/session.middleware";
 
@@ -40,7 +41,7 @@ app.use((req, res, next) => {
 // app.use((req, res, next) => {
 //   res.append("Access-Control-Allow-Origin", ["*"]);
 //   res.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-//   res.append("Access-Control-Allow-Headers", "Content-Type");
+//   res.append("Access-Control-Allow-Headers", "application/json");
 //   next();
 // });
 
@@ -50,11 +51,10 @@ app.use((req, res, next) => {
 // session ============================================
 Session(app);
 
-// inti router ========================================
+// Public router ========================================
 Router(app);
-
 // Admin router ========================================
-// app.use("/admin/v1", require("./routes/admin"));
+AdminRouter(app);
 
 // invalid url handling ===============================
 app.use((req, res, next) => {
@@ -70,7 +70,7 @@ const server = app.listen(config.port, () => {
 });
 
 // handle server crash ===============================
-// process.on("unhandledRejection", (err, promise) => {
-//   console.log(`logged Error: ${err}`);
-//   server.close(() => process.exit(1));
-// });
+process.on("unhandledRejection", (err, promise) => {
+  console.log(`logged Error: ${err}`);
+  server.close(() => process.exit(1));
+});

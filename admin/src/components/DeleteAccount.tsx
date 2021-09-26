@@ -5,24 +5,46 @@ import Call from "../api";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
-  const [state, setState] = useState(false);
+  const [btnstate, setBtnState] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSucess] = useState("");
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
-    setState(true);
-    const info = await fetch(Call.Production.URI + "/accountTerminate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify({
-        email,
-        code,
-      }),
-    });
-    const data = await info.json();
-    console.log(data);
-    toast.loading("Loading...");
+    setBtnState(true);
+    let Decide = () => {
+      const resolveAfter4sec = new Promise(async (resolve, reject) => {
+        const info = await fetch(Call.Production.URI + "/accountTerminate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "Application/json",
+          },
+          body: JSON.stringify({
+            email,
+            code,
+          }),
+        });
+        const data = await info.json();
+        if (data.type === "success") {
+          setTimeout(resolve, 4000);
+          setSucess(data.message);
+        }
+        if (data.type === "error") {
+          setTimeout(reject, 4000);
+          setError(data.message);
+        } else {
+          setTimeout(reject, 4000);
+        }
+      });
+
+      toast.promise(resolveAfter4sec, {
+        pending: "Request dispatch",
+        success: success || "Delete Succssfully",
+        error: error || "Error 404",
+      });
+    };
+    Decide();
+    setBtnState(false);
   };
   return (
     <div className="text-center mt-5">
@@ -54,11 +76,11 @@ const Register = () => {
           />
           <button
             className={
-              state
+              btnstate
                 ? "mt-10 px-16 py-4 rounded-md cursor-wait text-white bg-blue-900"
                 : "mt-10 px-16 py-4 bg-blue-700 rounded-md text-white hover:bg-blue-900"
             }
-            disabled={state ? true : false}
+            disabled={btnstate ? true : false}
           >
             Login
           </button>

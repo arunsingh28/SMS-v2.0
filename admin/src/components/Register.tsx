@@ -7,24 +7,46 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [state, setState] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSucess] = useState("");
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
     setState(true);
-    const info = await fetch(Call.Production.URI + "/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-        name,
-      }),
-    });
-    const data = await info.json();
-    console.log(data);
-    toast.loading("Loading...");
+    let Decide = () => {
+      const resolveAfter4sec = new Promise(async (resolve, reject) => {
+        const info = await fetch(Call.Production.URI + "/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "Application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+            name,
+          }),
+        });
+        const data = await info.json();
+        if (data.type === "success") {
+          setTimeout(resolve, 4000);
+          setSucess(data.message);
+        }
+        if (data.type === "error") {
+          setTimeout(reject, 4000);
+          setError(data.message);
+        } else {
+          setTimeout(reject, 4000);
+        }
+      });
+
+      toast.promise(resolveAfter4sec, {
+        pending: "Request dispatch",
+        success: success || "Accont Created.",
+        error: error || "Try again",
+      });
+    };
+    Decide();
+    setState(false);
   };
   return (
     <div className="text-center mt-5">

@@ -5,6 +5,7 @@ import _admin from "../models/admin.model";
 const Login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
   const token = await getToken(username);
+
   res.json({ token });
 };
 
@@ -22,11 +23,13 @@ const Register = async (req: Request, res: Response) => {
       message: "Account Created.",
       user,
       token,
+      type: "success",
     });
   } catch (error) {
     return res.status(501).json({
       message: "account not created",
       code: res.statusCode,
+      type: "error",
     });
   }
 };
@@ -34,7 +37,17 @@ const Register = async (req: Request, res: Response) => {
 const AccountTerminate = async (req: Request, res: Response) => {
   const { email, code } = req.body;
   if (code === "sms7894") {
-    return res.json({ message: "ok" });
+    const isUser = await _admin.findOneAndDelete(email);
+    if (isUser === null) {
+      return res.json({ message: "Account not exist.", type: "error" });
+    } else {
+      return res.json({ message: "Account deleted.", type: "success" });
+    }
+  } else {
+    return res.status(203).json({
+      message: "Invalid Code.",
+      type: "error",
+    });
   }
 };
 

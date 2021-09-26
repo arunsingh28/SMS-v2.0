@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Call from "../api";
 
@@ -67,7 +67,7 @@ const Register = () => {
             required={true}
           />
           <input
-            type="text"
+            type="password"
             value={code}
             onChange={(e) => setCode(e.target.value)}
             placeholder="Enter Code**"

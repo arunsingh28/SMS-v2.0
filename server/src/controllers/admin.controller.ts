@@ -27,7 +27,7 @@ const Register = async (req: Request, res: Response) => {
     });
   } catch (error) {
     return res.status(501).json({
-      message: "account not created",
+      message: "Account not created",
       code: res.statusCode,
       type: "error",
     });

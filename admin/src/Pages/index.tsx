@@ -2,15 +2,20 @@ import { useEffect, useState } from "react";
 import Login from "../components/Login";
 
 const Home = () => {
-  const token = localStorage.getItem("adminToken");
-  const [auth, setAuth] = useState(false);
+  const [IsToken, setIsToken] = useState(false);
 
   useEffect(() => {
-    if (token) {
-      setAuth(true);
-    }
+    checkToken();
   });
-  return <div>{auth ? <h1>Looged in</h1> : <Login />}</div>;
+  const checkToken = () => {
+    const token = localStorage.getItem("adminToken");
+    if (!token) {
+      setIsToken(false);
+    } else {
+      setIsToken(true);
+    }
+  };
+  return <div>{IsToken ? <h1></h1> : <Login />}</div>;
 };
 
 export default Home;

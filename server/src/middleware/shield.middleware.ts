@@ -21,31 +21,31 @@ const authorization = async (
     token = req.headers.authorization.split(" ")[1];
   }
   if (!token) {
-    return res
-      .status(404)
-      .json({
-        message: "not authorize to access content",
-        code: res.statusCode,
-      });
+    return res.status(404).json({
+      message: "not authorize to access content",
+      code: res.statusCode,
+      type: "error",
+    });
   }
   try {
     const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);
     const user = await _user.findOne({ email: (<any>decoded).id });
     if (!user) {
-      return res
-        .status(203)
-        .json({ message: "No user found ", code: res.statusCode });
+      return res.status(203).json({
+        message: "No user found ",
+        code: res.statusCode,
+        type: "error",
+      });
     } else {
       next();
     }
   } catch (error) {
-    return res
-      .status(401)
-      .json({
-        message: "Not authorize to access this route ",
-        error,
-        code: res.statusCode,
-      });
+    return res.status(401).json({
+      message: "Not authorize to access this route ",
+      error,
+      type: "error",
+      code: res.statusCode,
+    });
   }
 };
 

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Call from "../api";
 
@@ -8,6 +9,8 @@ const Login = () => {
   const [state, setState] = useState(false);
   const [error, setError] = useState("");
   const [success, setSucess] = useState("");
+
+  const history = useHistory();
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -26,15 +29,18 @@ const Login = () => {
         });
         const data = await info.json();
         if (data.type === "success") {
-          setTimeout(resolve, 3000);
+          setTimeout(resolve, 2000);
           setSucess(data.message);
           localStorage.setItem("adminToken", "Bearer " + data.token);
+          setTimeout(() => {
+            history.push("/");
+          }, 2200);
         }
         if (data.type === "error") {
-          setTimeout(reject, 3000);
+          setTimeout(reject, 2000);
           setError(data.message);
         } else {
-          setTimeout(reject, 4000);
+          setTimeout(reject, 2000);
         }
       });
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Call from "../api";
 
@@ -12,13 +12,17 @@ const Register = () => {
   const handleLogin = async (e: any) => {
     e.preventDefault();
     setBtnState(true);
+
+    const token = JSON.parse(localStorage.getItem("adminToken")!);
+    const requestHeader: HeadersInit = new Headers();
+    requestHeader.set("Content-Type", "application/json");
+    requestHeader.set("authorization", token);
+
     let Decide = () => {
       const resolveAfter4sec = new Promise(async (resolve, reject) => {
         const info = await fetch(Call.Production.URI + "/accountTerminate", {
           method: "POST",
-          headers: {
-            "Content-Type": "Application/json",
-          },
+          headers: requestHeader,
           body: JSON.stringify({
             email,
             code,

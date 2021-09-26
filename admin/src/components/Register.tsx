@@ -6,6 +6,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [role, setRole] = useState("");
+
   const [state, setState] = useState(false);
   const [error, setError] = useState("");
   const [success, setSucess] = useState("");
@@ -46,6 +48,10 @@ const Register = () => {
       });
     };
     Decide();
+    setEmail("");
+    setName("");
+    setPassword("");
+    setRole("");
     setState(false);
   };
   return (
@@ -82,6 +88,14 @@ const Register = () => {
             onChange={(e) => setName(e.target.value)}
             className="pl-2 h-16 w-80 bg-gray-100 mt-10 rounded-md shadow-md outline-none"
             placeholder="Name"
+            required={true}
+          />
+          <input
+            type="text"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="pl-2 h-16 w-80 bg-gray-100 mt-10 rounded-md shadow-md outline-none"
+            placeholder="Role"
             required={true}
           />
           <button

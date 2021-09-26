@@ -1,28 +1,51 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import Call from "../../api";
+import Call from "../api";
 
-const Auth = () => {
+const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [state, setState] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSucess] = useState("");
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
     setState(true);
-    const info = await fetch(Call.Production.URI + "/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });
-    const data = await info.json();
-    console.log(data);
-    toast.loading("Loading...");
+    let Decide = () => {
+      const resolveAfter4sec = new Promise(async (resolve, reject) => {
+        const info = await fetch(Call.Production.URI + "/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "Application/json",
+          },
+          body: JSON.stringify({
+            username,
+            password,
+          }),
+        });
+        const data = await info.json();
+        if (data.type === "success") {
+          setTimeout(resolve, 3000);
+          setSucess(data.message);
+          localStorage.setItem("adminToken", "Bearer " + data.token);
+        }
+        if (data.type === "error") {
+          setTimeout(reject, 3000);
+          setError(data.message);
+        } else {
+          setTimeout(reject, 4000);
+        }
+      });
+
+      toast.promise(resolveAfter4sec, {
+        pending: "Request dispatch",
+        success: success || "Logged in",
+        error: error || "Try again",
+      });
+    };
+    Decide();
+    setState(false);
   };
   return (
     <div className="text-center mt-5">
@@ -65,4 +88,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default Login;

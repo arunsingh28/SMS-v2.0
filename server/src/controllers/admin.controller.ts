@@ -1,20 +1,41 @@
 import { Request, Response } from "express";
 import getToken from "../utils/token";
 import _admin from "../models/admin.model";
+import _user from "../models/user.model";
 
 const Login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
   const token = await getToken(username);
-
-  res.json({ token });
+  const isUser = await _admin.findOne({ email: username });
+  if (isUser) {
+    const isMatch = await isUser.comparePassword(password);
+    if (isMatch == true) {
+      return res.status(200).json({
+        message: "Logged in",
+        type: "success",
+        token,
+      });
+    } else {
+      return res.status(201).json({
+        message: "Invalid Credentials",
+        type: "error",
+      });
+    }
+  } else {
+    return res.status(201).json({
+      message: "Email not exist",
+      type: "error",
+    });
+  }
 };
 
 const Register = async (req: Request, res: Response) => {
-  const { email, password, name } = req.body;
-  const newAdmin = new _admin({
+  const { email, password, name, role } = req.body;
+  const newAdmin = new _user({
     password,
     name,
     email,
+    role,
   });
   try {
     const token = await getToken(email);
@@ -27,7 +48,7 @@ const Register = async (req: Request, res: Response) => {
     });
   } catch (error) {
     return res.status(501).json({
-      message: "Account not created",
+      message: "Email already exist",
       code: res.statusCode,
       type: "error",
     });

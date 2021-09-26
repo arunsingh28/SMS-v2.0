@@ -34,6 +34,13 @@ adminSchema.pre("save", async function (next: mongoose.HookNextFunction) {
   return next();
 });
 
-const newAdmin = mongoose.model<UserDocument>("query", adminSchema);
+adminSchema.methods.comparePassword = async function (
+  candidatePassword: string
+) {
+  const user = this as UserDocument;
+  return bcrypt.compare(candidatePassword, user.password).catch((e) => false);
+};
+
+const newAdmin = mongoose.model<UserDocument>("admin", adminSchema);
 
 export default newAdmin;

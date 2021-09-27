@@ -1,7 +1,13 @@
 import { useState } from "react";
 import Auth from "./Auth";
 
-const useAuthProvider = () => {
+export interface IUseAuthProvider {
+  signIn: (cb: () => void) => void;
+  singOut: (cb: () => void) => void;
+  user: string | null;
+}
+
+const useAuthProvider = (): IUseAuthProvider => {
   const [user, setUser] = useState<null | string>(null);
 
   const signIn = (cb: () => void) => {

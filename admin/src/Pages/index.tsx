@@ -15,7 +15,7 @@ const Home = () => {
       setIsToken(true);
     }
   };
-  return <div>{IsToken ? <h1></h1> : <Login />}</div>;
+  return <div>{IsToken ? <h1>Logged in</h1> : <Login />}</div>;
 };
 
 export default Home;

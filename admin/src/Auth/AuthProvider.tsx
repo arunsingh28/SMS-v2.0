@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import useAuthProvider, { IUseAuthProvider } from "./useAuthProvider";
 
-const AuthContext = createContext<IUseAuthProvider | null>(null);
+export const AuthContext = createContext<IUseAuthProvider | null>(null);
 
 const AuthProvider: React.FC = ({ children }) => {
   const auth = useAuthProvider();

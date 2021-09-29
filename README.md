@@ -21,17 +21,8 @@ default with typescript
 
 ## api
 
-[register](http://localhost:3002/api/register)
-
-[login](http://localhost:3002/api/login)
-
-[forgot-password](http://localhost:3002/api/forgot-password)
-
-[update-password](http://localhost:3002/api/update-password)
-
-## need to be done aka 2doList
-
-- auth
-- routing
-- home layout
-- api connecction
+[register](/api/register)
+[login](/api/login)
+[forgot-password](/api/forgot-password)
+[update-password](/api/update-password)
+[adminRegister]('/admin/v1/register')

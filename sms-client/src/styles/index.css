@@ -10,3 +10,13 @@
 .text-uppercase {
     text-transform: capitalize;
 }
+
+.bg-blue-gradient {
+    background: linear-gradient(rgb(54, 147, 253), rgb(36, 36, 197));
+}
+
+.bg-image-moutain {
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url(https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500);
+    background-size: cover;
+    background-position: center;
+}

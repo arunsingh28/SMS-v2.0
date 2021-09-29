@@ -1,9 +1,8 @@
 import React from "react";
-import bulb from "../../Assets/images/light.png";
+
 const Index = () => {
   return (
-    <div className="w-full bg-blue-600 text-white rounded-lg shadow-md px-3 py-10">
-      {/* <img src={bulb} alt="" /> */}
+    <div className="w-full bg-blue-gradient text-white rounded-lg shadow-md px-3 py-10">
       <h1 className="text-3xl ">Your Product Overview</h1>
       <p className="py-2 text-sm text-gray-100">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis

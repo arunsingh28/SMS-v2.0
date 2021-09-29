@@ -1,4 +1,3 @@
-import { HashRouter } from "react-router-dom";
 import InnerRouting from "../../Router/InnerRouting";
 import Banner from "../Banner/Index";
 

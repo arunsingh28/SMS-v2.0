@@ -22,7 +22,11 @@ default with typescript
 ## api
 
 [register](/api/register)
+
 [login](/api/login)
+
 [forgot-password](/api/forgot-password)
+
 [update-password](/api/update-password)
+
 [adminRegister]('/admin/v1/register')

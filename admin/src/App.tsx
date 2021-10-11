@@ -2,20 +2,18 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./Pages/index";
 import Register from "./components/Register";
 import DeleteAccount from "./components/DeleteAccount";
-import AuthProvider from "./Auth/AuthProvider";
-import PrivateRoute from "./Auth/PrivateRoute";
+import Login from "./components/Login";
+
 const App = () => {
   return (
-    <AuthProvider>
-      <Router>
-        <Switch>
-          <Route component={Home} path="/" exact />
-          <Route component={Register} path="/n" exact />
-          <PrivateRoute component={DeleteAccount} path="/remove" exact />
-          <Route path="*" component={Wrong} />
-        </Switch>
-      </Router>
-    </AuthProvider>
+    <Router>
+      <Switch>
+        <Route component={Login} path="/" exact />
+        <Route component={Register} path="/n" exact />
+        <Route component={DeleteAccount} path="/remove" exact />
+        <Route path="*" component={Wrong} />
+      </Switch>
+    </Router>
   );
 };
 

@@ -6,31 +6,39 @@ import Filter from "../pages/student/Filter";
 import Student_detail from "../pages/student/Student_detail";
 import Performance from "../pages/student/Performance";
 import { toast, ToastContainer } from "react-toastify";
+import { AnimatedSwitch } from "react-router-transition";
 
 const InnerRouting = () => {
   return (
     <Switch>
-      {/* Dashboard route */}
-      <Route path="/" component={Dashboard} exact />
-      {/* end of Dashboard route */}
+      <AnimatedSwitch
+        atEnter={{ opacity: 0 }}
+        atLeave={{ opacity: 0 }}
+        atActive={{ opacity: 1 }}
+        className="switch-wrapper"
+      >
+        {/* Dashboard route */}
+        <Route path="/" component={Dashboard} exact />
+        {/* end of Dashboard route */}
 
-      {/* student routing */}
-      <Route path="/student-detail" component={Student_detail} exact />
-      <Route path="/addmission" component={Addmission} exact />
-      <Route path="/cancel-addmission" component={Cancel_addmission} exact />
-      <Route path="/filter" component={Filter} exact />
-      <Route path="/performace" component={Performance} exact />
-      {/* end of student routing */}
+        {/* student routing */}
+        <Route path="/student-detail" component={Student_detail} exact />
+        <Route path="/addmission" component={Addmission} exact />
+        <Route path="/cancel-addmission" component={Cancel_addmission} exact />
+        <Route path="/filter" component={Filter} exact />
+        <Route path="/performace" component={Performance} exact />
+        {/* end of student routing */}
 
-      {/* Academin route */}
-      {/* <Route path="/academic" component={} exact /> */}
-      {/* end of academic route */}
+        {/* Academin route */}
+        {/* <Route path="/academic" component={} exact /> */}
+        {/* end of academic route */}
 
-      {/* <Route path="/logout" exact render={() => <Redirect to="/" />} /> */}
+        {/* <Route path="/logout" exact render={() => <Redirect to="/" />} /> */}
 
-      {/* wrong 404 routing */}
-      <Route path="*" component={WrongRoute} />
-      {/* end of wrong 404 routing */}
+        {/* wrong 404 routing */}
+        <Route path="*" component={WrongRoute} />
+        {/* end of wrong 404 routing */}
+      </AnimatedSwitch>
     </Switch>
   );
 };

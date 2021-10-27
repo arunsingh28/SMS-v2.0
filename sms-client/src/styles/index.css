@@ -20,3 +20,14 @@
     background-size: cover;
     background-position: center;
 }
+
+
+/* routing transtion styling */
+
+.switch-wrapper {
+    position: relative;
+}
+
+.switch-wrapper>div {
+    position: absolute;
+}

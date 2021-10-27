@@ -6,6 +6,7 @@ const Workspace = () => {
     <div className="bg-white h-screen p-1">
       {/* Banner */}
       <Banner />
+
       {/* end of Banner */}
       <InnerRouting />
     </div>

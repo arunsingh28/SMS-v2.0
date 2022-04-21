@@ -1,5 +1,11 @@
 const Production = true;
 
+/**
+ * @mode 
+ * produnction is TRUE
+ * development is FALSE
+*/
+
 const api = {
   production: {
     URI: Production
@@ -9,3 +15,5 @@ const api = {
 };
 
 export default api;
+
+

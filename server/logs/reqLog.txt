@@ -148,3 +148,12 @@
 2022-08-16 15:13:52	 3bf8e4ae-35e1-4574-861e-4db5fc4795d7	 - POST /api/register
 2022-08-16 15:14:01	 96d93d67-157b-4962-b183-762fd2ca8c00	 - POST /api/register
 2022-08-16 15:14:40	 aff89d20-b6db-49e8-84b1-7a256760ba4d	 - POST /api/login
+2022-08-16 15:16:04	 ffe79776-b8d2-4221-b878-cd0a77652591	 - GET /
+2022-08-16 15:18:44	 683c3ad4-5f1a-4126-acc7-c24b9f2bdbef	 - POST /api/register
+2022-08-16 15:19:31	 ccf9066c-776d-415d-a834-5dd5cbd578a7	 - POST /api/login
+2022-08-16 15:21:54	 6d7a252c-e753-454e-bfe1-f89b49d94394	 - POST /admin/v1/register
+2022-08-16 15:22:42	 0eec3d09-90eb-4d2a-a207-27e513e65f2b	 - POST /admin/v1/register
+2022-08-16 15:24:45	 e72ed953-4a1f-41d3-ba31-83c606d233da	 - POST /admin/v1/register
+2022-08-16 15:24:54	 5a9d606a-74f6-4270-b8e2-36c98eead7cb	 - POST /admin/v1/register
+2022-08-16 15:24:57	 fedcea36-fa30-4233-b18d-707927e02cce	 - POST /admin/v1/register
+2022-08-16 15:24:59	 ff1c6f3b-5d01-4ac1-be96-452723731a81	 - POST /admin/v1/register

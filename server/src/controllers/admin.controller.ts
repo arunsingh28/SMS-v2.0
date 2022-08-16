@@ -29,15 +29,14 @@ const Login = async (req: Request, res: Response) => {
 };
 
 const Register = async (req: Request, res: Response) => {
-  const { email, password, name, role } = req.body;
+  const { email, password, name } = req.body;
   const newAdmin = new _admin({
     password,
     name,
     email,
-    role,
   });
   try {
-    if (!email || !password || !name || !role) {
+    if (!email || !password || !name) {
       return res.status(203).json({
         message: "Please fill all fields",
         type: "error",
@@ -52,6 +51,12 @@ const Register = async (req: Request, res: Response) => {
       type: "success",
     });
   } catch (error: any) {
+    if (error.code === 11000) {
+      return res.status(203).json({
+        message: "Email already exist" || error.message,
+        type: "error",
+      });
+    }
     return res.status(501).json({
       message: "server error " + error.message,
       code: res.statusCode,

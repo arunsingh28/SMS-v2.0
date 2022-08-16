@@ -31,6 +31,12 @@ const register = async (req: Request, res: Response) => {
         code: res.statusCode,
       });
     } catch (error: any) {
+      if (error.code == 11000) {
+        return res.status(203).json({
+          message: "User alredy registered",
+          code: res.statusCode,
+        });
+      }
       return res.status(501).json({
         message: "account not created" + error.message,
         code: res.statusCode,

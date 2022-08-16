@@ -4,11 +4,14 @@ import logging from "../config/logger";
 import { connectDB } from "./utils/DB";
 import Router from "./routes/router";
 import AdminRouter from "./routes/admin";
-import Cors from "cors";
+import cors from "cors";
 import Session from "./middleware/session.middleware";
+import corsOption from "./utils/corsOption";
+import errorHandler from "./utils/errorResponse";
 
 // init express variable to app =====================
 const app = express();
+
 
 const NAMESPACE = "server";
 
@@ -21,7 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 connectDB();
 
 // Policy =================================
-app.use(Cors());
+app.use(cors(corsOption));
 
 // logger =============================================
 app.use((req, res, next) => {
@@ -56,6 +59,8 @@ Router(app);
 // Admin router ========================================
 AdminRouter(app);
 
+
+
 // invalid url handling ===============================
 app.use((req, res, next) => {
   const error = new Error("Page not found");
@@ -70,7 +75,4 @@ const server = app.listen(config.port, () => {
 });
 
 // handle server crash ===============================
-process.on("unhandledRejection", (err, promise) => {
-  console.log(`logged Error: ${err}`);
-  server.close(() => process.exit(1));
-});
+errorHandler(server);

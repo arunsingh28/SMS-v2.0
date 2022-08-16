@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 
 
 declare var process: {
-    env:{
+    env: {
         JWT_SECRET_KEY: string,
         JWT_EXPIRE_TIME: number
     }

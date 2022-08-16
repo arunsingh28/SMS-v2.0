@@ -1,7 +1,19 @@
-class ErrorResponse extends Error {
-    constructor(message: string, statusCode: number) {
-        super(message)
-        statusCode = statusCode
-    }
+interface ErrorResponse {
+    message?: string;
 }
-export default ErrorResponse
+
+
+const errorHandler = (server: any) => {
+    process.on("unhandledRejection", (err: ErrorResponse, promise) => {
+        console.log(`unhanle Rejection fail: ${err.message}`);
+        process.on('uncaughtException', (err: ErrorResponse) => {
+            console.log(`Exception Error: ${err.message}`);
+            server.close(() => {
+                process.exit(1);
+            });
+        })
+    });
+
+}
+
+export default errorHandler;

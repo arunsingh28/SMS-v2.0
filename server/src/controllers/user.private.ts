@@ -91,7 +91,7 @@ const updateProfile = async (req: Request, res: Response) => {
   const key = (<any>file).key;
   const location = (<any>file).location;
   try {
-    // delte previous image from aws
+    // delete previous image from aws
     const user = await _user.findById(id);
     let _key = (<any>user).profile[0].key;
     await deleteObject(_key).then(async () => {

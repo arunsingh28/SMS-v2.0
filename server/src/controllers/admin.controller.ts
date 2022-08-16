@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import getToken from "../utils/token";
 import _admin from "../models/admin.model";
-import _user from "../models/user.model";
 
 const Login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
@@ -31,13 +30,19 @@ const Login = async (req: Request, res: Response) => {
 
 const Register = async (req: Request, res: Response) => {
   const { email, password, name, role } = req.body;
-  const newAdmin = new _user({
+  const newAdmin = new _admin({
     password,
     name,
     email,
     role,
   });
   try {
+    if (!email || !password || !name || !role) {
+      return res.status(203).json({
+        message: "Please fill all fields",
+        type: "error",
+      });
+    }
     const token = await getToken(email);
     const user = await newAdmin.save();
     return res.status(200).json({
@@ -46,9 +51,9 @@ const Register = async (req: Request, res: Response) => {
       token,
       type: "success",
     });
-  } catch (error) {
+  } catch (error: any) {
     return res.status(501).json({
-      message: "Email already exist",
+      message: "server error " + error.message,
       code: res.statusCode,
       type: "error",
     });

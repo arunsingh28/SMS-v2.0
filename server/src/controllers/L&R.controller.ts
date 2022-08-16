@@ -30,9 +30,9 @@ const register = async (req: Request, res: Response) => {
         token,
         code: res.statusCode,
       });
-    } catch (error) {
+    } catch (error: any) {
       return res.status(501).json({
-        message: "account not created",
+        message: "account not created" + error.message,
         code: res.statusCode,
       });
     }
@@ -137,7 +137,7 @@ const updatePassword = async (req: Request, res: Response) => {
           });
       }
     }
-  } catch (error) {}
+  } catch (error) { }
 };
 
 const forgotPassword = async (req: Request, res: Response) => {

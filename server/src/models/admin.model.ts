@@ -7,6 +7,7 @@ export interface UserDocument extends mongoose.Document {
   name: string;
   email: string;
   password: string;
+  role: string;
 }
 
 const adminSchema = new mongoose.Schema({
@@ -22,6 +23,11 @@ const adminSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    required: true,
+    default: "emp"
+  }
 });
 
 // hasing & salting  ==========================

@@ -72,17 +72,15 @@ userSchema.methods.comparePassword = async function (
   candidatePassword: string
 ) {
   const user = this as UserDocument;
-  console.log(user);
   return bcrypt.compare(candidatePassword, user.password).catch((e) => false);
 };
 
 userSchema.methods.encryptPassword = async function (newPassword: string) {
-  console.log("plain", newPassword);
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hashSync(newPassword, salt);
   return hash;
 };
 
-const user = mongoose.model<UserDocument>("user", userSchema);
+const emp = mongoose.model<UserDocument>("employee", userSchema);
 
-export default user;
+export default emp;

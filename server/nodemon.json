@@ -1,12 +1,20 @@
 {
     "restarable": "rs",
-    "ignore": [".git", "node_modules/", "dist/", "coverage/"],
-    "watch": ["src/"],
+    "ignore": [
+        ".git",
+        "node_modules/",
+        "dist/",
+        "coverage/"
+    ],
+    "watch": [
+        "src/**.ts"
+    ],
     "execMap": {
         "ts": "node -r ts-node/register"
     },
     "env": {
         "NODE_ENV": "development"
     },
-    "ext": "js,json,ts"
+    "ext": "js,json,ts",
+    "exec": "ts-node ./src/app.ts"
 }

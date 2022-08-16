@@ -6,27 +6,35 @@ import Router from "./routes/router";
 import AdminRouter from "./routes/admin";
 import cors from "cors";
 import Session from "./middleware/session.middleware";
-import corsOption from "./utils/corsOption";
+import corsOption from "../config/corsOption";
 import errorHandler from "./utils/errorResponse";
+import credentials from "./middleware/credentials";
+import logger from "./middleware/logEvents.middleware";
 
 // init express variable to app =====================
 const app = express();
 
 
+// databse connection =================================
+connectDB();
+
+
+// logger for file ============================================
+app.use(logger.logger)
+
 const NAMESPACE = "server";
+
+app.use(credentials)
 
 // body parser =======================================
 app.use(express.json());
-app.use(express.text());
 app.use(express.urlencoded({ extended: false }));
 
-// databse connection =================================
-connectDB();
 
 // Policy =================================
 app.use(cors(corsOption));
 
-// logger =============================================
+// logger for console =============================================
 app.use((req, res, next) => {
   logging.info(
     NAMESPACE,
@@ -41,16 +49,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use((req, res, next) => {
-//   res.append("Access-Control-Allow-Origin", ["*"]);
-//   res.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-//   res.append("Access-Control-Allow-Headers", "application/json");
-//   next();
-// });
-
-// proxy ==============================================
-// app.set("trust proxy", 1);
-
 // session ============================================
 Session(app);
 
@@ -60,13 +58,12 @@ Router(app);
 AdminRouter(app);
 
 
-
 // invalid url handling ===============================
 app.use((req, res, next) => {
-  const error = new Error("Page not found");
+  const error = new Error("invalid url");
   return res
     .status(404)
-    .json({ message: error.message, statusCode: res.statusCode });
+    .send(error.message);
 });
 
 // server start ======================================

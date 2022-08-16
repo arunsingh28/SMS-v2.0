@@ -23,6 +23,7 @@ const logEvents = async (message: string, fileName: string) => {
 }
 
 const logger = (req: Request, res: Response, next: NextFunction) => {
+    console.log('logger')
     logEvents(`${req.method} ${req.path}`, 'reqLog.txt')
     next()
 }

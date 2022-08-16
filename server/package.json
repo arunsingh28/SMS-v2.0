@@ -43,7 +43,7 @@
     "scripts": {
         "start": "node build/src/app.js",
         "build": "tsc -p .",
-        "dev:start": "nodemon -L --config nodemon.json src/app.ts"
+        "dev:start": "nodemon src/app.ts"
     },
     "engines": {
         "node": "14.17.4",

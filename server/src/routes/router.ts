@@ -78,12 +78,12 @@ export default function (router: Express) {
   router.get("/api/verify", authorization);
   /**
    * @private routes
-   * @method post
+   * @method patch
    *
    * for checking user? recovery :  create new password
    *
    */
-  router.post("/api/forgot-password", register_contollers.forgotPassword);
+  router.patch("/api/forgot-password", register_contollers.forgotPassword);
 
   /**
    * @private routes

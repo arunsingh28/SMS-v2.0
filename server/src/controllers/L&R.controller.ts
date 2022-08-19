@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import TOKEN from "../utils/token";
 import _user, { UserDocument } from "../models/user.model";
+import otpGenrator from "../utils/otpGenrator";
 import crypto from "crypto";
 
 // register api for emp
@@ -114,7 +115,6 @@ const logout = async (req: Request, res: Response) => {
 
 // change password for local emp
 const updatePassword = async (req: Request, res: Response) => {
-
   const id: any = req.session.user;
   console.log('ID------', id?._id)
   const { password, oldPassword } = req.body;
@@ -136,12 +136,11 @@ const updatePassword = async (req: Request, res: Response) => {
     } else {
       const hash = await user?.encryptPassword(password);
       // save to db
-      await user
-        ?.updateOne({
-          $set: {
-            password: hash,
-          },
-        })
+      await user?.updateOne({
+        $set: {
+          password: hash,
+        },
+      })
         .then(() => {
           return res.status(200).json({
             message: "password change successfully",
@@ -172,21 +171,23 @@ const forgotPassword = async (req: Request, res: Response) => {
         code: res.statusCode,
       });
     } else {
-      // if user found in db
-
-      /** 
-             * send otp to registered mail
-             * reapir this code for mail cause nodemail not working with it 
-            await mailGun('arun.singh28aug@gmail.com','forgot password','hi this testing')
-            */
-
-      /**
-       *@override send otp to register mobile number
-       *
-       */
-      return res
-        .status(500)
-        .json({ message: "server error v1.0 dont try again." });
+      try {
+        // change the otp into db
+        otpGenrator(email, res)
+        // send otp to email
+        return res.status(200).json({
+          // send the otp to client by email serivce by Gunmail
+          otp: user.otp,
+          name: user.name,
+          email: user.email
+        })
+      } catch (error) {
+        // catch server error
+        return res.status(500).json({
+          message: 'server error',
+          code: res.statusCode
+        })
+      }
     }
   }
 };

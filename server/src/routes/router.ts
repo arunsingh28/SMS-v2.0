@@ -3,7 +3,7 @@ import user_contollers from "../controllers/user.private";
 import contact from "../controllers/contact-us";
 import student from "../controllers/student";
 import { Express, Request, Response } from "express";
-import authorization from "../middleware/shield.middleware";
+import authorization from "../middleware/auth.middleware";
 
 import multer from "multer";
 import multerS3 from "multer-s3";
@@ -87,12 +87,12 @@ export default function (router: Express) {
 
   /**
    * @private routes
-   * @method post
+   * @method patch
    *
    * for updating password
    *
    */
-  router.post(
+  router.patch(
     "/api/update-password",
     authorization,
     register_contollers.updatePassword

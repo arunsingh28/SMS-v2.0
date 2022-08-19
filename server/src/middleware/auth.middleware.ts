@@ -29,14 +29,16 @@ const authorization = async (
   }
   try {
     const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);
-    const user = await _user.findOne({ email: (<any>decoded).id });
+    const user: any = await _user.findOne({ email: (<any>decoded).id });
     if (!user) {
       return res.status(203).json({
-        message: "No user found ",
+        message: "No user found",
         code: res.statusCode,
         type: "error",
       });
     } else {
+      // save this user to session
+      req.session.user = user
       next();
     }
   } catch (error) {

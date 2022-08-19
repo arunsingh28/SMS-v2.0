@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import TOKEN from "../utils/token";
-import _admin from "../models/admin.model";
+import _admin from "../models/user.model";
 
 const Login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
@@ -29,14 +29,15 @@ const Login = async (req: Request, res: Response) => {
 };
 
 const Register = async (req: Request, res: Response) => {
-  const { email, password, name } = req.body;
+  const { email, password, name, role, } = req.body;
   const newAdmin = new _admin({
     password,
     name,
     email,
+    role
   });
   try {
-    if (!email || !password || !name) {
+    if (!email || !password || !name || !role) {
       return res.status(203).json({
         message: "Please fill all fields",
         type: "error",

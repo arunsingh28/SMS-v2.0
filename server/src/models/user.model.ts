@@ -81,6 +81,6 @@ userSchema.methods.encryptPassword = async function (newPassword: string) {
   return hash;
 };
 
-const emp = mongoose.model<UserDocument>("employee", userSchema);
+const emp = mongoose.model<UserDocument>("user", userSchema);
 
 export default emp;

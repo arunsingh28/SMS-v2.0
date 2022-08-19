@@ -1,6 +1,6 @@
 import { Express } from "express";
 import adminController from "../controllers/admin.controller";
-import authorization from "../middleware/shield.middleware";
+import authorization from "../middleware/auth.middleware";
 
 export default function (router: Express) {
   router.post("/admin/v1/login", adminController.Login);

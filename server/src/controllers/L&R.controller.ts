@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import TOKEN from "../utils/token";
-import _user from "../models/user.model";
+import _user, { UserDocument } from "../models/user.model";
 import crypto from "crypto";
 
 // register api for emp
 const register = async (req: Request, res: Response) => {
-  const { email, password, confirmPassword, name } = req.body;
+  const { email, password, confirmPassword, name, role } = req.body;
   if (!email || !password || !confirmPassword || !name) {
     return res
       .status(400)
@@ -21,7 +21,7 @@ const register = async (req: Request, res: Response) => {
       email,
       password,
       name,
-    }).populate("data", 'password')
+    })
     try {
       const token = await TOKEN.getToken(email);
       // genrate refresh token
@@ -30,7 +30,6 @@ const register = async (req: Request, res: Response) => {
       await newUser.save();
       return res.status(200).json({
         message: "account created!",
-        data: newUser,
         token,
         refreshToken,
         code: res.statusCode,
@@ -60,19 +59,16 @@ const login = async (req: Request, res: Response) => {
       code: res.statusCode,
     });
   }
-  const user = await _user.findOne({ email }).populate("password")
+  const user: any = await _user.findOne({ email })
+  req.session.user = user
+
+  console.log('testing:::', req.session.user)
   // if user not found
   if (!user) {
     return res
       .status(203)
       .json({ message: "User not found", code: res.statusCode });
   } else {
-    // if (user?.status === true) {
-    //   return res.status(203).json({
-    //     message: "user alredy logged in diffrent device",
-    //     code: res.statusCode,
-    //   });
-    // }
     // checking user password
     const isMatch = await user.comparePassword(password);
     if (isMatch === false) {
@@ -82,15 +78,13 @@ const login = async (req: Request, res: Response) => {
     } else {
       // genrate token
       const token = await TOKEN.getToken(email);
-
       // genrate refresh token
       const refreshToken = await TOKEN.refreshToken(email);
-
       // send data to client
       return res.json({
         message: "logged in",
-        data: user,
-        token,
+        data: { name: user.name, email: user.email, role: user.role },
+        accessToken: token,
         refreshToken,
         code: res.statusCode,
       });
@@ -99,6 +93,8 @@ const login = async (req: Request, res: Response) => {
 };
 
 // logout api for emp
+
+// work on the logout api emprove it
 const logout = async (req: Request, res: Response) => {
   try {
     const token = crypto.randomBytes(20).toString("hex");
@@ -118,45 +114,46 @@ const logout = async (req: Request, res: Response) => {
 
 // change password for local emp
 const updatePassword = async (req: Request, res: Response) => {
-  const id = req.session.user;
-  const { password, confirmPassword, oldPassword } = req.body;
+
+  const id: any = req.session.user;
+  console.log('ID------', id?._id)
+  const { password, oldPassword } = req.body;
   // find user with this id
   const user = await _user.findById(id);
-  if (!password || !confirmPassword || !oldPassword) {
+  console.log('CURRENT USER: ', user)
+  if (!password || !oldPassword) {
     return res
       .status(400)
       .json({ message: "fill all detail", code: res.statusCode });
   }
   try {
-    if (password != confirmPassword) {
+    // compare old-password with client-password
+    const isMatch = await (<any>user).comparePassword(oldPassword);
+    if (isMatch === false) {
       return res
         .status(401)
-        .json({ message: "password not matching", code: res.statusCode });
+        .json({ message: "Invalid credinitals", code: res.statusCode });
     } else {
-      // compare old-password with client-password
-      const isMatch = await (<any>user).comparePassword(oldPassword);
-      if (isMatch === false) {
-        return res
-          .status(401)
-          .json({ message: "Invalid credinitals", code: res.statusCode });
-      } else {
-        const hash = await user?.encryptPassword(password);
-        // save to db
-        await user
-          ?.updateOne({
-            $set: {
-              password: hash,
-            },
-          })
-          .then(() => {
-            return res.status(200).json({
-              message: "password change successfully",
-              code: res.statusCode,
-            });
+      const hash = await user?.encryptPassword(password);
+      // save to db
+      await user
+        ?.updateOne({
+          $set: {
+            password: hash,
+          },
+        })
+        .then(() => {
+          return res.status(200).json({
+            message: "password change successfully",
+            code: res.statusCode,
           });
-      }
+        });
     }
-  } catch (error) { }
+  } catch (error) {
+    return res.status(500).json({
+      message: "server error"
+    })
+  }
 };
 
 // forgot password for local emp

@@ -12,8 +12,11 @@ export default function (app: Express) {
         secret: 'sce',
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: true }
+        cookie: { secure: true, maxAge: 60000 }
     }))
+
+    app.set('trust proxy', 1)
+
 }
 
 

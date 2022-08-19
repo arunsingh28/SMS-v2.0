@@ -6,7 +6,7 @@ import crypto from "crypto";
 
 // register api for emp
 const register = async (req: Request, res: Response) => {
-  const { email, password, confirmPassword, name, role } = req.body;
+  const { email, password, confirmPassword, name } = req.body;
   if (!email || !password || !confirmPassword || !name) {
     return res
       .status(400)
@@ -27,11 +27,15 @@ const register = async (req: Request, res: Response) => {
       const token = await TOKEN.getToken(email);
       // genrate refresh token
       const refreshToken = await TOKEN.refreshToken(email);
-
       await newUser.save();
       return res.status(200).json({
         message: "account created!",
         token,
+        user: {
+          name: newUser.name,
+          email: newUser.email,
+          role: newUser.role
+        },
         refreshToken,
         code: res.statusCode,
       });
@@ -84,7 +88,11 @@ const login = async (req: Request, res: Response) => {
       // send data to client
       return res.json({
         message: "logged in",
-        data: { name: user.name, email: user.email, role: user.role },
+        data: {
+          name: user.name,
+          email: user.email,
+          role: user.role
+        },
         accessToken: token,
         refreshToken,
         code: res.statusCode,

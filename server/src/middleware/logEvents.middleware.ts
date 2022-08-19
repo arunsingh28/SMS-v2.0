@@ -5,7 +5,7 @@ import fs from 'fs'
 
 import path from 'path'
 
-const logEvents = async (message: string, fileName: string) => {
+const logEvents = async (message: string | undefined, fileName: string) => {
     const dateTime = `${format(new Date(), 'yyyy-MM-dd HH:mm:ss')}`
     const logMessage = `${dateTime}\t ${uuid()}\t - ${message}\n`
 

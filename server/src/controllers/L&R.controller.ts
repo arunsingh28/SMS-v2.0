@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-import getToken from "../utils/token";
+import TOKEN from "../utils/token";
 import _user from "../models/user.model";
 import crypto from "crypto";
 
+// register api for emp
 const register = async (req: Request, res: Response) => {
   const { email, password, confirmPassword, name } = req.body;
   if (!email || !password || !confirmPassword || !name) {
@@ -20,14 +21,18 @@ const register = async (req: Request, res: Response) => {
       email,
       password,
       name,
-    });
+    }).populate("data", 'password')
     try {
-      const token = await getToken(email);
+      const token = await TOKEN.getToken(email);
+      // genrate refresh token
+      const refreshToken = await TOKEN.refreshToken(email);
+
       await newUser.save();
       return res.status(200).json({
         message: "account created!",
         data: newUser,
         token,
+        refreshToken,
         code: res.statusCode,
       });
     } catch (error: any) {
@@ -38,13 +43,14 @@ const register = async (req: Request, res: Response) => {
         });
       }
       return res.status(501).json({
-        message: "account not created" + error.message,
+        message: "account not created " + error.message,
         code: res.statusCode,
       });
     }
   }
 };
 
+// logni api for emp
 const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   console.log(email, password);
@@ -54,7 +60,7 @@ const login = async (req: Request, res: Response) => {
       code: res.statusCode,
     });
   }
-  const user = await _user.findOne({ email });
+  const user = await _user.findOne({ email }).populate("password")
   // if user not found
   if (!user) {
     return res
@@ -75,18 +81,24 @@ const login = async (req: Request, res: Response) => {
         .json({ message: "Invalid credinitals", code: res.statusCode });
     } else {
       // genrate token
-      const token = await getToken(email);
+      const token = await TOKEN.getToken(email);
+
+      // genrate refresh token
+      const refreshToken = await TOKEN.refreshToken(email);
+
       // send data to client
       return res.json({
         message: "logged in",
         data: user,
         token,
+        refreshToken,
         code: res.statusCode,
       });
     }
   }
 };
 
+// logout api for emp
 const logout = async (req: Request, res: Response) => {
   try {
     const token = crypto.randomBytes(20).toString("hex");
@@ -104,6 +116,7 @@ const logout = async (req: Request, res: Response) => {
   }
 };
 
+// change password for local emp
 const updatePassword = async (req: Request, res: Response) => {
   const id = req.session.user;
   const { password, confirmPassword, oldPassword } = req.body;
@@ -146,6 +159,7 @@ const updatePassword = async (req: Request, res: Response) => {
   } catch (error) { }
 };
 
+// forgot password for local emp
 const forgotPassword = async (req: Request, res: Response) => {
   const { email } = req.body;
   if (!email) {

@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import getToken from "../utils/token";
+import TOKEN from "../utils/token";
 import _admin from "../models/admin.model";
 
 const Login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
-  const token = await getToken(username);
+  const token = await TOKEN.getToken(username);
   const isUser = await _admin.findOne({ email: username });
   if (isUser) {
     const isMatch = await isUser.comparePassword(password);
@@ -42,7 +42,7 @@ const Register = async (req: Request, res: Response) => {
         type: "error",
       });
     }
-    const token = await getToken(email);
+    const token = await TOKEN.getToken(email);
     const user = await newAdmin.save();
     return res.status(200).json({
       message: "Account Created.",

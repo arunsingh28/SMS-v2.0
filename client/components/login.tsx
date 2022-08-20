@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import SEO from "./SEO";
-import api from "../util/api";
+import apiCall from "../util/api";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { ActionType } from "../store/Actions";
@@ -23,19 +23,9 @@ export const Login = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoader(true);
-    // api call
-    const data = {
-      method: "post",
-      headers: {
-        "Content-Type": "Application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    };
-    const Data = await fetch(`${api.production.URI}/api/login`, data);
-    const load = await Data.json();
+   
+    const d = await apiCall('/api/login',JSON.stringify({email,password}))
+    const load = await d.data
     if (load.code == 200) {
       localStorage.setItem("token", `Bearer ${load.token}`);
       dispatch({

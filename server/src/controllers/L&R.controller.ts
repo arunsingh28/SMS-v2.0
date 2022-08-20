@@ -86,7 +86,7 @@ const login = async (req: Request, res: Response) => {
       // genrate refresh token
       const refreshToken = await TOKEN.refreshToken(email);
       // send data to client
-      return res.json({
+      return res.status(200).json({
         message: "logged in",
         data: {
           name: user.name,

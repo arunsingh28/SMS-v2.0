@@ -1,11 +1,14 @@
-const Production = false;
+import axios from 'axios';
 
-const api = {
-  production: {
-    URI: Production
-      ? "https://sms-rest-api-v1.herokuapp.com"
-      : "http://localhost:8080",
-  },
-};
+axios.create({
+  baseURL: 'http://localhost:8080',
+  headers: {
+    'content-Type': 'application/json'
+  }
+})
 
-export default api;
+export default async function apiCall(path: string, cred: any) {
+  const apiData = await axios.post(path,cred)
+  return apiData
+}
+

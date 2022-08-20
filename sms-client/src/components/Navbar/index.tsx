@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useHistory, BrowserRouter as Router } from "react-router-dom";
-
-const Navbar = () => {
+import api from "../../utils/api";
+const Navbar = async () => {
   const [student, setStudent] = useState(false);
   const [admin, setAdmin] = useState(false);
   const [message, setMessage] = useState(false);
@@ -14,6 +14,23 @@ const Navbar = () => {
     localStorage.clear();
     history.push("/");
   };
+
+  const data = {
+    method: "post",
+    headers: {
+      "Content-Type": "Application/json",
+      "authorization": window.localStorage.token
+    },
+  };
+
+
+  const Data = fetch(`${api.production.URI}/api/verify`, data);
+  Data.then(res => console.log(res.json())).catch(e => console.log(e))
+
+  useEffect(() => {
+    console.log('run navbar')
+  }, [])
+
 
   // change background image
   const changeBackground = () => {

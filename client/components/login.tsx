@@ -20,30 +20,49 @@ export const Login = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  interface Ierror {
+    response: {
+      status: number
+    }
+  }
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoader(true);
-   
-    const d = await apiCall('/api/login',JSON.stringify({email,password}))
-    const load = await d.data
-    if (load.code == 200) {
-      localStorage.setItem("token", `Bearer ${load.token}`);
-      dispatch({
-        type: ActionType.ADD,
-        payload: {
-          name: load.data.name,
-          role: load.data.role,
-        },
-      });
-      router.push("/");
-      setLoader(false);
-    } else {
-      setError(load.message);
-      Alert.current.style.display! = "block";
-      setTimeout(() => {
-        Alert.current.style.display! = "none";
-      }, 4000);
-      setLoader(false);
+
+    try {
+      const d = await apiCall('/api/login', JSON.stringify({ email, password }))
+      const load = await d.data
+      if (load.code == 200) {
+        localStorage.setItem("token", `Bearer ${load.token}`);
+        dispatch({
+          type: ActionType.ADD,
+          payload: {
+            name: load.data.name,
+            role: load.data.role,
+          },
+        });
+        router.push("/");
+        setLoader(false);
+      } else {
+        setError(load.message);
+        Alert.current.style.display! = "block";
+        setTimeout(() => {
+          Alert.current.style.display! = "none";
+        }, 4000);
+        setLoader(false);
+      }
+    } catch (error) {
+      if (!(error as Ierror)?.response) {
+        console.log('no server response')
+      } else if ((error as Ierror)?.response?.status === 400) {
+        console.log('Missing username or password')
+      } else if ((error as Ierror)?.response?.status === 401) {
+        console.log('unauthoruzed')
+      } else {
+        console.log('server error')
+        setLoader(false);
+      }
     }
   };
 

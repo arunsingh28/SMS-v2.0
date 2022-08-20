@@ -9,7 +9,7 @@ const Home = () => {
   });
   const checkToken = () => {
     const token = localStorage.getItem("token");
-    if (!token) {
+    if (!token || token.split(' ')[1] == 'undefined') {
       setIsToken(false);
     } else {
       setIsToken(true);

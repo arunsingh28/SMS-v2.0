@@ -8,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [show, setShow] = useState(false);
   const [loader, setLoader] = useState(false);
 
@@ -18,7 +17,6 @@ export const Login = () => {
     document.title = "Login";
   });
 
-  console.log(history.location.hash);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoader(true);
@@ -36,16 +34,16 @@ export const Login = () => {
     const Data = await fetch(`${api.production.URI}/api/login`, data);
     const load = await Data.json();
     if (load.code == 200) {
-      localStorage.setItem("token", `Bearer ${load.token}`);
+      localStorage.setItem("token", `Bearer ${load.accessToken}`);
       // routing to dashboad
       history.push("/");
       setLoader(false);
     } else {
-      setError(load.message);
-      toast(error, { type: "error" });
+      toast(load?.message || 'something went wrong', { type: "error" });
       setLoader(false);
     }
-  };
+  }
+
 
   return (
     <>

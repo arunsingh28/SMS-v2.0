@@ -41,7 +41,7 @@ const register = async (req: Request, res: Response) => {
       });
     } catch (error: any) {
       if (error.code == 11000) {
-        return res.status(203).json({
+        return res.status(409).json({
           message: "User alredy registered",
           code: res.statusCode,
         });
@@ -58,6 +58,7 @@ const register = async (req: Request, res: Response) => {
 const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   console.log(email, password);
+  console.log('\t\n',req.body)
   if (!email || !password) {
     return res.status(401).json({
       message: "please fill all detail",

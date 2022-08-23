@@ -2,11 +2,11 @@ import allowedOrigin from "./allowedOrigin";
 
 const corsOption = {
     origin: (origin: any, callback: any) => {
-        console.log(origin, '\n')
-        if (allowedOrigin.indexOf(origin)) {
-            callback(new Error('Not allowed by CORS'));
-        } else {
+        console.log(origin,'\n')
+        if (allowedOrigin.indexOf(origin) !== -1) {
             callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
         }
     },
     optionSuccessStatus: 200,

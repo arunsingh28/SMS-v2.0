@@ -2,70 +2,73 @@ import React, { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import SEO from "./SEO";
-import apiCall from "../util/api";
+import apiCall from "../api/api";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { ActionType } from "../store/Actions";
-import Loader from "./loader";
+import { toast } from 'react-toastify'
 import spinner from "../public/circle4.svg";
-import router from "next/router";
+
+
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [show, setShow] = useState(false);
   const [loader, setLoader] = useState(false);
-  const Alert = useRef<any>();
 
   const dispatch = useDispatch();
   const router = useRouter();
 
   interface Ierror {
     response: {
-      status: number
-    }
+      status: number | string
+    },
+    message: string
   }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setLoader(true);
-
-    try {
-      const d = await apiCall('/api/login', JSON.stringify({ email, password }))
-      const load = await d.data
-      if (load.code == 200) {
-        localStorage.setItem("token", `Bearer ${load.token}`);
-        dispatch({
-          type: ActionType.ADD,
-          payload: {
-            name: load.data.name,
-            role: load.data.role,
-          },
-        });
-        router.push("/");
-        setLoader(false);
-      } else {
-        setError(load.message);
-        Alert.current.style.display! = "block";
-        setTimeout(() => {
-          Alert.current.style.display! = "none";
-        }, 4000);
-        setLoader(false);
-      }
-    } catch (error) {
-      if (!(error as Ierror)?.response) {
-        console.log('no server response')
-      } else if ((error as Ierror)?.response?.status === 400) {
-        console.log('Missing username or password')
-      } else if ((error as Ierror)?.response?.status === 401) {
-        console.log('unauthoruzed')
-      } else {
-        console.log('server error')
-        setLoader(false);
+    // validate form
+    if (!email || !password) {
+      toast('Fill all the detail', { type: 'error', theme: 'colored' })
+    } else {
+      setLoader(true);
+      try {
+        const d = await apiCall('/api/login', { email, password })
+        const load = await d.data
+        if (load.code == 200) {
+          localStorage.setItem("token", `Bearer ${load.accessToken}`);
+          dispatch({
+            type: ActionType.ADD,
+            payload: {
+              name: load.data.name,
+              role: load.data.role,
+            },
+          });
+          router.push("/");
+          setLoader(false);
+        } else {
+          toast(load.message, { type: 'error' });
+          setLoader(false);
+        }
+      } catch (error) {
+        console.log(error)
+        if (!(error as Ierror)?.response) {
+          toast('No server response', { type: 'error' })
+          setLoader(false);
+        } else if ((error as Ierror)?.response?.status === 400) {
+          toast('Missing username or password', { type: 'error', theme: 'dark' })
+          setLoader(false);
+        } else if ((error as Ierror)?.response?.status === 401) {
+          toast('Invalid cred', { type: 'error' })
+          setLoader(false);
+        } else {
+          toast((error as Ierror)?.message, { type: 'error' })
+          setLoader(false);
+        }
       }
     }
   };
-
   return (
     <>
       <SEO
@@ -73,24 +76,11 @@ export const Login = () => {
         description="Login page for Indian public school mangement"
       />
       <div className="flex flex-col justify-center items-center h-screen">
-        {/* <img
-          src="https://image.shutterstock.com/image-vector/student-book-logo-600w-334176206.jpg"
-          alt="logo"
-          width="100"
-          height="100"
-          className="rounded-full shadow-lg"
-        /> */}
         <h1 className="text-4xl my-10">SMS</h1>
         {/* <h3 className="font-black text-3xl my-5">SIGN IN</h3> */}
         <p className="text-sm font-medium my-2">
           Hello There ! Sign in and start managing your SMS account
         </p>
-        <div
-          className="mt-4 shadow-lg hidden bg-red-400 py-3 px-20 rounded-md text-white"
-          ref={Alert}
-        >
-          <h5 className="font-medium"> {error && error.toUpperCase()}</h5>
-        </div>
         <form
           className="w-2/3 lg:w-1/3 md:w-2/3 mt-10 flex flex-col justify-center"
           onSubmit={handleSubmit}

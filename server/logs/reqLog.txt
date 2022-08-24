@@ -447,3 +447,24 @@
 2022-08-23 12:47:55	 eb725309-8628-41bf-8994-f0061eb46322	 - OPTIONS /api/login
 2022-08-23 12:47:55	 c445bdb0-eb3e-4330-8aca-cc3821aace6d	 - POST /api/login
 >>>>>>> 2bce89a5e7eaa551cc472e6e92559c0ce788a4df
+2022-08-24 09:36:42	 283c750b-8102-43b9-962d-fe5f83fb9afd	 - OPTIONS /api/register
+2022-08-24 09:36:42	 b939bda8-1bac-42ac-978c-28c64fc522a8	 - POST /api/register
+2022-08-24 09:37:07	 45e55f79-b615-4b60-9a83-17c4458140e7	 - OPTIONS /api/register
+2022-08-24 09:37:07	 636cb14c-fe25-4771-80be-c4ee2b52b19f	 - POST /api/register
+2022-08-24 09:37:39	 543dfab8-bbb3-4595-83ff-431ba1de1b78	 - OPTIONS /api/register
+2022-08-24 09:39:12	 fbaa1925-53d5-4929-9683-3ef2cdddad81	 - OPTIONS /api/register
+2022-08-24 09:39:12	 71d9ea1e-13eb-462c-9d24-18594336da58	 - POST /api/register
+2022-08-24 09:40:27	 7495d5da-817f-4f08-9547-b53b1c3744b5	 - OPTIONS /api/register
+2022-08-24 09:40:27	 d8add3e9-dd6f-4004-b1f4-a8de947c7da2	 - POST /api/register
+2022-08-24 09:40:36	 5be2002d-8136-47f1-b0ad-ee73e1c8a9ac	 - OPTIONS /api/register
+2022-08-24 09:40:36	 bf31aed0-b3f9-4688-b818-b9d77c03f9e0	 - POST /api/register
+2022-08-24 09:42:01	 df24b7d7-c45d-4c64-b57b-8d26907aa304	 - OPTIONS /api/register
+2022-08-24 09:42:01	 0122d880-72ee-4680-b8bd-f6052d8bef36	 - POST /api/register
+2022-08-24 09:42:10	 93af5ee7-2c8b-48e8-bfcc-6e556217740d	 - OPTIONS /api/register
+2022-08-24 09:42:10	 f41e92ad-8882-44cf-a5ff-bcedce91835c	 - POST /api/register
+2022-08-24 09:45:34	 9b774665-ec99-430e-bcf8-265a72178c6d	 - OPTIONS /api/register
+2022-08-24 09:45:34	 a650f1d9-eb84-4a8e-aa0f-aeb8e81585d5	 - POST /api/register
+2022-08-24 09:46:09	 14323594-3e4e-43c7-922e-0e1b2d7736fd	 - OPTIONS /api/register
+2022-08-24 09:46:09	 0382dbbb-34db-4827-81ab-4be13a7e4027	 - POST /api/register
+2022-08-24 09:46:18	 2d381353-d51c-4452-b18c-db2170841513	 - OPTIONS /api/register
+2022-08-24 09:46:18	 bd2547d8-ec78-43cf-b9c1-805df8784e2a	 - POST /api/register

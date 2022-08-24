@@ -6,34 +6,41 @@ import crypto from "crypto";
 
 // register api for emp
 const register = async (req: Request, res: Response) => {
-  const { email, password, confirmPassword, name } = req.body;
-  if (!email || !password || !confirmPassword || !name) {
+  const { email, password, name } = req.body;
+  if (!email || !password || !name) {
     return res
       .status(400)
       .json({ message: "please fill all detail", code: res.statusCode });
+  } else if (password.length < 6) {
+    return res.json({ message: "Enter more then 6 char long password" })
   }
   else {
+    const refreshToken = await TOKEN.refreshToken(email);
     // hasing password
     const newUser = new _user({
       email,
       password,
       name,
+      refresh_token: refreshToken
     })
     try {
-      const token = await TOKEN.getToken(email);
+      const accesstoken = await TOKEN.getToken(email);
       // genrate refresh token
-      const refreshToken = await TOKEN.refreshToken(email);
       await newUser.save();
+      // send the accessToken with cookie
+      res.cookie('jwt', refreshToken, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000
+      })
       // user created
       return res.status(201).json({
         message: "account created!",
-        token,
+        accesstoken,
         user: {
           name: newUser.name,
           email: newUser.email,
           role: newUser.role
         },
-        refreshToken,
         code: res.statusCode,
       });
     } catch (error: any) {
@@ -45,7 +52,7 @@ const register = async (req: Request, res: Response) => {
         });
       }
       return res.status(500).json({
-        message: "account not created " + error.message,
+        message: "account not created " + error,
         code: res.statusCode,
       });
     }
@@ -65,8 +72,6 @@ const login = async (req: Request, res: Response) => {
   }
   const user: any = await _user.findOne({ email })
   req.session.user = user
-
-  console.log('testing:::', req.session.user)
   // if user not found
   if (!user) {
     return res
@@ -84,6 +89,7 @@ const login = async (req: Request, res: Response) => {
       const token = await TOKEN.getToken(email);
       // genrate refresh token
       const refreshToken = await TOKEN.refreshToken(email);
+
       // send data to client
       return res.status(200).json({
         message: "logged in",

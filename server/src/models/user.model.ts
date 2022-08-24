@@ -12,6 +12,7 @@ export interface UserDocument extends mongoose.Document {
   name: string;
   otp: number;
   role: string;
+  refresh_token: string;
   profile: {
     key: string;
     location: string;
@@ -44,6 +45,9 @@ const userSchema = new mongoose.Schema(
     },
     otp: {
       type: Number,
+    },
+    refresh_token: {
+      type: String,
     },
     profile: [
       {

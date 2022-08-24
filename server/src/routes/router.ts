@@ -152,4 +152,5 @@ export default function (router: Express) {
    *
    */
   router.post("/api/contact-us", contact.newQuery);
+
 }

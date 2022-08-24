@@ -56,6 +56,7 @@ const register = async (req: Request, res: Response) => {
 const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   console.log(email, password);
+  console.log('\t\n', req.body)
   if (!email || !password) {
     return res.status(401).json({
       message: "please fill all detail",

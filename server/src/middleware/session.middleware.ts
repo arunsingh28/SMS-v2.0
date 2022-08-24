@@ -13,8 +13,8 @@ export default function (app: Express) {
         resave: false,
         saveUninitialized: true,
         cookie: { secure: true, maxAge: 60000 }
-    }))
-
+    })) 
+    console.log('______cookie created.')
     app.set('trust proxy', 1)
 
 }

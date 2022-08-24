@@ -26,11 +26,11 @@ app.use(logger.logger)
 
 const NAMESPACE = "server";
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(credentials)
 
 // body parser =======================================
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 
 // Policy ============================================

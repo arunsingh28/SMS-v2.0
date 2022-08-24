@@ -7,6 +7,7 @@ import crypto from "crypto";
 // register api for emp
 const register = async (req: Request, res: Response) => {
   const { email, password, name } = req.body;
+  console.table(req.body)
   if (!email || !password || !name) {
     return res
       .status(400)

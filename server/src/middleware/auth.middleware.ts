@@ -21,7 +21,7 @@ const authorization = async (
     token = req.headers.authorization.split(" ")[1];
   }
   if (!token) {
-    return res.status(404).json({
+    return res.status(401).json({
       message: "not authorize to access content",
       code: res.statusCode,
       type: "error",

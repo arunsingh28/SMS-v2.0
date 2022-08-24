@@ -86,7 +86,7 @@ export default function (router: Express) {
    * for checking user? recovery :  create new password
    *
    */
-  router.patch("/api/forgot-password", register_contollers.forgotPassword);
+  router.put("/api/forgot-password", register_contollers.forgotPassword);
 
   /**
    * @private routes
@@ -95,7 +95,7 @@ export default function (router: Express) {
    * for updating password
    *
    */
-  router.patch(
+  router.put(
     "/api/update-password",
     authorization,
     register_contollers.updatePassword

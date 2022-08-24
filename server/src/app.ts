@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from 'cookie-parser'
 import logging from "../config/logger";
 import { connectDB } from "./utils/DB";
 import Router from "./routes/router";
@@ -26,12 +27,13 @@ app.use(logger.logger)
 
 const NAMESPACE = "server";
 
+// body parser =======================================
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(credentials)
 
-// body parser =======================================
-
+// cookie parser =======================================
+app.use(cookieParser())
 
 // Policy ============================================
 app.use(cors(corsOption));

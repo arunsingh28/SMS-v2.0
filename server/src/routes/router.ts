@@ -4,10 +4,13 @@ import contact from "../controllers/contact-us";
 import student from "../controllers/student";
 import { Express, Request, Response } from "express";
 import authorization from "../middleware/auth.middleware";
-
 import multer from "multer";
 import multerS3 from "multer-s3";
 import AWS from "aws-sdk";
+
+
+import dot from 'dotenv'
+dot.config()
 
 declare var process: {
   env: {

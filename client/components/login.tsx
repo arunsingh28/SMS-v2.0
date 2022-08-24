@@ -36,8 +36,9 @@ export const Login = () => {
     };
     const Data = await fetch(`${api.production.URI}/api/login`, data);
     const load = await Data.json();
+    console.log('console data from api:', load)
     if (load.code == 200) {
-      localStorage.setItem("token", `Bearer ${load.token}`);
+      localStorage.setItem("token", `Bearer ${load.accessToken}`);
       dispatch({
         type: ActionType.ADD,
         payload: {

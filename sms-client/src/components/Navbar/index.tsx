@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Link, useHistory, BrowserRouter as Router } from "react-router-dom";
+import { useState, useRef } from "react";
+import { Link, useHistory } from "react-router-dom";
 
 const Navbar = () => {
   const [student, setStudent] = useState(false);

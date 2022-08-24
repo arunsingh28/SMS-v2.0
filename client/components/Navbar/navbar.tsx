@@ -13,7 +13,7 @@ const Navbar = () => {
     Router.push("/");
   };
   return (
-    <div className="bg-blue-500 overflow-scroll h-screen text-start hover:shadow-lg hide-scroll">
+    <div className="bg-blue-500 overflow-scroll h-screen text-start hover:shadow-lg hide-scroll nav-bg">
       {/* header */}
       <h2 className="font-bold text-4xl text-white border-b-2 py-4 px-2">
         SMS <span className="font-light text-xl">Mangement</span>

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import api from "../util/api";
 
 export default function Home() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   useEffect(() => {
     checkToken();

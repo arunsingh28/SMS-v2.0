@@ -7,7 +7,7 @@ import { store } from "../store/store";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <div className="antialiased">
+      <div className="antialiased app-wrapper">
         <Component {...pageProps} />
       </div>
     </Provider>

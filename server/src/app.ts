@@ -1,5 +1,4 @@
 import express from "express";
-import config from "../config/config";
 import logging from "../config/logger";
 import { connectDB } from "./utils/DB";
 import Router from "./routes/router";
@@ -11,6 +10,9 @@ import errorHandler from "./utils/errorResponse";
 import credentials from "./middleware/credentials";
 import logger from "./middleware/logEvents.middleware";
 
+import config from '../config/config'
+import dot from 'dotenv'
+dot.config()
 // init express variable to app =====================
 const app = express();
 
@@ -19,7 +21,7 @@ const app = express();
 connectDB();
 
 
-// logger for file ============================================
+// logger for file ====================================
 app.use(logger.logger)
 
 const NAMESPACE = "server";
@@ -31,10 +33,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
-// Policy =================================
+// Policy ============================================
 app.use(cors(corsOption));
 
-// logger for console =============================================
+// logger for console =================================
 app.use((req, res, next) => {
   logging.info(
     NAMESPACE,
@@ -52,24 +54,32 @@ app.use((req, res, next) => {
 // session ============================================
 Session(app);
 
-// Public router ========================================
+// Public router ======================================
 Router(app);
-// Admin router ========================================
+// Admin router =======================================
 AdminRouter(app);
 
 
 // invalid url handling ===============================
-app.use((req, res, next) => {
+app.use('*', (req, res, next) => {
   const error = new Error("invalid url");
   return res
     .status(404)
     .send(error.message);
 });
 
-// server start ======================================
-const server = app.listen(config.port, () => {
-  console.log(`Server started on port ${config.port}`);
-});
+let server;
 
 // handle server crash ===============================
 errorHandler(server);
+
+
+app.use(function (err: any, res: express.Response) {
+  console.log(err.message)
+  logger.logEvents(err.message, 'serverInternalError.txt')
+  return res.status(500).send(err.message)
+})
+
+server = app.listen(config.port, () => {
+  console.log(`------ Server start on port ${config.port} ------`)
+})

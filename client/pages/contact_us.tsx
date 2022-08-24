@@ -1,6 +1,6 @@
 import React from "react";
 import SEO from "../components/SEO";
-import Image from "next/image";
+import Imgage from "next/image";
 import Link from "next/link";
 // import l from "";
 const Contact = () => {
@@ -8,7 +8,7 @@ const Contact = () => {
     <div className="h-screen">
       <SEO title="Contact us" description="Contact us page" />
       <div className="h-1/3 bg-blue-700 flex justify-center items-center">
-        <img
+        <Imgage
           src="https://ouch-cdn2.icons8.com/cRcyWU3CWZRI0Vmed5qNqLu-61XofFBJhfW6UGkZrFI/rs:fit:1420:912/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNDM5/L2Y1MDIwMTA3LTIz/ZWMtNGNiNi04OTli/LWJlODA2MWJlYWE0/Mi5zdmc.png"
           alt="logo"
           height="200"
@@ -19,7 +19,7 @@ const Contact = () => {
       <div className="flex justify-center items-start -mt-40">
         <div className="bg-white w-2/3 rounded-md shadow-lg py-10">
           <div className="m-auto flex justify-center items-center">
-            <img
+            <Imgage
               src="https://ouch-cdn2.icons8.com/5i6_E8WXRbDNaweOEJSsWnluUH8rfFfNTEv7g9m06fU/rs:fit:579:912/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvOTA4/L2IwYWIzZGE2LTA0/ZWItNDJlYy1iNjMz/LTE4MmQ5YmVlMTY0/MS5zdmc.png"
               alt="asdf"
               height="50"

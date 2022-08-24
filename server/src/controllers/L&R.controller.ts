@@ -12,11 +12,7 @@ const register = async (req: Request, res: Response) => {
       .status(400)
       .json({ message: "please fill all detail", code: res.statusCode });
   }
-  if (password != confirmPassword) {
-    return res
-      .status(401)
-      .json({ message: "password not matching", code: res.statusCode });
-  } else {
+  else {
     // hasing password
     const newUser = new _user({
       email,
@@ -28,7 +24,8 @@ const register = async (req: Request, res: Response) => {
       // genrate refresh token
       const refreshToken = await TOKEN.refreshToken(email);
       await newUser.save();
-      return res.status(200).json({
+      // user created
+      return res.status(201).json({
         message: "account created!",
         token,
         user: {
@@ -41,12 +38,13 @@ const register = async (req: Request, res: Response) => {
       });
     } catch (error: any) {
       if (error.code == 11000) {
-        return res.status(203).json({
+        // user conflict
+        return res.status(409).json({
           message: "User alredy registered",
           code: res.statusCode,
         });
       }
-      return res.status(501).json({
+      return res.status(500).json({
         message: "account not created " + error.message,
         code: res.statusCode,
       });
@@ -86,7 +84,7 @@ const login = async (req: Request, res: Response) => {
       // genrate refresh token
       const refreshToken = await TOKEN.refreshToken(email);
       // send data to client
-      return res.json({
+      return res.status(200).json({
         message: "logged in",
         data: {
           name: user.name,

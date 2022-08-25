@@ -81,7 +81,7 @@ userSchema.methods.comparePassword = async function (
 
 userSchema.methods.encryptPassword = async function (newPassword: string) {
   const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hashSync(newPassword, salt);
+  const hash = bcrypt.hashSync(newPassword, salt);
   return hash;
 };
 

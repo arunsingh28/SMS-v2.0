@@ -1205,3 +1205,5 @@
 2022-08-25 12:55:27	 b510ce08-7168-4bca-8402-eb313200abb1	 - PATCH /api/refreshToken
 2022-08-25 12:59:13	 07a1a021-b90f-4d1d-9c25-bc0e81435e66	 - POST /api/login
 2022-08-25 12:59:22	 29d4e1df-2775-4e21-a018-e770ce1697b5	 - PATCH /api/refreshToken
+2022-08-25 21:24:04	 1b05d27d-e6c2-4945-aaa4-62ce6a3e43c4	 - OPTIONS /api/login
+2022-08-25 21:24:04	 575747d1-94c9-4481-99fa-035dee310030	 - POST /api/login

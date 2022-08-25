@@ -1,4 +1,6 @@
 import jwt from 'jsonwebtoken'
+import dot from 'dotenv'
+dot.config()
 
 declare var process: {
     env: {
@@ -20,4 +22,4 @@ const refreshToken = async (id: string) => {
     })
 }
 
-export default {getToken, refreshToken}
+export default { getToken, refreshToken }

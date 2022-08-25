@@ -2,10 +2,11 @@ import { Request, Response } from "express";
 import TOKEN from "../utils/token";
 import _admin from "../models/user.model";
 
+
 const Login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
   const token = await TOKEN.getToken(username);
-  const isUser = await _admin.findOne({ email: username });
+  const isUser = await _admin.findOne({ email: username })
   if (isUser) {
     const isMatch = await isUser.comparePassword(password);
     if (isMatch == true) {
@@ -68,7 +69,7 @@ const Register = async (req: Request, res: Response) => {
 
 const AccountTerminate = async (req: Request, res: Response) => {
   const { email, code } = req.body;
-  if (code === "sms7894") {
+  if (code === "@apple1397000") {
     const isUser = await _admin.findOneAndDelete(email);
     if (isUser === null) {
       return res.json({ message: "Account not exist.", type: "error" });

@@ -1157,3 +1157,6 @@
 2022-08-24 10:34:22	 80ea506d-72bb-47dd-a353-5329e1c551eb	 - POST /api/register
 2022-08-24 10:34:23	 6968d1f8-dcee-47f4-94d8-af5b318ca62f	 - OPTIONS /api/register
 2022-08-24 10:34:23	 14be56fa-3915-4cbd-8716-a3c3fd896aa2	 - POST /api/register
+2022-08-25 12:18:43	 a533ce43-0c1e-4164-bfd2-5d745c742f14	 - POST /api/login
+2022-08-25 12:19:13	 79f4efcc-1e69-4e56-bd4c-7c3d700c5ebc	 - POST /api/login
+2022-08-25 12:20:16	 19cc8637-8992-4f11-95c9-35628a209307	 - POST /api/login

@@ -53,7 +53,7 @@ const register = async (req: Request, res: Response) => {
         });
       }
       return res.status(500).json({
-        message: "account not created " + error,
+        message: "account not created " + error.message,
         code: res.statusCode,
       });
     }
@@ -131,7 +131,7 @@ const logout = async (req: Request, res: Response) => {
 const updatePassword = async (req: Request, res: Response) => {
   const id: any = req.session.user;
   console.log('ID------', id?._id)
-  const { password, oldPassword } = req.body;
+  const { pwd: password, oldpwd: oldPassword } = req.body;
   // find user with this id
   const user = await _user.findById(id);
   console.log('CURRENT USER: ', user)

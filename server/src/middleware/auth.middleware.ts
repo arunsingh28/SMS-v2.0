@@ -20,15 +20,16 @@ const authorization = async (
   ) {
     token = req.headers.authorization.split(" ")[1];
   }
+  console.log('token______', token)
   if (!token) {
-    return res.status(401).json({
+    return res.status(404).json({
       message: "not authorize to access content",
       code: res.statusCode,
       type: "error",
     });
   }
   try {
-    const decoded = await jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const user: any = await _user.findOne({ email: (<any>decoded).id });
     if (!user) {
       return res.status(203).json({

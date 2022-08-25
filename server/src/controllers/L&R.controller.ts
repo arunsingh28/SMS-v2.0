@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import TOKEN from "../utils/token";
 import _user, { UserDocument } from "../models/user.model";
 import otpGenrator from "../utils/otpGenrator";
@@ -132,6 +132,7 @@ const updatePassword = async (req: Request, res: Response) => {
   const id: any = req.session.user;
   console.log('ID------', id?._id)
   const { pwd: password, oldpwd: oldPassword } = req.body;
+  console.table(req.body)
   // find user with this id
   const user = await _user.findById(id);
   console.log('CURRENT USER: ', user)
@@ -211,7 +212,7 @@ const module = {
   login,
   logout,
   updatePassword,
-  forgotPassword,
+  forgotPassword
 };
 
 export default module;

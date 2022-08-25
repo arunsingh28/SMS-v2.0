@@ -4,6 +4,7 @@ import contact from "../controllers/contact-us";
 import student from "../controllers/student";
 import { Express, Request, Response } from "express";
 import authorization from "../middleware/auth.middleware";
+import jwtRefreshToken from '../middleware/jwtRefreshToken'
 import multer from "multer";
 import multerS3 from "multer-s3";
 import AWS from "aws-sdk";
@@ -152,5 +153,7 @@ export default function (router: Express) {
    *
    */
   router.post("/api/contact-us", contact.newQuery);
+
+  router.patch('/api/refreshToken', authorization, jwtRefreshToken)
 
 }

@@ -8,6 +8,11 @@ declare var process: {
   };
 };
 
+interface JwtError {
+  name: string;
+  message: string;
+}
+
 const authorization = async (
   req: Request,
   res: Response,
@@ -45,8 +50,7 @@ const authorization = async (
   } catch (error) {
     return res.status(401).json({
       message: "Not authorize to access this route ",
-      error,
-      type: "error",
+      error: (error as JwtError).message,
       code: res.statusCode,
     });
   }

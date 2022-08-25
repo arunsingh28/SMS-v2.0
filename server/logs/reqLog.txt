@@ -1160,3 +1160,16 @@
 2022-08-25 12:18:43	 a533ce43-0c1e-4164-bfd2-5d745c742f14	 - POST /api/login
 2022-08-25 12:19:13	 79f4efcc-1e69-4e56-bd4c-7c3d700c5ebc	 - POST /api/login
 2022-08-25 12:20:16	 19cc8637-8992-4f11-95c9-35628a209307	 - POST /api/login
+2022-08-25 12:23:16	 49ea3acf-9e82-44aa-b51b-5248fb3975da	 - GET /api/forgot-password
+2022-08-25 12:23:23	 01960116-66d7-434f-a05d-b87a1f1c74f9	 - POST /api/forgot-password
+2022-08-25 12:23:35	 007b7d1b-ded6-455a-997d-958941fa85aa	 - PUT /api/forgot-password
+2022-08-25 12:23:58	 10081db9-c1cc-47ff-8605-97db4821f897	 - PUT /api/forgot-password
+2022-08-25 12:24:23	 f0280fa6-3b36-44ef-a007-87cf52918ae6	 - PUT /api/forgot-password
+2022-08-25 12:24:33	 01a44208-6c75-4ef3-9531-57ae7336e6a0	 - PUT /api/forgot-password
+2022-08-25 12:24:36	 37049dee-f3a6-414c-bd61-eb9f4c8210ba	 - PUT /api/forgot-password
+2022-08-25 12:24:45	 5cd1cc92-c0d7-4016-93b6-34541b320cce	 - PUT /api/update-password
+2022-08-25 12:25:18	 5aa6e553-ae15-4d71-aae7-5de5f0c0fa90	 - GET /api/login
+2022-08-25 12:25:23	 4eb9819e-2417-4a41-bfe6-e9772de2d372	 - POST /api/login
+2022-08-25 12:25:30	 b872dc1e-fd08-4244-b98f-59d671056393	 - POST /api/login
+2022-08-25 12:25:43	 386ac74a-e4a3-458b-81de-21a6006c8e5a	 - PUT /api/update-password
+2022-08-25 12:26:10	 7c9d157e-199d-46fd-b2a3-72a24a7cacd2	 - PUT /api/update-password

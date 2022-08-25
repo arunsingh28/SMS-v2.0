@@ -1,9 +1,10 @@
 import session from 'express-session'
 import { Express } from 'express'
+import { UserDocument } from '../models/user.model'
 
 declare module 'express-session' {
     interface SessionData {
-        user: string
+        user: UserDocument
     }
 }
 
@@ -14,7 +15,7 @@ export default function (app: Express) {
         saveUninitialized: true,
         cookie: { secure: true, maxAge: 60000 }
     }))
-    
+
     app.set('trust proxy', 1)
 
 }

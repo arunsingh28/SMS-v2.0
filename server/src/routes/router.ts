@@ -65,7 +65,6 @@ export default function (router: Express) {
   /**
    * @public routes
    * @method get
-   * @use not in use
    *
    * logout and destroy token
    *
@@ -154,6 +153,6 @@ export default function (router: Express) {
    */
   router.post("/api/contact-us", contact.newQuery);
 
-  router.patch('/api/refreshToken', authorization, jwtRefreshToken)
+  router.get('/api/refreshToken', jwtRefreshToken)
 
 }

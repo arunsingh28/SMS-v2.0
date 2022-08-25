@@ -33,6 +33,9 @@ const register = async (req: Request, res: Response) => {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000
       })
+      // start session
+      req.session.user = newUser
+
       // user created
       return res.status(201).json({
         message: "account created!",
@@ -64,15 +67,13 @@ const register = async (req: Request, res: Response) => {
 const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   console.log(email, password);
-  console.log('\t\n', req.body)
   if (!email || !password) {
     return res.status(401).json({
       message: "please fill all detail",
       code: res.statusCode,
     });
   }
-  const user: any = await _user.findOne({ email })
-  req.session.user = user
+  const user = await _user.findOne({ email })
   // if user not found
   if (!user) {
     return res
@@ -90,7 +91,12 @@ const login = async (req: Request, res: Response) => {
       const token = await TOKEN.getToken(email);
       // genrate refresh token
       const refreshToken = await TOKEN.refreshToken(email);
-
+      res.cookie('jwt', refreshToken, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000
+      })
+      // start session 
+      req.session.user = user
       // send data to client
       return res.status(200).json({
         message: "logged in",
@@ -111,25 +117,26 @@ const login = async (req: Request, res: Response) => {
 
 // work on the logout api emprove it
 const logout = async (req: Request, res: Response) => {
-  try {
-    const token = crypto.randomBytes(20).toString("hex");
-    const destroyToken = crypto
-      .createHash("sha256")
-      .update(token)
-      .digest("hex");
-    res.set("newtoken", destroyToken);
-    console.log(req.headers);
-    return res
-      .status(200)
-      .json({ message: "you are logged out", token: destroyToken });
-  } catch (error) {
-    return res.status(200).json({ message: "server error please try again" });
+  const cookie = req.cookies?.jwt
+  if (!cookie) return res.sendStatus(204)
+  const foundUser = await _user.findOneAndUpdate({ refresh_token: cookie }, {
+    $set: {
+      "refresh_token": ""
+    }
+  })
+  if (!foundUser) {
+    res.clearCookie('jwt', {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000
+    })
+    return res.sendStatus(203)
   }
+  return res.status(200).json({ message: 'Logout Successfully' })
 };
 
 // change password for local emp
 const updatePassword = async (req: Request, res: Response) => {
-  const id: any = req.session.user;
+  const id = req.session.user;
   console.log('ID------', id?._id)
   const { pwd: password, oldpwd: oldPassword } = req.body;
   console.table(req.body)

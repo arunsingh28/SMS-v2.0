@@ -1,23 +1,23 @@
 import jwt from 'jsonwebtoken'
-import dot from 'dotenv'
-dot.config()
+
 
 declare var process: {
     env: {
-        JWT_SECRET_KEY: string,
+        JWT_SECRET_KEY1: string,
+        JWT_SECRET_KEY2: string,
         JWT_EXPIRE_TIME: number,
         JWT_REFRESH_EXPIRE_TIME: number
     }
 }
 
 const getToken = async (id: String) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
+    return jwt.sign({ id }, process.env.JWT_SECRET_KEY1, {
         expiresIn: process.env.JWT_EXPIRE_TIME
     })
 }
 
 const refreshToken = async (id: string) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
+    return jwt.sign({ id }, process.env.JWT_SECRET_KEY2, {
         expiresIn: process.env.JWT_REFRESH_EXPIRE_TIME
     })
 }

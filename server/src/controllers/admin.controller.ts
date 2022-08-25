@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import TOKEN from "../utils/token";
 import _admin from "../models/user.model";
 
-
 const Login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
   const token = await TOKEN.getToken(username);

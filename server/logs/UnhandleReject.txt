@@ -6,3 +6,4 @@
 2022-08-20 07:34:41	 1e8eb3af-dc67-4f1c-90bf-7345900cef13	 - "expiresIn" should be a number of seconds or string representing a timespan
 2022-08-20 07:36:10	 fd9b16a7-45de-4036-93ff-2e05dfadb493	 - "expiresIn" should be a number of seconds or string representing a timespan
 2022-08-25 21:24:04	 d8790035-6bfd-414c-8067-e2e294d8828d	 - secretOrPrivateKey must have a value
+2022-08-25 21:26:56	 eef0cbb0-3f8b-4940-8633-725d4bad3f7f	 - secretOrPrivateKey must have a value

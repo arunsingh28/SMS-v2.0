@@ -13,14 +13,11 @@ declare var process: {
 
 export default async function refreshToken(req: Request, res: Response, next: NextFunction) {
     const refresh_token = req.cookies?.jwt
-    const string_token: string = JSON.stringify(refresh_token)
+    const string_token = `'${refresh_token}'`
     if (!refresh_token) return res.status(401)
     console.log('---refresh token------', `${refresh_token}`)
     // match token in DB
-    const foundUser = await _user.findOne({ refresh_token: string_token }, (err: any, doc: UserDocument) => {
-        if (err) throw err;
-        console.table(doc)
-    })
+    const foundUser = await _user.findOne({ refresh_token: `'${string_token}'` })
     console.log(foundUser)
 
     // // forbidden

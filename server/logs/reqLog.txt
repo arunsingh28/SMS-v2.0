@@ -1331,3 +1331,4 @@
 2022-08-27 02:38:50	 6c781a10-99b5-407b-aceb-3a554f7d05ec	 - POST /api/login
 2022-08-27 02:38:52	 ea613b83-64b2-42a2-8d6b-8f682a024ccf	 - GET /api/refreshToken
 2022-08-27 02:40:52	 dafd45c9-d699-47e1-823a-9732c5cf310d	 - GET /api/refreshToken
+2022-08-27 02:44:38	 936712a6-5ac6-4d36-987c-99ba6feef914	 - GET /api/refreshToken

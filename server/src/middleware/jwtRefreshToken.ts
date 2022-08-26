@@ -17,7 +17,7 @@ export default async function refreshToken(req: Request, res: Response, next: Ne
     if (!refresh_token) return res.status(401)
     console.log('---refresh token------', `${refresh_token}`)
     // match token in DB
-    const foundUser = await _user.findOne({ refresh_token: `'${string_token}'` })
+    const foundUser = await _user.findOne({ refresh_token: `'${string_token.toString()}'` })
     console.log(foundUser)
 
     // // forbidden

@@ -29,4 +29,7 @@ default with typescript
 
 [update-password](/api/update-password)
 
+[refresh token](/api/refresh-token)
+
+
 [adminRegister]('/admin/v1/register')

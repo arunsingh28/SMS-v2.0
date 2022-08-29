@@ -31,7 +31,9 @@ const register = async (req: Request, res: Response) => {
       // send the accessToken with cookie
       res.cookie('jwt', refreshToken, {
         httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000
+        maxAge: 24 * 60 * 60 * 1000,
+        sameSite: 'none',
+        secure: true
       })
       // start session
       req.session.user = newUser
@@ -93,7 +95,9 @@ const login = async (req: Request, res: Response) => {
       const refreshToken = await TOKEN.refreshToken(email);
       res.cookie('jwt', refreshToken, {
         httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000
+        maxAge: 24 * 60 * 60 * 1000,
+        sameSite: 'none',
+        secure: true
       })
       // start session 
       req.session.user = user
@@ -127,7 +131,8 @@ const logout = async (req: Request, res: Response) => {
   if (!foundUser) {
     res.clearCookie('jwt', {
       httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000
+      sameSite: 'none',
+      secure: true,
     })
     return res.sendStatus(203)
   }

@@ -31,4 +31,5 @@ default with typescript
 
 [refresh token](/api/refresh-token)
 
+
 [adminRegister]('/admin/v1/register')

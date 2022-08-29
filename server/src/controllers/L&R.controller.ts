@@ -32,8 +32,8 @@ const register = async (req: Request, res: Response) => {
       res.cookie('jwt', refreshToken, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
-        sameSite: 'none',
-        secure: true
+        // sameSite: 'none',
+        // secure: true
       })
       // start session
       req.session.user = newUser
@@ -68,7 +68,7 @@ const register = async (req: Request, res: Response) => {
 // logni api for emp
 const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  console.log(email, password);
+  console.log('Cookies------', JSON.stringify(req.cookies))
   if (!email || !password) {
     return res.status(401).json({
       message: "please fill all detail",
@@ -89,15 +89,18 @@ const login = async (req: Request, res: Response) => {
         .status(401)
         .json({ message: "Invalid credinitals", code: res.statusCode });
     } else {
-      // genrate token
+      // genrate access token
       const token = await TOKEN.getToken(email);
       // genrate refresh token
       const refreshToken = await TOKEN.refreshToken(email);
+      // update the refresh token in DB
+
+      // send the accessToken with cookie
       res.cookie('jwt', refreshToken, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
-        sameSite: 'none',
-        secure: true
+        // sameSite: 'none',
+        // secure: true
       })
       // start session 
       req.session.user = user
@@ -110,14 +113,11 @@ const login = async (req: Request, res: Response) => {
           role: user.role
         },
         accessToken: token,
-        refreshToken,
         code: res.statusCode,
       });
     }
   }
 };
-
-// logout api for emp
 
 // work on the logout api emprove it
 const logout = async (req: Request, res: Response) => {

@@ -8,3 +8,13 @@
 2022-08-25 21:24:04	 d8790035-6bfd-414c-8067-e2e294d8828d	 - secretOrPrivateKey must have a value
 2022-08-25 21:26:56	 eef0cbb0-3f8b-4940-8633-725d4bad3f7f	 - secretOrPrivateKey must have a value
 2022-08-29 21:35:35	 c7a6b106-2de1-44b5-9448-eb903a497ac5	 - The "properties" argument must be an instance of Array. Received type string ('eyJhbGciOiJIUzI1NiIsInR5...)
+2022-08-29 22:56:20	 3939aa47-8328-464d-a931-831aaaf117cb	 - The "properties" argument must be an instance of Array. Received [Object: null prototype] {}
+2022-08-29 22:57:28	 5b77eef7-7aa3-4fbf-bc18-83c8a956b446	 - The "properties" argument must be an instance of Array. Received [Object: null prototype] {}
+2022-08-29 22:57:44	 00cf4bd9-b293-4fce-a366-548488bd03b3	 - The "properties" argument must be an instance of Array. Received [Object: null prototype] {}
+2022-08-29 22:59:06	 47bf5678-309a-4456-bff9-351fd40a276b	 - The "properties" argument must be an instance of Array. Received [Object: null prototype] {}
+2022-08-29 22:59:28	 c0f7b1c1-f1d8-488f-8974-04919070cc94	 - The "properties" argument must be an instance of Array. Received [Object: null prototype] {}
+2022-08-29 22:59:47	 23e339a2-ff30-4e18-b92d-ae249c0363c1	 - The "properties" argument must be an instance of Array. Received [Object: null prototype] {}
+2022-08-29 23:03:44	 a6e838df-3258-4356-908e-8baac963e8aa	 - The "properties" argument must be an instance of Array. Received [Object: null prototype] {}
+2022-08-29 23:04:11	 87c6245c-a977-4ac2-b16f-33fb239d1f92	 - The "properties" argument must be an instance of Array. Received [Object: null prototype] {}
+2022-08-29 23:04:55	 968581a0-69e6-488f-b545-17147a441679	 - The "properties" argument must be an instance of Array. Received [Object: null prototype] {}
+2022-08-29 23:05:38	 54d19938-d193-4c3c-9af2-0be28c1ebf5f	 - The "properties" argument must be an instance of Array. Received [Object: null prototype] {}

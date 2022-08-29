@@ -7,7 +7,7 @@ import AdminRouter from "./routes/admin";
 import cors from "cors";
 import Session from "./middleware/session.middleware";
 import corsOption from "../config/corsOption";
-import errorHandler from "./utils/errorResponse";
+import errorHandler from "./utils/errorHandler";
 import credentials from "./middleware/credentials";
 import logger from "./middleware/logEvents.middleware";
 

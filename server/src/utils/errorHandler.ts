@@ -6,12 +6,14 @@ import Logger from '../middleware/logEvents.middleware'
 
 const errorHandler = (server: any) => {
 
-    process.on("unhandledRejection", (err: ErrorResponse, promise) => {
+    console.log('SERVER', server)
+
+    process.on("unhandledRejection", (err: ErrorResponse) => {
         Logger.logEvents(err.message, 'UnhandleReject.txt')
-        console.log(`unhanle Rejection fail: ${err.message}`);
+        console.log(`unhanle Rejection fail: ${err}`);
         process.on('uncaughtException', (err: ErrorResponse) => {
             Logger.logEvents(err.message, 'uncaughtException.txt')
-            console.log(`Exception Error: ${err.message}`);
+            console.log(`Exception Error: ${err}`);
             server.close(() => {
                 process.exit(1);
             });

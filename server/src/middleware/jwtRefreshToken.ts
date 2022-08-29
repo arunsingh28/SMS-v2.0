@@ -13,18 +13,23 @@ declare var process: {
 
 export default async function refreshToken(req: Request, res: Response, next: NextFunction) {
     const refresh_token = req.cookies?.jwt
-    const string_token = `'${refresh_token}'`
-    if (!refresh_token) return res.status(401)
+    console.log('RT:-----', refresh_token)
+    if (!refresh_token) return res.sendStatus(401)
     // match token in DB
-
     const foundUser = await _user.findOne({ refresh_token }).exec()
-    console.log(foundUser)
-    if (!foundUser) return res.status(401)
+    console.log('User from DB -----', foundUser)
+    res.clearCookie('jwt', {
+        httpOnly: true,
+        // sameSite: 'none',
+        // secure: true,
+    })
+    if (!foundUser) return res.sendStatus(403)
 
     // // forbidden
     // else return res.sendStatus(403)
 }
 
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlbW9AZG8uY29tIiwiaWF0IjoxNjYxNTQ4MDA4LCJleHAiOjE2NjE1NDgzMDh9.fhiK2gouUGm119yxYTr7J2kbZSpbRfwbCvhFPXTYD00
 
 
 // jwt.verify(clientRefreshToken, process.env.JWT_SECRET_KEY2, (err: any, decoded: any) => {

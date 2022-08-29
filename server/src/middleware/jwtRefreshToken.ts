@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 import _user, { UserDocument } from '../models/user.model'
 import { Response, Request, NextFunction } from 'express'
 
@@ -10,7 +10,11 @@ declare var process: {
         JWT_REFRESH_EXPIRE_TIME: number
     }
 }
-
+interface JwtPayload {
+    id: string,
+    iat: number,
+    exp: number
+}
 export default async function refreshToken(req: Request, res: Response, next: NextFunction) {
     const refresh_token = req.cookies?.jwt
     console.log('RT:-----', refresh_token)
@@ -18,18 +22,31 @@ export default async function refreshToken(req: Request, res: Response, next: Ne
     // match token in DB
     const foundUser = await _user.findOne({ refresh_token }).exec()
     console.log('User from DB -----', foundUser)
-    res.clearCookie('jwt', {
-        httpOnly: true,
-        // sameSite: 'none',
-        // secure: true,
-    })
-    if (!foundUser) return res.sendStatus(403)
+    // res.clearCookie('jwt', {
+    //     httpOnly: true,
+    //     // sameSite: 'none',
+    //     // secure: true,
+    // })
+    if (!foundUser) return res.sendStatus(403)  //Forbidden
+    // verify token
+    try {
+        const decoded: JwtPayload = jwt.verify(refresh_token, process.env.JWT_SECRET_KEY2)
+        console.log('decoded', decoded)
+        // match token in DB
+        if (foundUser.email !== decoded.id) return res.sendStatus(403) //Forbidden
+        // create new access token
+
+        // send new access token to client
+
+    } catch (error) {
+        console.log('error', error)
+        return res.sendStatus(403)
+    }
 
     // // forbidden
     // else return res.sendStatus(403)
 }
 
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlbW9AZG8uY29tIiwiaWF0IjoxNjYxNTQ4MDA4LCJleHAiOjE2NjE1NDgzMDh9.fhiK2gouUGm119yxYTr7J2kbZSpbRfwbCvhFPXTYD00
 
 
 // jwt.verify(clientRefreshToken, process.env.JWT_SECRET_KEY2, (err: any, decoded: any) => {

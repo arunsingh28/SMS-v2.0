@@ -94,7 +94,9 @@ const login = async (req: Request, res: Response) => {
       // genrate refresh token
       const refreshToken = await TOKEN.refreshToken(email);
       // update the refresh token in DB
-
+      await _user.findOneAndUpdate({ email }, {
+        $set: { refresh_token: refreshToken }
+      })
       // send the accessToken with cookie
       res.cookie('jwt', refreshToken, {
         httpOnly: true,

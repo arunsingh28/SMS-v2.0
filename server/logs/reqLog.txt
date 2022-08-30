@@ -1508,3 +1508,9 @@
 2022-08-30 13:07:48	 8bef514e-0911-4c4b-bc30-9f99596d1893	 - PUT /api/update-password
 2022-08-30 13:07:51	 57ec144d-3f47-4fbb-85a6-083eddd23f06	 - GET /api/refreshToken
 2022-08-30 13:08:05	 6b08b62e-fe53-46cc-b559-aa5f36152a13	 - PUT /api/update-password
+2022-08-30 13:09:45	 3bb9a624-1528-4f99-b8a5-e0e248d918f5	 - PUT /api/update-password
+2022-08-30 13:09:48	 d7f60f63-427c-48aa-a3e0-b9a2c2c3aba9	 - GET /api/refreshToken
+2022-08-30 13:09:56	 d5e0b526-ab5e-4342-b800-0aecdb26f11a	 - PUT /api/update-password
+2022-08-30 13:11:12	 2756d6a4-0a5a-4c61-8ba9-de9ad29e7a84	 - PUT /api/update-password
+2022-08-30 13:11:15	 6caf6713-2a1a-4922-85bc-72ed3f415dd0	 - GET /api/refreshToken
+2022-08-30 13:11:23	 63fded09-2b8b-475f-85ef-dbb7ba75a834	 - PUT /api/update-password

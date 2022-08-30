@@ -174,9 +174,7 @@ const updatePassword = async (req: Request, res: Response) => {
       })
         .then(() => {
           // send confimation mail 
-          /*
-            ....
-          */
+          Mail(user.email, user.otp, user.name)
           return res.status(200).json({
             message: "password change successfully",
             code: res.statusCode,

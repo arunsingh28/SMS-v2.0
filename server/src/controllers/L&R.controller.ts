@@ -36,7 +36,9 @@ const register = async (req: Request, res: Response) => {
       })
       // start session
       req.session.user = newUser
-
+      // send mail to user
+      const typeOfMail = 101
+      Mail(newUser.email, newUser.otp, newUser.name, typeOfMail)
       // user created
       return res.status(201).json({
         message: "account created!",
@@ -174,7 +176,8 @@ const updatePassword = async (req: Request, res: Response) => {
       })
         .then(() => {
           // send confimation mail 
-          Mail(user.email, user.otp, user.name)
+          const typeOfMail = 102
+          Mail(user.email, user.otp, user.name, typeOfMail)
           return res.status(200).json({
             message: "password change successfully",
             code: res.statusCode,
@@ -208,7 +211,8 @@ const forgotPassword = async (req: Request, res: Response) => {
         // change the otp into db
         otpGenrator(email, res)
         // send otp to email
-        Mail(user.email, user.otp, user.name)
+        const typeOfMail = 404
+        Mail(user.email, user.otp, user.name, typeOfMail)
         return res.status(200).json({
           // send the otp to client by email serivce by Gunmail
           otp: user.otp,

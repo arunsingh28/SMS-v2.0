@@ -1,14 +1,18 @@
 import _user from '../models/user.model'
 import { Response } from 'express'
 
-export default async function otpGenrator(id: string, res: Response) {
-    // genrate 6 digit number
+export default async function otpGenrator(email: string, res: Response) {
+    // genrate 6 digit new otp
     const otp = Math.floor(100000 + Math.random() * 900000);
+    // fetch old otp
+    const user = await _user.findOne({ email })
     try {
-        await _user.findOneAndUpdate({ email: id },
+        // update otp in DB
+        await _user.findOneAndUpdate({ email },
             {
-                $inc: {
-                    "otp": otp
+                $set: {
+                    oldOtp: user?.otp,
+                    otp
                 }
             }
         );

@@ -10,6 +10,7 @@ var DB_1 = require("./utils/DB");
 var router_1 = __importDefault(require("./routes/router"));
 var admin_1 = __importDefault(require("./routes/admin"));
 var cors_1 = __importDefault(require("cors"));
+var session_middleware_1 = __importDefault(require("./middleware/session.middleware"));
 var corsOption_1 = __importDefault(require("../config/corsOption"));
 var errorHandler_1 = __importDefault(require("./utils/errorHandler"));
 var credentials_1 = __importDefault(require("./middleware/credentials"));
@@ -41,7 +42,7 @@ app.use(function (req, res, next) {
     next();
 });
 // session ============================================
-// Session(app);
+session_middleware_1.default(app);
 // Public router ======================================
 router_1.default(app);
 // Admin router =======================================
@@ -53,6 +54,7 @@ app.use('*', function (req, res, next) {
         .status(404)
         .json(error.message);
 });
+// server init
 var server;
 // handle server crash ===============================
 errorHandler_1.default(server);

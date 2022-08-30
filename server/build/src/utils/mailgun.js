@@ -48,7 +48,19 @@ var mail = new mailgun_js_1.default({
 console.log(process.env.MAILGUN_API_KEY, process.env.MAILGUN_DOMAIN);
 // creating message
 var mailGun = function (to, subject, body) { return __awaiter(void 0, void 0, void 0, function () {
+    var data;
     return __generator(this, function (_a) {
+        data = {
+            from: 'arunsingh28aug.as@gmail.com',
+            to: to,
+            subject: subject,
+            text: body
+        };
+        mail.messages().send(data, function (err, data) {
+            if (err)
+                throw err;
+            console.log(data);
+        });
         return [2 /*return*/];
     });
 }); };

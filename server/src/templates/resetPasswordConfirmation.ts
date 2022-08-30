@@ -1,4 +1,4 @@
-export default function createAccount(name: string) {
+export default function confirmResetPassword(name: string) {
     return `
 <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
     <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
@@ -8,10 +8,7 @@ export default function createAccount(name: string) {
                 <table style="background-color: #f2f3f8; max-width:670px; margin:0 auto;" width="100%" border="0"
                     align="center" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td style="height:80px;">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td style="height:20px;">&nbsp;</td>
+                        <td style="height:40px;">&nbsp;</td>
                     </tr>
                     <tr>
                         <td>
@@ -22,26 +19,21 @@ export default function createAccount(name: string) {
                                 </tr>
                                 <tr>
                                     <td style="padding:0 35px;">
-                                        <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Get started
+                                        <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Reset Password Successfull
                                         </h1>
-                                        <p style="font-size:15px; color:#455056; margin:8px 0 0; line-height:24px;">
-                                           Hello ${name},<br> Your account has been created. <br>
+                                        <p style="font-size:15px; color:#455056;text-align: initial;margin:8px 0 0; line-height:24px;">
+                                           <span style="margin-top:10px">Hello ${name}</span>,<br> <br>This notification is on behalf of SMS to let you know that your password has been successfully reset. <br>
                                         </p>
-
-                                        <a href="login_page_url"
-                                            style="background:#20e277;text-decoration:none !important; display:inline-block; font-weight:500; margin-top:24px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Login
-                                            to your Account</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="height:40px;">&nbsp;</td>
-                                </tr>
+                                <td style="height:40px;">&nbsp;</td>
+                            </tr>
                             </table>
+                            <tr>
+                            <td style="height:40px;">&nbsp;</td>
+                        </tr>
                         </td>
-                    </tr>
-                 \
-                    <tr>
-                        <td style="height:80px;">&nbsp;</td>
                     </tr>
                 </table>
             </td>

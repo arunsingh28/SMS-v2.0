@@ -1,8 +1,9 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import TOKEN from "../utils/token";
-import _user, { UserDocument } from "../models/user.model";
+import _user from "../models/user.model";
 import otpGenrator from "../utils/otpGenrator";
 import Mail from '../utils/nodeMailer'
+import { mailType } from "../../config/mailTypes";
 
 // register api for emp
 const register = async (req: Request, res: Response) => {
@@ -37,7 +38,7 @@ const register = async (req: Request, res: Response) => {
       // start session
       req.session.user = newUser
       // send mail to user
-      const typeOfMail = 101
+      const typeOfMail = mailType.MAIL_CREATE
       Mail(newUser.email, newUser.otp, newUser.name, typeOfMail)
       // user created
       return res.status(201).json({
@@ -75,7 +76,7 @@ const login = async (req: Request, res: Response) => {
       code: res.statusCode,
     });
   }
-  const user = await _user.findOne({ email })
+  const user = await _user.findOne({ email }).exec()
   // if user not found
   if (!user) {
     return res
@@ -148,48 +149,60 @@ const logout = async (req: Request, res: Response) => {
   return res.sendStatus(204)
 };
 
+
 // change password for local emp
-const updatePassword = async (req: Request, res: Response) => {
+const resetPassword = async (req: Request, res: Response) => {
   const id = req.session.user;
-  const { pwd: password, oldpwd: oldPassword } = req.body;
+  const { pwd: password, oldpwd: oldPassword, otp } = req.body;
   // find user with this id
-  const user = await _user.findById(id);
+  let user = await _user.findById(id).exec()
+  let email = user?.email
   if (!password || !oldPassword) {
     return res
       .status(400)
       .json({ message: "fill all detail", code: res.statusCode });
+  } else if (!otp) {
+    return res
+      .status(400)
+      .json({ message: "Please provide the otp", code: res.statusCode });
   }
-  try {
-    // compare old-password with client-password
-    const isMatch = await (<any>user).comparePassword(oldPassword);
-    if (isMatch === false) {
-      return res
-        .status(401)
-        .json({ message: "Invalid credinitals", code: res.statusCode });
-    } else {
-      const hash = await user?.encryptPassword(password);
-      // save to db
-      await user?.updateOne({
-        $set: {
-          password: hash,
-        },
-      })
-        .then(() => {
-          // send confimation mail 
-          const typeOfMail = 102
-          Mail(user.email, user.otp, user.name, typeOfMail)
-          return res.status(200).json({
-            message: "password change successfully",
-            code: res.statusCode,
-          });
-        });
+  // compare old-password with client-password
+  const isMatch = await (<any>user).comparePassword(oldPassword);
+  if (isMatch === false) {
+    return res
+      .status(401)
+      .json({ message: "Invalid credinitals", code: res.statusCode });
+  } else {
+    const hash = await user?.encryptPassword(password);
+    // user must have the otp
+    try {
+      // save the new password in DB after the verify the otp
+      if (otp == user?.oldOtp) {
+        await _user.findOneAndUpdate({ email },
+          {
+            $set: {
+              password: hash
+            }
+          }
+        );
+        // save new password
+        user?.save()
+        // change the otp
+        otpGenrator(email!, res)
+        // send success mail
+        Mail(email!, otp, user?.name, mailType.MAIL_SUCCESS)
+        return res.status(200).json({ message: 'Password change succssfully' })
+      }
+      // otp not match
+      else return res.status(406).json({ message: 'incorrect otp' })
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json({ message: 'server error' })
     }
-  } catch (error) {
-    return res.status(500).json({
-      message: "server error"
-    })
   }
-};
+}
+
+
 
 // forgot password for local emp
 const forgotPassword = async (req: Request, res: Response) => {
@@ -234,7 +247,7 @@ const module = {
   register,
   login,
   logout,
-  updatePassword,
+  resetPassword,
   forgotPassword
 };
 

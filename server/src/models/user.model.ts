@@ -11,6 +11,7 @@ export interface UserDocument extends mongoose.Document {
   updatedAt: Date;
   name: string;
   otp: number;
+  oldOtp: number;
   role: string;
   refresh_token: string;
   profile: {
@@ -46,6 +47,9 @@ const userSchema = new mongoose.Schema(
     otp: {
       type: Number,
     },
+    oldOtp: {
+      type: Number
+    },
     refresh_token: {
       type: String,
     },
@@ -68,6 +72,7 @@ userSchema.pre("save", async function (next: mongoose.HookNextFunction) {
   user.password = hash;
   // set or asign otp to user
   user.otp = Math.floor(100000 + Math.random() * 900000);
+  user.oldOtp = Math.floor(100000 + Math.random() * 900000)
   return next();
 });
 

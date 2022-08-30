@@ -4,13 +4,13 @@ import logging from "../config/logger";
 import { connectDB } from "./utils/DB";
 import Router from "./routes/router";
 import AdminRouter from "./routes/admin";
+import OtpRouter from './routes/otpRouter'
 import cors from "cors";
 import Session from "./middleware/session.middleware";
 import corsOption from "../config/corsOption";
 import errorHandler from "./utils/errorHandler";
 import credentials from "./middleware/credentials";
 import logger from "./middleware/logEvents.middleware";
-
 import config from '../config/config'
 import dot from 'dotenv'
 dot.config()
@@ -58,6 +58,8 @@ Session(app);
 
 // Public router ======================================
 Router(app);
+// otp router =========================================
+OtpRouter(app)
 // Admin router =======================================
 AdminRouter(app);
 

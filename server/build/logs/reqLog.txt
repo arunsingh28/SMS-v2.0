@@ -33,3 +33,5 @@
 2022-08-30 11:16:15	 d71a0543-878f-4ebb-be63-04df54ca140a	 - GET /api/refreshToken
 2022-08-30 11:16:19	 e519a837-759c-4e35-a23a-2f189853ac1a	 - GET /api/logout
 2022-08-30 11:16:24	 3ddcdd26-2f22-4e0b-a593-c98b0874b872	 - PUT /api/update-password
+2022-08-30 19:43:56	 7d347f63-29cc-4374-8472-ba9cd7d80faa	 - POST /api/login
+2022-08-30 19:44:07	 7ce3ac36-3549-402f-af0f-8731705b4a15	 - POST /api/login

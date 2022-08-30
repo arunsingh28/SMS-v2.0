@@ -79,7 +79,7 @@ errorHandler(server);
 app.use(function (err: any, res: express.Response) {
   console.log(err.message)
   logger.logEvents(err.message, 'serverInternalError.txt')
-  return res.status(500).send(err.message)
+  return res.status(500).json(err.message)
 })
 
 server = app.listen(config.port, () => {

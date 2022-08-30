@@ -139,8 +139,8 @@ const logout = async (req: Request, res: Response) => {
   }
   // delet refresh token in db
   foundUser.refresh_token = ''
-  const result = foundUser.save()
-  console.table(result)
+  foundUser.save()
+  // clear the refresh token  
   res.clearCookie('jwt', {
     httpOnly: true,
     smaeSite: 'none',
@@ -152,7 +152,6 @@ const logout = async (req: Request, res: Response) => {
 // change password for local emp
 const updatePassword = async (req: Request, res: Response) => {
   const id = req.session.user;
-  console.log('ID------', id?._id)
   const { pwd: password, oldpwd: oldPassword } = req.body;
   console.table(req.body)
   // find user with this id

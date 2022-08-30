@@ -2,7 +2,6 @@ import { format } from 'date-fns'
 import { v4 as uuid } from 'uuid'
 import { Request, Response, NextFunction } from 'express'
 import fs from 'fs'
-
 import path from 'path'
 
 const logEvents = async (message: string | undefined, fileName: string) => {
@@ -23,7 +22,6 @@ const logEvents = async (message: string | undefined, fileName: string) => {
 }
 
 const logger = (req: Request, res: Response, next: NextFunction) => {
-    console.log('logger')
     logEvents(`${req.method} ${req.path}`, 'reqLog.txt')
     next()
 }

@@ -6,8 +6,6 @@ import Logger from '../middleware/logEvents.middleware'
 
 const errorHandler = (server: any) => {
 
-    console.log('SERVER', server)
-
     process.on("unhandledRejection", (err: ErrorResponse) => {
         Logger.logEvents(err.message, 'UnhandleReject.txt')
         console.log(`unhanle Rejection fail: ${err}`);

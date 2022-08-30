@@ -1452,3 +1452,7 @@
 2022-08-30 09:33:53	 2d6bb086-5b96-40cf-a550-c9bc7877ef54	 - GET /api/refreshToken
 2022-08-30 09:34:07	 414d6348-3ad9-4799-879b-d9562266fc0a	 - POST /api/login
 2022-08-30 09:34:10	 951b4acf-dd6b-42b4-b125-07a03945d4e2	 - GET /api/refreshToken
+2022-08-30 09:43:39	 88c90362-f63b-4e9d-b3d1-7d9995c8aa85	 - GET /api/logout
+2022-08-30 09:44:13	 e24c2001-94ed-48fe-9800-a629024a58f1	 - GET /api/refreshToken
+2022-08-30 09:44:16	 534d66aa-4400-4a42-bdea-f2bcd50b1ec3	 - POST /api/login
+2022-08-30 09:44:19	 03664460-c18a-4ac7-90df-34a476a772eb	 - GET /api/refreshToken

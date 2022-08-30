@@ -3,6 +3,7 @@ import TOKEN from "../utils/token";
 import _user, { UserDocument } from "../models/user.model";
 import otpGenrator from "../utils/otpGenrator";
 import crypto from "crypto";
+import refreshToken from "../middleware/jwtRefreshToken";
 
 // register api for emp
 const register = async (req: Request, res: Response) => {
@@ -121,24 +122,31 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
-// work on the logout api emprove it
+// logout api 
 const logout = async (req: Request, res: Response) => {
+  // on client delte the access token
   const cookie = req.cookies?.jwt
-  if (!cookie) return res.sendStatus(204)
-  const foundUser = await _user.findOneAndUpdate({ refresh_token: cookie }, {
-    $set: {
-      "refresh_token": ""
-    }
-  })
+  if (!cookie) return res.sendStatus(204) //no content
+  // match refresh token in DB
+  const foundUser = await _user.findOne({ refresh_token: cookie }).exec()
   if (!foundUser) {
     res.clearCookie('jwt', {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
     })
-    return res.sendStatus(203)
+    return res.sendStatus(204)
   }
-  return res.status(200).json({ message: 'Logout Successfully' })
+  // delet refresh token in db
+  foundUser.refresh_token = ''
+  const result = foundUser.save()
+  console.table(result)
+  res.clearCookie('jwt', {
+    httpOnly: true,
+    smaeSite: 'none',
+    secure: true
+  })
+  return res.sendStatus(204)
 };
 
 // change password for local emp

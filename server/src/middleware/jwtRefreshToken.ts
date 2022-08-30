@@ -20,6 +20,9 @@ export default async function refreshToken(req: Request, res: Response, next: Ne
     if (!refresh_token) return res.sendStatus(401)
     // find token in DB
     const foundUser = await _user.findOne({ refresh_token }).exec()
+
+    // delete previous cookie //
+
     // res.clearCookie('jwt', {
     //     httpOnly: true,
     //     // sameSite: 'none',
@@ -37,7 +40,11 @@ export default async function refreshToken(req: Request, res: Response, next: Ne
             const accessToken = jwt.sign({ id: decoded.id }, process.env.JWT_SECRET_KEY1, {
                 expiresIn: process.env.JWT_EXPIRE_TIME
             })
-            res.cookie('jwt', {
+            const newRefreshToken = jwt.sign({ id: foundUser.email },
+                process.env.JWT_SECRET_KEY2,
+                { expiresIn: process.env.JWT_REFRESH_EXPIRE_TIME })
+
+            res.cookie('jwt', newRefreshToken, {
                 httpOnly: true,
                 maxAge: 24 * 60 * 60 * 1000,
                 // sameSite: 'none',

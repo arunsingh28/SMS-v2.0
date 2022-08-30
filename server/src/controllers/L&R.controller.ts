@@ -2,13 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import TOKEN from "../utils/token";
 import _user, { UserDocument } from "../models/user.model";
 import otpGenrator from "../utils/otpGenrator";
-import crypto from "crypto";
-import refreshToken from "../middleware/jwtRefreshToken";
+import Mail from '../utils/nodeMailer'
 
 // register api for emp
 const register = async (req: Request, res: Response) => {
   const { email, password, name } = req.body;
-  console.table(req.body)
   if (!email || !password || !name) {
     return res
       .status(400)
@@ -69,7 +67,6 @@ const register = async (req: Request, res: Response) => {
 // logni api for emp
 const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  console.log('Cookies------', JSON.stringify(req.cookies))
   if (!email || !password) {
     return res.status(401).json({
       message: "please fill all detail",
@@ -153,10 +150,8 @@ const logout = async (req: Request, res: Response) => {
 const updatePassword = async (req: Request, res: Response) => {
   const id = req.session.user;
   const { pwd: password, oldpwd: oldPassword } = req.body;
-  console.table(req.body)
   // find user with this id
   const user = await _user.findById(id);
-  console.log('CURRENT USER: ', user)
   if (!password || !oldPassword) {
     return res
       .status(400)
@@ -178,6 +173,10 @@ const updatePassword = async (req: Request, res: Response) => {
         },
       })
         .then(() => {
+          // send confimation mail 
+          /*
+            ....
+          */
           return res.status(200).json({
             message: "password change successfully",
             code: res.statusCode,
@@ -211,6 +210,7 @@ const forgotPassword = async (req: Request, res: Response) => {
         // change the otp into db
         otpGenrator(email, res)
         // send otp to email
+        Mail(user.email, user.otp, user.name)
         return res.status(200).json({
           // send the otp to client by email serivce by Gunmail
           otp: user.otp,

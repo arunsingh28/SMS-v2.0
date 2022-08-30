@@ -153,6 +153,47 @@
 "@types/node@*", "@types/node@^16.4.0":
   "version" "16.7.1"
 
+"@types/nodemailer-direct-transport@*":
+  "integrity" "sha512-1S0E405ghuApKUSH3x1dJpu/4Y8cQP4kQZ6BSLsfrM5uJB+IKKJuxCUVCDJoe3OTydPtzAoKFGggseXY97jlDw=="
+  "resolved" "https://registry.npmjs.org/@types/nodemailer-direct-transport/-/nodemailer-direct-transport-1.0.32.tgz"
+  "version" "1.0.32"
+  dependencies:
+    "@types/nodemailer" "^3"
+
+"@types/nodemailer-ses-transport@*":
+  "integrity" "sha512-4N5somkAYv/K0DzGnXyxsuE08OOV1l2KrgzxWXDsO7F6B1GOXPJeKhOaN2lGM2KeKF9s7WWV1fCMsUaYQcveqQ=="
+  "resolved" "https://registry.npmjs.org/@types/nodemailer-ses-transport/-/nodemailer-ses-transport-1.5.2.tgz"
+  "version" "1.5.2"
+  dependencies:
+    "@types/nodemailer" "^3"
+    "aws-sdk" "^2.814.0"
+
+"@types/nodemailer-smtp-transport@*", "@types/nodemailer-smtp-transport@^2.7.5":
+  "integrity" "sha512-TziFYmQgyO9QuKvD3j7GcC6rnbp/Js9CEROm5h3u50AAeD8d8LcwoOlhosaEeMyPmy7fVXN63ZC1/MtjvzQViQ=="
+  "resolved" "https://registry.npmjs.org/@types/nodemailer-smtp-transport/-/nodemailer-smtp-transport-2.7.5.tgz"
+  "version" "2.7.5"
+  dependencies:
+    "@types/node" "*"
+    "@types/nodemailer" "^3"
+
+"@types/nodemailer@^3":
+  "integrity" "sha512-xm9K8jNvPq6dpkndsZ1+pFfHtA6161vpIFvfZVZ7B83QxnV7K9EaUyQwoWNI50f0BV5Ay7wC+5oG6Ov9UrP0Tg=="
+  "resolved" "https://registry.npmjs.org/@types/nodemailer/-/nodemailer-3.1.8.tgz"
+  "version" "3.1.8"
+  dependencies:
+    "@types/node" "*"
+    "@types/nodemailer-direct-transport" "*"
+    "@types/nodemailer-ses-transport" "*"
+    "@types/nodemailer-smtp-transport" "*"
+    "aws-sdk" "^2.814.0"
+
+"@types/nodemailer@^6.4.5":
+  "integrity" "sha512-zuP3nBRQHI6M2PkXnGGy1Ww4VB+MyYHGgnfV2T+JR9KLkeWqPJuyVUgLpKXuFnA/b7pZaIDFh2sV4759B7jK1g=="
+  "resolved" "https://registry.npmjs.org/@types/nodemailer/-/nodemailer-6.4.5.tgz"
+  "version" "6.4.5"
+  dependencies:
+    "@types/node" "*"
+
 "@types/qs@*":
   "version" "6.9.7"
 
@@ -247,7 +288,7 @@
 "asynckit@^0.4.0":
   "version" "0.4.0"
 
-"aws-sdk@*", "aws-sdk@^2.37.0", "aws-sdk@^2.953.0":
+"aws-sdk@*", "aws-sdk@^2.37.0", "aws-sdk@^2.814.0", "aws-sdk@^2.953.0":
   "version" "2.973.0"
   dependencies:
     "buffer" "4.9.2"
@@ -721,6 +762,19 @@
     "agent-base" "4"
     "debug" "3.1.0"
 
+"httpntlm@1.6.1":
+  "integrity" "sha512-Tcz3Ct9efvNqw3QdTl3h6IgRRlIQxwKkJELN/aAIGnzi2xvb3pDHdnMs8BrxWLV6OoT4DlVyhzSVhFt/tk0lIw=="
+  "resolved" "https://registry.npmjs.org/httpntlm/-/httpntlm-1.6.1.tgz"
+  "version" "1.6.1"
+  dependencies:
+    "httpreq" ">=0.4.22"
+    "underscore" "~1.7.0"
+
+"httpreq@>=0.4.22":
+  "integrity" "sha512-2Jm+x9WkExDOeFRrdBCBSpLPT5SokTcRHkunV3pjKmX/cx6av8zQ0WtHUMDrYb6O4hBFzNU6sxJEypvRUVYKnw=="
+  "resolved" "https://registry.npmjs.org/httpreq/-/httpreq-0.5.2.tgz"
+  "version" "0.5.2"
+
 "https-proxy-agent@^3.0.0":
   "version" "3.0.1"
   dependencies:
@@ -1043,6 +1097,37 @@
 "node-fetch@^2.6.1":
   "version" "2.6.1"
 
+"nodemailer-fetch@1.6.0":
+  "integrity" "sha512-P7S5CEVGAmDrrpn351aXOLYs1R/7fD5NamfMCHyi6WIkbjS2eeZUB/TkuvpOQr0bvRZicVqo59+8wbhR3yrJbQ=="
+  "resolved" "https://registry.npmjs.org/nodemailer-fetch/-/nodemailer-fetch-1.6.0.tgz"
+  "version" "1.6.0"
+
+"nodemailer-shared@1.1.0":
+  "integrity" "sha512-68xW5LSyPWv8R0GLm6veAvm7E+XFXkVgvE3FW0FGxNMMZqMkPFeGDVALfR1DPdSfcoO36PnW7q5AAOgFImEZGg=="
+  "resolved" "https://registry.npmjs.org/nodemailer-shared/-/nodemailer-shared-1.1.0.tgz"
+  "version" "1.1.0"
+  dependencies:
+    "nodemailer-fetch" "1.6.0"
+
+"nodemailer-smtp-transport@^2.7.4":
+  "integrity" "sha512-1e86YhJ633OZWk3OHWS5TpuoYXG/LtY2/RzNiB5+EkFifDdqHCNHBnExd5cobx0ZSHJLNGM8EKnDuHRFIjFi6Q=="
+  "resolved" "https://registry.npmjs.org/nodemailer-smtp-transport/-/nodemailer-smtp-transport-2.7.4.tgz"
+  "version" "2.7.4"
+  dependencies:
+    "nodemailer-shared" "1.1.0"
+    "nodemailer-wellknown" "0.1.10"
+    "smtp-connection" "2.12.0"
+
+"nodemailer-wellknown@0.1.10":
+  "integrity" "sha512-/VV4mjAEjfm2fn0loUvrpjvugw5rgurNjPO4WU24CuVSoeumsyLOTgaEWG8WoGdPxh1biOAp5JxDoy1hlA2zsw=="
+  "resolved" "https://registry.npmjs.org/nodemailer-wellknown/-/nodemailer-wellknown-0.1.10.tgz"
+  "version" "0.1.10"
+
+"nodemailer@^6.7.8":
+  "integrity" "sha512-2zaTFGqZixVmTxpJRCFC+Vk5eGRd/fYtvIR+dl5u9QXLTQWGIf48x/JXvo58g9sa0bU6To04XUv554Paykum3g=="
+  "resolved" "https://registry.npmjs.org/nodemailer/-/nodemailer-6.7.8.tgz"
+  "version" "6.7.8"
+
 "nodemon@^2.0.19":
   "integrity" "sha512-4pv1f2bMDj0Eeg/MhGqxrtveeQ5/G/UVe9iO6uTZzjnRluSA4PVWf8CW99LUPwGB3eNIA7zUFoP77YuI7hOc0A=="
   "resolved" "https://registry.npmjs.org/nodemon/-/nodemon-2.0.19.tgz"
@@ -1346,6 +1431,14 @@
 "smart-buffer@^4.1.0":
   "version" "4.2.0"
 
+"smtp-connection@2.12.0":
+  "integrity" "sha512-UP5jK4s5SGcUcqPN4U9ingqKt9mXYSKa52YhqxPuMecAnUOsVJpOmtgGaOm1urUBJZlzDt1M9WhZZkgbhxQlvg=="
+  "resolved" "https://registry.npmjs.org/smtp-connection/-/smtp-connection-2.12.0.tgz"
+  "version" "2.12.0"
+  dependencies:
+    "httpntlm" "1.6.1"
+    "nodemailer-shared" "1.1.0"
+
 "socks-proxy-agent@^4.0.1":
   "version" "4.0.2"
   dependencies:
@@ -1480,6 +1573,11 @@
   "integrity" "sha512-WxONCrssBM8TSPRqN5EmsjVrsv4A8X12J4ArBiiayv3DyyG3ZlIg6yysuuSYdZsVz3TKcTg2fd//Ujd4CHV1iA=="
   "resolved" "https://registry.npmjs.org/undefsafe/-/undefsafe-2.0.5.tgz"
   "version" "2.0.5"
+
+"underscore@~1.7.0":
+  "integrity" "sha512-cp0oQQyZhUM1kpJDLdGO1jPZHgS/MpzoWYfe9+CM2h/QGDZlqwT2T3YGukuBdaNJ/CAPoeyAZRRHz8JFo176vA=="
+  "resolved" "https://registry.npmjs.org/underscore/-/underscore-1.7.0.tgz"
+  "version" "1.7.0"
 
 "unpipe@~1.0.0", "unpipe@1.0.0":
   "version" "1.0.0"

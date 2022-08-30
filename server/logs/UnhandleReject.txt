@@ -18,3 +18,5 @@
 2022-08-29 23:04:11	 87c6245c-a977-4ac2-b16f-33fb239d1f92	 - The "properties" argument must be an instance of Array. Received [Object: null prototype] {}
 2022-08-29 23:04:55	 968581a0-69e6-488f-b545-17147a441679	 - The "properties" argument must be an instance of Array. Received [Object: null prototype] {}
 2022-08-29 23:05:38	 54d19938-d193-4c3c-9af2-0be28c1ebf5f	 - The "properties" argument must be an instance of Array. Received [Object: null prototype] {}
+2022-08-30 12:52:44	 47c8fb44-c846-4c9a-ad34-6dea49fadf4d	 - Cannot create property 'mailer' on string 'SMTP'
+2022-08-30 12:54:33	 307c85b8-e5b1-47f8-91c5-d4626412573b	 - Cannot create property 'mailer' on string 'SMTP'

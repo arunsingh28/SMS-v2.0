@@ -20,3 +20,16 @@
 2022-08-30 10:08:33	 a3223784-3fcc-48de-9dd2-e334fbfb1655	 - PUT /api/update-password
 2022-08-30 10:08:38	 02c555a0-8f28-4151-93ac-ca6f5a7ed5df	 - GET /api/refreshToken
 2022-08-30 10:08:45	 182dc517-b91a-4b74-9b81-1839ec1d4110	 - PUT /api/update-password
+2022-08-30 10:57:46	 8c2f0b7f-c86a-450c-a0c4-ab5228bb8546	 - POST /api/login
+2022-08-30 11:04:33	 891b936a-229e-4d70-bbf3-0c30514e8c60	 - POST /api/login
+2022-08-30 11:05:38	 52275e65-9e8a-4999-ac31-4083003368e4	 - POST /api/login
+2022-08-30 11:06:28	 393b5bf6-d418-4265-9372-c0f798fefc60	 - POST /api/login
+2022-08-30 11:06:48	 25c5648c-914d-4ff6-932c-30f258f73a43	 - POST /api/login
+2022-08-30 11:08:27	 d720d672-c2de-4c7d-b65a-93de563cb71e	 - POST /api/login
+2022-08-30 11:12:55	 4a066bb1-e2b6-49f0-8236-1840c24ea783	 - POST /api/login
+2022-08-30 11:13:15	 c4262309-9a27-4ba0-958b-d4f4e0e7a114	 - POST /api/login
+2022-08-30 11:15:46	 60f69cb9-cfac-4421-845a-4b9a6eb2310c	 - POST /api/refreshToken
+2022-08-30 11:16:04	 4d802678-9dea-4160-ae8f-34242cbcebe1	 - GET /api/refreshToken
+2022-08-30 11:16:15	 d71a0543-878f-4ebb-be63-04df54ca140a	 - GET /api/refreshToken
+2022-08-30 11:16:19	 e519a837-759c-4e35-a23a-2f189853ac1a	 - GET /api/logout
+2022-08-30 11:16:24	 3ddcdd26-2f22-4e0b-a593-c98b0874b872	 - PUT /api/update-password

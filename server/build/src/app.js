@@ -10,7 +10,6 @@ var DB_1 = require("./utils/DB");
 var router_1 = __importDefault(require("./routes/router"));
 var admin_1 = __importDefault(require("./routes/admin"));
 var cors_1 = __importDefault(require("cors"));
-var session_middleware_1 = __importDefault(require("./middleware/session.middleware"));
 var corsOption_1 = __importDefault(require("../config/corsOption"));
 var errorHandler_1 = __importDefault(require("./utils/errorHandler"));
 var credentials_1 = __importDefault(require("./middleware/credentials"));
@@ -42,17 +41,17 @@ app.use(function (req, res, next) {
     next();
 });
 // session ============================================
-session_middleware_1.default(app);
+// Session(app);
 // Public router ======================================
 router_1.default(app);
 // Admin router =======================================
 admin_1.default(app);
 // invalid url handling ===============================
 app.use('*', function (req, res, next) {
-    var error = new Error("invalid url");
+    var error = new Error("Protected");
     return res
         .status(404)
-        .send(error.message);
+        .json(error.message);
 });
 var server;
 // handle server crash ===============================

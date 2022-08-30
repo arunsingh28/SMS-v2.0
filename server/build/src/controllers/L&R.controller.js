@@ -50,6 +50,7 @@ var register = function (req, res) {
             switch (_b.label) {
                 case 0:
                     _a = req.body, email = _a.email, password = _a.password, name = _a.name;
+                    console.table(req.body);
                     if (!(!email || !password || !name)) return [3 /*break*/, 1];
                     return [2 /*return*/, res
                         .status(400)
@@ -123,6 +124,7 @@ var login = function (req, res) {
             switch (_b.label) {
                 case 0:
                     _a = req.body, email = _a.email, password = _a.password;
+                    console.log('Cookies------', JSON.stringify(req.cookies));
                     if (!email || !password) {
                         return [2 /*return*/, res.status(401).json({
                             message: "please fill all detail",
@@ -231,9 +233,11 @@ var updatePassword = function (req, res) {
                 case 0:
                     id = req.session.user;
                     _a = req.body, password = _a.pwd, oldPassword = _a.oldpwd;
+                    console.table(req.body);
                     return [4 /*yield*/, user_model_1.default.findById(id)];
                 case 1:
                     user = _b.sent();
+                    console.log('CURRENT USER: ', user);
                     if (!password || !oldPassword) {
                         return [2 /*return*/, res
                             .status(400)

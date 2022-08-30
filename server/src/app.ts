@@ -61,13 +61,16 @@ Router(app);
 // Admin router =======================================
 AdminRouter(app);
 
+interface iErr {
+  message: string
+}
 
 // invalid url handling ===============================
 app.use('*', (req, res, next) => {
-  const error = new Error("invalid url");
+  const error: iErr = new Error("Protected");
   return res
     .status(404)
-    .send(error.message);
+    .json((error as iErr).message);
 });
 
 let server;

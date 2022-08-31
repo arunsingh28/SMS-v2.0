@@ -40,32 +40,38 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var user_model_1 = __importDefault(require("../models/user.model"));
-function otpGenrator(id, res) {
+function otpGenrator(email, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var otp, error_1;
+        var otp, user, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     otp = Math.floor(100000 + Math.random() * 900000);
-                    _a.label = 1;
+                    return [4 /*yield*/, user_model_1.default.findOne({ email: email })];
                 case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, user_model_1.default.findOneAndUpdate({ email: id }, {
-                            $inc: {
-                                "otp": otp
+                    user = _a.sent();
+                    _a.label = 2;
+                case 2:
+                    _a.trys.push([2, 4, , 5]);
+                    // update otp in DB
+                    return [4 /*yield*/, user_model_1.default.findOneAndUpdate({ email: email }, {
+                            $set: {
+                                oldOtp: user === null || user === void 0 ? void 0 : user.otp,
+                                otp: otp
                             }
                         })];
-                case 2:
-                    _a.sent();
-                    return [3 /*break*/, 4];
                 case 3:
+                    // update otp in DB
+                    _a.sent();
+                    return [3 /*break*/, 5];
+                case 4:
                     error_1 = _a.sent();
                     console.log(error_1);
                     return [2 /*return*/, res.status(500).json({
                             message: 'server error',
                             code: res.statusCode
                         })];
-                case 4: return [2 /*return*/];
+                case 5: return [2 /*return*/];
             }
         });
     });

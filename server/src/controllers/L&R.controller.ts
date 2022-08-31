@@ -243,6 +243,12 @@ const forgotPassword = async (req: Request, res: Response) => {
   }
 };
 
+
+// delet account parament
+const delteAccount = async (req: Request, res: Response) => {
+  
+}
+
 const module = {
   register,
   login,

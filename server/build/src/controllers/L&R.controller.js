@@ -43,6 +43,7 @@ var token_1 = __importDefault(require("../utils/token"));
 var user_model_1 = __importDefault(require("../models/user.model"));
 var otpGenrator_1 = __importDefault(require("../utils/otpGenrator"));
 var nodeMailer_1 = __importDefault(require("../utils/nodeMailer"));
+var mailTypes_1 = require("../../config/mailTypes");
 // register api for emp
 var register = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, email, password, name, refreshToken, newUser, accesstoken, typeOfMail, error_1;
@@ -86,7 +87,7 @@ var register = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
                 });
                 // start session
                 req.session.user = newUser;
-                typeOfMail = 101;
+                typeOfMail = mailTypes_1.mailType.MAIL_CREATE;
                 nodeMailer_1.default(newUser.email, newUser.otp, newUser.name, typeOfMail);
                 // user created
                 return [2 /*return*/, res.status(201).json({
@@ -220,59 +221,62 @@ var logout = function (req, res) { return __awaiter(void 0, void 0, void 0, func
     });
 }); };
 // change password for local emp
-var updatePassword = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, _a, password, oldPassword, user, isMatch, hash, error_2;
+var resetPassword = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, _a, password, oldPassword, otp, user, email, isMatch, hash, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 id = req.session.user;
-                _a = req.body, password = _a.pwd, oldPassword = _a.oldpwd;
-                return [4 /*yield*/, user_model_1.default.findById(id)];
+                _a = req.body, password = _a.pwd, oldPassword = _a.oldpwd, otp = _a.otp;
+                return [4 /*yield*/, user_model_1.default.findById(id).exec()];
             case 1:
                 user = _b.sent();
+                email = user === null || user === void 0 ? void 0 : user.email;
                 if (!password || !oldPassword) {
                     return [2 /*return*/, res
                             .status(400)
                             .json({ message: "fill all detail", code: res.statusCode })];
                 }
-                _b.label = 2;
-            case 2:
-                _b.trys.push([2, 8, , 9]);
+                else if (!otp) {
+                    return [2 /*return*/, res
+                            .status(400)
+                            .json({ message: "Please provide the otp", code: res.statusCode })];
+                }
                 return [4 /*yield*/, user.comparePassword(oldPassword)];
-            case 3:
+            case 2:
                 isMatch = _b.sent();
-                if (!(isMatch === false)) return [3 /*break*/, 4];
+                if (!(isMatch === false)) return [3 /*break*/, 3];
                 return [2 /*return*/, res
                         .status(401)
                         .json({ message: "Invalid credinitals", code: res.statusCode })];
-            case 4: return [4 /*yield*/, (user === null || user === void 0 ? void 0 : user.encryptPassword(password))];
-            case 5:
+            case 3: return [4 /*yield*/, (user === null || user === void 0 ? void 0 : user.encryptPassword(password))];
+            case 4:
                 hash = _b.sent();
-                // save to db
-                return [4 /*yield*/, (user === null || user === void 0 ? void 0 : user.updateOne({
+                _b.label = 5;
+            case 5:
+                _b.trys.push([5, 9, , 10]);
+                if (!(otp == (user === null || user === void 0 ? void 0 : user.oldOtp))) return [3 /*break*/, 7];
+                return [4 /*yield*/, user_model_1.default.findOneAndUpdate({ email: email }, {
                         $set: {
-                            password: hash,
-                        },
-                    }).then(function () {
-                        // send confimation mail 
-                        var typeOfMail = 102;
-                        nodeMailer_1.default(user.email, user.otp, user.name, typeOfMail);
-                        return res.status(200).json({
-                            message: "password change successfully",
-                            code: res.statusCode,
-                        });
-                    }))];
-            case 6:
-                // save to db
-                _b.sent();
-                _b.label = 7;
-            case 7: return [3 /*break*/, 9];
-            case 8:
-                error_2 = _b.sent();
-                return [2 /*return*/, res.status(500).json({
-                        message: "server error"
+                            password: hash
+                        }
                     })];
-            case 9: return [2 /*return*/];
+            case 6:
+                _b.sent();
+                // save new password
+                user === null || user === void 0 ? void 0 : user.save();
+                // change the otp
+                otpGenrator_1.default(email, res);
+                // send success mail
+                nodeMailer_1.default(email, otp, user === null || user === void 0 ? void 0 : user.name, mailTypes_1.mailType.MAIL_SUCCESS);
+                return [2 /*return*/, res.status(200).json({ message: 'Password change succssfully' })];
+            case 7: return [2 /*return*/, res.status(406).json({ message: 'incorrect otp' })];
+            case 8: return [3 /*break*/, 10];
+            case 9:
+                error_2 = _b.sent();
+                console.log(error_2);
+                return [2 /*return*/, res.status(500).json({ message: 'server error' })];
+            case 10: return [2 /*return*/];
         }
     });
 }); };
@@ -327,7 +331,7 @@ var module = {
     register: register,
     login: login,
     logout: logout,
-    updatePassword: updatePassword,
+    resetPassword: resetPassword,
     forgotPassword: forgotPassword
 };
 exports.default = module;

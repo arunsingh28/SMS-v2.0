@@ -13,6 +13,7 @@ import credentials from "./middleware/credentials";
 import logger from "./middleware/logEvents.middleware";
 import config from '../config/config'
 import dot from 'dotenv'
+import path from "path";
 dot.config()
 // init express variable to app =====================
 const app = express();
@@ -63,16 +64,10 @@ OtpRouter(app)
 // Admin router =======================================
 AdminRouter(app);
 
-interface iErr {
-  message: string
-}
 
 // invalid url handling ===============================
-app.use('*', (req, res, next) => {
-  const error: iErr = new Error("Protected");
-  return res
-    .status(404)
-    .json((error as iErr).message);
+app.use('*', (req, res) => {
+  res.status(404).sendFile(path.join(__dirname + '/templates/404.html'))
 });
 
 let server;

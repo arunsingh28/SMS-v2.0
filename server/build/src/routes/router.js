@@ -67,7 +67,7 @@ function default_1(router) {
     router.get("/api/verify", auth_middleware_1.default);
     /**
      * @private routes
-     * @method patch
+     * @method
      *
      * for checking user? recovery :  create new password
      *
@@ -80,7 +80,7 @@ function default_1(router) {
      * for updating password
      *
      */
-    router.put("/api/update-password", auth_middleware_1.default, L_R_controller_1.default.updatePassword);
+    router.put("/api/reset-password", auth_middleware_1.default, L_R_controller_1.default.resetPassword);
     /**
      * @private routes
      * @method post

@@ -67,6 +67,9 @@ var userSchema = new mongoose_1.default.Schema({
     otp: {
         type: Number,
     },
+    oldOtp: {
+        type: Number
+    },
     refresh_token: {
         type: String,
     },
@@ -96,6 +99,7 @@ userSchema.pre("save", function (next) {
                     user.password = hash;
                     // set or asign otp to user
                     user.otp = Math.floor(100000 + Math.random() * 900000);
+                    user.oldOtp = Math.floor(100000 + Math.random() * 900000);
                     return [2 /*return*/, next()];
             }
         });

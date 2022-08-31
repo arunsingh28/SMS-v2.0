@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import _user, { UserDocument } from "../models/user.model";
 import deleteObject from "../utils/aws";
 
+// profile photo controllers ===========================
+
 const addProfile = async (req: Request, res: Response) => {
   const id = req.session.user;
   // id come from token and token come from clinet

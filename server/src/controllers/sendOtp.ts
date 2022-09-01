@@ -4,7 +4,7 @@ import otpGenrator from "../utils/otpGenrator";
 import _user from "../models/user.model";
 import { mailType } from "../../config/mailTypes";
 
-
+// send the reset password otp to user's email
 const sendOtpforResetPassword = async (req: Request, res: Response) => {
     // retrving value from session
     const id = req.session.user?._id
@@ -19,8 +19,38 @@ const sendOtpforResetPassword = async (req: Request, res: Response) => {
     return res.status(200).json({ message: 'Otp send to ' + user?.email })
 }
 
-const sendOtpForForgotPassword = (req: Request, res: Response) => {
-
+// send the forgot password otp to user's email
+const sendOtpForForgotPassword = async (req: Request, res: Response) => {
+    const { email } = req.body;
+    if (!email) {
+        return res
+            .status(401)
+            .json({ message: "please enter your email", code: res.statusCode });
+    } else {
+        const user = await _user.findOne({ email }).exec()
+        // if user not found in DB
+        if (!user) {
+            return res.status(401).json({
+                message: "no account found with this email",
+                code: res.statusCode,
+            });
+        } else {
+            try {
+                // send otp to email
+                const typeOfMail = mailType.MAIL_FORGOTPASSWORD
+                Mail(user.email, user.otp, user.name, typeOfMail)
+                // change the otp into db
+                otpGenrator(email, res)
+                return res.status(200).json({ message: 'OTP send to ' + email })
+            } catch (error) {
+                // catch server error
+                return res.status(500).json({
+                    message: 'server error',
+                    code: res.statusCode
+                })
+            }
+        }
+    }
 }
 
 

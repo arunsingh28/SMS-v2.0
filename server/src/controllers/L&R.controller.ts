@@ -4,6 +4,7 @@ import _user from "../models/user.model";
 import otpGenrator from "../utils/otpGenrator";
 import Mail from '../utils/nodeMailer'
 import { mailType } from "../../config/mailTypes";
+import { RequestCustome } from "../interface/request.interface";
 
 // register api for emp
 const register = async (req: Request, res: Response) => {
@@ -194,7 +195,7 @@ const resetPassword = async (req: Request, res: Response) => {
         return res.status(200).json({ message: 'Password change succssfully' })
       }
       // otp not match
-      else return res.status(406).json({ message: 'incorrect otp' })
+      else return res.status(406).json({ message: 'incorrect OTP' })
     } catch (error) {
       console.log(error)
       return res.status(500).json({ message: 'server error' })
@@ -204,49 +205,27 @@ const resetPassword = async (req: Request, res: Response) => {
 
 
 
+const verifyForgotOTP = async (req: Request | RequestCustome, res: Response) => {
+  const rawEmail = req.params.email
+  const { otp } = req.body;
+  const email = rawEmail.split('=')[1]
+  console.table({ otp, email })
+  if (!email || !otp) return res.status(401).json({ message: 'please provide the information' })
+  const user = await _user.findOne({ email }).exec()
+  // if hacker do something with url
+  if (!user) return res.status(401).json({ message: 'something went wrong' })
+  if (otp != user.oldOtp) return res.status(406).json({ message: 'incorrect OTP' })
+}
+
 // forgot password for local emp
 const forgotPassword = async (req: Request, res: Response) => {
-  const { email } = req.body;
-  if (!email) {
-    return res
-      .status(401)
-      .json({ message: "please enter your email", code: res.statusCode });
-  } else {
-    const user = await _user.findOne({ email });
-    // if user not found in db
-    if (!user) {
-      return res.status(401).json({
-        message: "no account found with this email",
-        code: res.statusCode,
-      });
-    } else {
-      try {
-        // change the otp into db
-        otpGenrator(email, res)
-        // send otp to email
-        const typeOfMail = 404
-        Mail(user.email, user.otp, user.name, typeOfMail)
-        return res.status(200).json({
-          // send the otp to client by email serivce by Gunmail
-          otp: user.otp,
-          name: user.name,
-          email: user.email
-        })
-      } catch (error) {
-        // catch server error
-        return res.status(500).json({
-          message: 'server error',
-          code: res.statusCode
-        })
-      }
-    }
-  }
+  const { newPassword } = req.body;
 };
 
 
 // delet account parament
 const delteAccount = async (req: Request, res: Response) => {
-  
+
 }
 
 const module = {
@@ -254,7 +233,7 @@ const module = {
   login,
   logout,
   resetPassword,
-  forgotPassword
+  forgotPassword,
+  verifyForgotOTP
 };
-
 export default module;

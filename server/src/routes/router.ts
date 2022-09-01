@@ -79,6 +79,7 @@ export default function (router: Express) {
    *
    */
   router.get("/api/verify", authorization);
+
   /**
    * @private routes
    * @method 
@@ -154,5 +155,7 @@ export default function (router: Express) {
   router.post("/api/contact-us", contact.newQuery);
 
   router.get('/api/refreshToken', jwtRefreshToken)
+
+  router.post('/api/otp/forgot/:email', register_contollers.verifyForgotOTP)
 
 }

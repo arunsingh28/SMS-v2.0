@@ -6,7 +6,6 @@ import resetPassword from '../templates/resetPassword'
 import successResetPassword from '../templates/resetPasswordConfirmation'
 
 
-
 async function sendMail(to: string, otp?: number, name?: string, type?: number) {
   let transporter = nodemailer.createTransport({
     service: "hotmail",
@@ -54,7 +53,7 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number) 
     transporter.sendMail({ //forgot password
       from: "sms.798361@hotmail.com",
       to: to,
-      subject: "Forgot password",
+      subject: "Forgot Password",
       html: forgotPassword(name!, otp!)
     }, (err, info) => {
       if (err) console.log(err)

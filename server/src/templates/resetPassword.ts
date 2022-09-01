@@ -7,9 +7,10 @@ export default function resetPassword(name: string, otp: number) {
       <p style="font-size:1.1em">Hi, ${name}</p>
       <p>Thank you for choosing SMS. This is your reset password OTP</p>
       <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${otp}</h2>
+      <p> If you did not reset the password, please contact Mailgun Support immediately at help@sms.com.</p>
       <p style="font-size:0.9em;">Regards,<br />SMS support</p>
       <hr style="border:none;border-top:1px solid #eee" />
-      <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+      <div style="float:right;padding:8px 0;color:#454545;font-size:0.8em;line-height:1;font-weight:300">
         <p>SMS</p>
         <p>Law gate Kiran PG</p>
         <p>India</p>

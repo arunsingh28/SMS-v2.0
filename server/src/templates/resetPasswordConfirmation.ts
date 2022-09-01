@@ -19,7 +19,7 @@ export default function confirmResetPassword(name: string) {
                                 </tr>
                                 <tr>
                                     <td style="padding:0 35px;">
-                                        <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Reset Password Successfull
+                                        <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Password Reset Successful
                                         </h1>
                                         <p style="font-size:15px; color:#455056;text-align: initial;margin:8px 0 0; line-height:24px;">
                                            <span style="margin-top:10px">Hello ${name}</span>,<br> <br>This notification is on behalf of SMS to let you know that your password has been successfully reset. <br>

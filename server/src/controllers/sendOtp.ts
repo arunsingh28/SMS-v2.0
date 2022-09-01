@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Mail from '../utils/nodeMailer'
 import otpGenrator from "../utils/otpGenrator";
 import _user from "../models/user.model";
-import { mailType } from "../../config/mailTypes";
+import env from '../../config/envConfig'
 
 // send the reset password otp to user's email
 const sendOtpforResetPassword = async (req: Request, res: Response) => {
@@ -11,7 +11,7 @@ const sendOtpforResetPassword = async (req: Request, res: Response) => {
     if (!id) return res.sendStatus(401) //forbiden
     const user = await _user.findById(id).exec()
     if (!user) return res.sendStatus(401) //forbiden
-    const type = mailType.MAIL_RESETPASSWORD // code for reset password
+    const type = env.MAIL_RESETPASSWORD // code for reset password
     Mail(user?.email, user?.otp, user?.name, type)
     // change the otp in DB
     otpGenrator(user.email, res)
@@ -37,7 +37,7 @@ const sendOtpForForgotPassword = async (req: Request, res: Response) => {
         } else {
             try {
                 // send otp to email
-                const typeOfMail = mailType.MAIL_FORGOTPASSWORD
+                const typeOfMail = env.MAIL_FORGOTPASSWORD
                 Mail(user.email, user.otp, user.name, typeOfMail)
                 // change the otp into db
                 otpGenrator(email, res)

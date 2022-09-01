@@ -1,21 +1,13 @@
 import mailgun from 'mailgun-js'
-
-// declare env variabls
-declare var process: {
-    env: {
-        MAILGUN_API_KEY: string,
-        MAILGUN_DOMAIN: string
-    }
-}
+import env from '../../config/envConfig'
 
 
 // init mailgun-js
 const mail = new mailgun({
-    apiKey: process.env.MAILGUN_API_KEY,
-    domain: process.env.MAILGUN_DOMAIN
+    apiKey: env.MAILGUN_API_KEY,
+    domain: env.MAILGUN_DOMAIN
 })
 
-console.log(process.env.MAILGUN_API_KEY, process.env.MAILGUN_DOMAIN)
 
 // creating message
 const mailGun = async (to: string, subject: string, body: string) => {

@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import _user from "../models/user.model";
 import { Response, Request, NextFunction } from "express";
-
+import env from '../../config/envConfig'
 declare var process: {
   env: {
     JWT_SECRET_KEY1: string;
@@ -33,7 +33,7 @@ const authorization = async (
     });
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY1);
+    const decoded = jwt.verify(token, env.JWT_SECRET_KEY1);
     const user: any = await _user.findOne({ email: (<any>decoded).id });
     if (!user) {
       return res.status(203).json({

@@ -1,14 +1,10 @@
 import mongoose from "mongoose";
+import env from '../../config/envConfig'
 
-declare var process: {
-  env: {
-    MONGODB_URI: string;
-  };
-};
 
 export const connectDB = async () => {
   await mongoose
-    .connect(process.env.MONGODB_URI, {
+    .connect(env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: true,

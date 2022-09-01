@@ -1,15 +1,9 @@
 import jwt from 'jsonwebtoken'
-import _user, { UserDocument } from '../models/user.model'
+import _user from '../models/user.model'
 import { Response, Request, NextFunction } from 'express'
+import env from '../../config/envConfig'
 
-declare var process: {
-    env: {
-        JWT_SECRET_KEY1: string,
-        JWT_SECRET_KEY2: string,
-        JWT_EXPIRE_TIME: number,
-        JWT_REFRESH_EXPIRE_TIME: number
-    }
-}
+
 interface JwtPayload {
     id: string,
     iat: number,
@@ -29,17 +23,17 @@ export default async function refreshToken(req: Request, res: Response, next: Ne
     if (!foundUser) return res.sendStatus(403)  //Forbidden
     // verify token
     try {
-        jwt.verify(refresh_token, process.env.JWT_SECRET_KEY2, (err: any, decoded: JwtPayload | any) => {
+        jwt.verify(refresh_token, env.JWT_SECRET_KEY2, (err: any, decoded: JwtPayload | any) => {
             // match token in DB
             if (err || foundUser.email !== decoded.id) return res.sendStatus(403) // Forbiden
             // create new access token
-            const accessToken = jwt.sign({ id: decoded.id }, process.env.JWT_SECRET_KEY1, {
-                expiresIn: process.env.JWT_EXPIRE_TIME
+            const accessToken = jwt.sign({ id: decoded.id }, env.JWT_SECRET_KEY1, {
+                expiresIn: env.JWT_EXPIRE_TIME
             })
             // create new refersh token
             const newRefreshToken = jwt.sign({ id: foundUser.email },
-                process.env.JWT_SECRET_KEY2,
-                { expiresIn: process.env.JWT_REFRESH_EXPIRE_TIME })
+                env.JWT_SECRET_KEY2,
+                { expiresIn: env.JWT_REFRESH_EXPIRE_TIME })
             // save new refersh token to DB 
             foundUser.refresh_token = newRefreshToken
             foundUser.save()

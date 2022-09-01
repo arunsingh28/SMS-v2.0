@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-import { mailType } from '../../config/mailTypes'
+import env from '../../config/envConfig'
 import createAccount from '../templates/createAccount'
 import forgotPassword from '../templates/forgotPassword'
 import resetPassword from '../templates/resetPassword'
@@ -20,7 +20,7 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number) 
     }
   })
 
-  if (type === mailType.MAIL_CREATE) { // success accout create 
+  if (type === env.MAIL_CREATE) { // success accout create 
     transporter.sendMail({
       from: "sms.798361@hotmail.com",
       to: to,
@@ -30,7 +30,7 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number) 
       if (err) console.log(err)
       else console.log("email send:", info.response)
     })
-  } else if (type == mailType.MAIL_RESETPASSWORD) { // sent otp for reset password
+  } else if (type == env.MAIL_RESETPASSWORD) { // sent otp for reset password
     transporter.sendMail({
       from: "sms.798361@hotmail.com",
       to: to,
@@ -40,7 +40,7 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number) 
       if (err) console.log(err)
       else console.log("email send:", info.response)
     })
-  } else if (type == mailType.MAIL_SUCCESS) { // success reset password
+  } else if (type == env.MAIL_SUCCESS) { // success reset password
     transporter.sendMail({
       from: "sms.798361@hotmail.com",
       to: to,
@@ -50,7 +50,7 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number) 
       if (err) console.log(err)
       else console.log("email send:", info.response)
     })
-  } else if (type == mailType.MAIL_FORGOTPASSWORD_SUCCESS) { // success forgot password
+  } else if (type == env.MAIL_FORGOTPASSWORD_SUCCESS) { // success forgot password
     transporter.sendMail({
       from: "sms.798361@hotmail.com",
       to: to,

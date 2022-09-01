@@ -2,34 +2,24 @@ import register_contollers from "../controllers/L&R.controller";
 import user_contollers from "../controllers/user.private";
 import contact from "../controllers/contact-us";
 import student from "../controllers/student";
-import { Express, Request, Response } from "express";
+import { Express } from "express";
 import authorization from "../middleware/auth.middleware";
 import jwtRefreshToken from '../middleware/jwtRefreshToken'
 import multer from "multer";
 import multerS3 from "multer-s3";
 import AWS from "aws-sdk";
+import env from '../../config/envConfig'
 
-
-import dot from 'dotenv'
-dot.config()
-
-declare var process: {
-  env: {
-    AWS_ACESS_KEY: string;
-    AWS_SECRET_KEY: string;
-    AWS_BUCKET_NAME: string;
-  };
-};
 
 const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_KEY,
+  accessKeyId: env.AWS_ACESS_KEY,
+  secretAccessKey: env.AWS_SECRET_KEY,
 });
 
 const upload = multer({
   storage: multerS3({
     s3,
-    bucket: process.env.AWS_BUCKET_NAME,
+    bucket: env.AWS_BUCKET_NAME,
     acl: "public-read",
     metadata: function (req, file, cb) {
       cb(null, { fielName: file.fieldname });

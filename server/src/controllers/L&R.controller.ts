@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
-import TOKEN from "../utils/token";
+import TOKEN, { process } from "../utils/token";
 import _user from "../models/user.model";
 import otpGenrator from "../utils/otpGenrator";
 import Mail from '../utils/nodeMailer'
 import { mailType } from "../../config/mailTypes";
+import jwt from "jsonwebtoken";
 import { RequestCustome } from "../interface/request.interface";
 
 // register api for emp
@@ -144,7 +145,7 @@ const logout = async (req: Request, res: Response) => {
   // clear the refresh token  
   res.clearCookie('jwt', {
     httpOnly: true,
-    smaeSite: 'none',
+    sameSite: 'none',
     secure: true
   })
   return res.sendStatus(204)
@@ -204,22 +205,76 @@ const resetPassword = async (req: Request, res: Response) => {
 }
 
 
-
+// forgot password otp verify controller
 const verifyForgotOTP = async (req: Request | RequestCustome, res: Response) => {
-  const rawEmail = req.params.email
+  const email = req.params.email
   const { otp } = req.body;
-  const email = rawEmail.split('=')[1]
   console.table({ otp, email })
   if (!email || !otp) return res.status(401).json({ message: 'please provide the information' })
   const user = await _user.findOne({ email }).exec()
   // if hacker do something with url
   if (!user) return res.status(401).json({ message: 'something went wrong' })
   if (otp != user.oldOtp) return res.status(406).json({ message: 'incorrect OTP' })
+  // create token
+  const forgotToken = TOKEN.ForgotToken(user._id);
+  // create the cookie to save id of current user 
+  res.cookie('uft', forgotToken, {
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000,
+    // sameSite: 'none',
+    // secure: true
+  })
+  return res.sendStatus(200)
 }
+
 
 // forgot password for local emp
 const forgotPassword = async (req: Request, res: Response) => {
-  const { newPassword } = req.body;
+  const uft = req.cookies?.uft
+  const { password } = req.body;
+
+  // check token 
+  if (!uft) {
+    // delte the old cookie
+    res.clearCookie('uft', {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true
+    })
+    return res.status(401).json({ message: "tempared token" })
+  } else { // validate the password
+    if (!password) return res.status(401).json({ message: "Please provide the detail" })
+    // decode the token
+    try {
+      jwt.verify(uft, mailType.JWT_SECRET_KEY3, async (err: any, value: any) => {
+        if (err) {
+          // clear the old tempared cookie
+          res.clearCookie('uft', {
+            httpOnly: true,
+            sameSite: 'none',
+            secure: true
+          })
+          return res.sendStatus(403) //forbiden
+        }
+        const user = await _user.findById(value.id)
+        const email = user?.email
+        // create the hash password
+        const hash = await user?.encryptPassword(password);
+        // save the new hash password to DB
+        await _user.findOneAndUpdate({ email },
+          {
+            $set: {
+              password: hash
+            }
+          }
+        );
+        Mail(user?.email!, user?.otp, user?.name, mailType.MAIL_FORGOTPASSWORD_SUCCESS)
+        return res.status(200).json({ message: "Succssfuly change the password." })
+      })
+    } catch (err) {
+      return res.status(500).json({ message: "server error" }) //forbiden
+    }
+  }
 };
 
 

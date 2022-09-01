@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import TOKEN, { process } from "../utils/token";
+import TOKEN from "../utils/token";
 import _user from "../models/user.model";
 import otpGenrator from "../utils/otpGenrator";
 import Mail from '../utils/nodeMailer'
-import { mailType } from "../../config/mailTypes";
 import jwt from "jsonwebtoken";
+import env from '../../config/envConfig'
 import { RequestCustome } from "../interface/request.interface";
 
 // register api for emp
@@ -40,7 +40,7 @@ const register = async (req: Request, res: Response) => {
       // start session
       req.session.user = newUser
       // send mail to user
-      const typeOfMail = mailType.MAIL_CREATE
+      const typeOfMail = env.MAIL_CREATE
       Mail(newUser.email, newUser.otp, newUser.name, typeOfMail)
       // user created
       return res.status(201).json({
@@ -192,7 +192,7 @@ const resetPassword = async (req: Request, res: Response) => {
         // change the otp
         otpGenrator(email!, res)
         // send success mail
-        Mail(email!, otp, user?.name, mailType.MAIL_SUCCESS)
+        Mail(email!, otp, user?.name, env.MAIL_SUCCESS)
         return res.status(200).json({ message: 'Password change succssfully' })
       }
       // otp not match
@@ -246,7 +246,7 @@ const forgotPassword = async (req: Request, res: Response) => {
     if (!password) return res.status(401).json({ message: "Please provide the detail" })
     // decode the token
     try {
-      jwt.verify(uft, mailType.JWT_SECRET_KEY3, async (err: any, value: any) => {
+      jwt.verify(uft, env.JWT_SECRET_KEY3, async (err: any, value: any) => {
         if (err) {
           // clear the old tempared cookie
           res.clearCookie('uft', {
@@ -268,7 +268,7 @@ const forgotPassword = async (req: Request, res: Response) => {
             }
           }
         );
-        Mail(user?.email!, user?.otp, user?.name, mailType.MAIL_FORGOTPASSWORD_SUCCESS)
+        Mail(user?.email!, user?.otp, user?.name, env.MAIL_FORGOTPASSWORD_SUCCESS)
         return res.status(200).json({ message: "Succssfuly change the password." })
       })
     } catch (err) {

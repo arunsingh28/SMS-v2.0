@@ -2,11 +2,6 @@ import jwt from "jsonwebtoken";
 import _user from "../models/user.model";
 import { Response, Request, NextFunction } from "express";
 import env from '../../config/envConfig'
-declare var process: {
-  env: {
-    JWT_SECRET_KEY1: string;
-  };
-};
 
 interface JwtError {
   name: string;

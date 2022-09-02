@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var user_model_1 = __importDefault(require("../models/user.model"));
+var envConfig_1 = __importDefault(require("../../config/envConfig"));
 function refreshToken(req, res, next) {
     var _a;
     return __awaiter(this, void 0, void 0, function () {
@@ -70,16 +71,16 @@ function refreshToken(req, res, next) {
                         ]; //Forbidden
                     // verify token
                     try {
-                        jsonwebtoken_1.default.verify(refresh_token, process.env.JWT_SECRET_KEY2, function (err, decoded) {
+                        jsonwebtoken_1.default.verify(refresh_token, envConfig_1.default.JWT_SECRET_KEY2, function (err, decoded) {
                             // match token in DB
                             if (err || foundUser.email !== decoded.id)
                                 return res.sendStatus(403); // Forbiden
                             // create new access token
-                            var accessToken = jsonwebtoken_1.default.sign({ id: decoded.id }, process.env.JWT_SECRET_KEY1, {
-                                expiresIn: process.env.JWT_EXPIRE_TIME
+                            var accessToken = jsonwebtoken_1.default.sign({ id: decoded.id }, envConfig_1.default.JWT_SECRET_KEY1, {
+                                expiresIn: envConfig_1.default.JWT_EXPIRE_TIME
                             });
                             // create new refersh token
-                            var newRefreshToken = jsonwebtoken_1.default.sign({ id: foundUser.email }, process.env.JWT_SECRET_KEY2, { expiresIn: process.env.JWT_REFRESH_EXPIRE_TIME });
+                            var newRefreshToken = jsonwebtoken_1.default.sign({ id: foundUser.email }, envConfig_1.default.JWT_SECRET_KEY2, { expiresIn: envConfig_1.default.JWT_REFRESH_EXPIRE_TIME });
                             // save new refersh token to DB 
                             foundUser.refresh_token = newRefreshToken;
                             foundUser.save();

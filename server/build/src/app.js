@@ -18,6 +18,7 @@ var credentials_1 = __importDefault(require("./middleware/credentials"));
 var logEvents_middleware_1 = __importDefault(require("./middleware/logEvents.middleware"));
 var config_1 = __importDefault(require("../config/config"));
 var dotenv_1 = __importDefault(require("dotenv"));
+var path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
 // init express variable to app =====================
 var app = express_1.default();
@@ -51,11 +52,8 @@ otpRouter_1.default(app);
 // Admin router =======================================
 admin_1.default(app);
 // invalid url handling ===============================
-app.use('*', function (req, res, next) {
-    var error = new Error("Protected");
-    return res
-        .status(404)
-        .json(error.message);
+app.use('*', function (req, res) {
+    res.status(404).sendFile(path_1.default.join(__dirname + '/templates/404.html'));
 });
 var server;
 // handle server crash ===============================

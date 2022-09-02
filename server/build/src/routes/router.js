@@ -12,16 +12,15 @@ var jwtRefreshToken_1 = __importDefault(require("../middleware/jwtRefreshToken")
 var multer_1 = __importDefault(require("multer"));
 var multer_s3_1 = __importDefault(require("multer-s3"));
 var aws_sdk_1 = __importDefault(require("aws-sdk"));
-var dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+var envConfig_1 = __importDefault(require("../../config/envConfig"));
 var s3 = new aws_sdk_1.default.S3({
-    accessKeyId: process.env.AWS_ACESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_KEY,
+    accessKeyId: envConfig_1.default.AWS_ACESS_KEY,
+    secretAccessKey: envConfig_1.default.AWS_SECRET_KEY,
 });
 var upload = multer_1.default({
     storage: multer_s3_1.default({
         s3: s3,
-        bucket: process.env.AWS_BUCKET_NAME,
+        bucket: envConfig_1.default.AWS_BUCKET_NAME,
         acl: "public-read",
         metadata: function (req, file, cb) {
             cb(null, { fielName: file.fieldname });
@@ -115,5 +114,6 @@ function default_1(router) {
      */
     router.post("/api/contact-us", contact_us_1.default.newQuery);
     router.get('/api/refreshToken', jwtRefreshToken_1.default);
+    router.post('/api/otp/forgot/:email', L_R_controller_1.default.verifyForgotOTP);
 }
 exports.default = default_1;

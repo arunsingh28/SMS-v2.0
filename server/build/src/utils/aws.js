@@ -40,15 +40,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var aws_sdk_1 = __importDefault(require("aws-sdk"));
+var envConfig_1 = __importDefault(require("../../config/envConfig"));
 var s3 = new aws_sdk_1.default.S3({
-    accessKeyId: process.env.AWS_ACESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_KEY
+    accessKeyId: envConfig_1.default.AWS_ACESS_KEY,
+    secretAccessKey: envConfig_1.default.AWS_SECRET_KEY
 });
 var deleteObject = function (key) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, s3.deleteObject({
-                    Bucket: process.env.AWS_BUCKET_NAME,
+                    Bucket: envConfig_1.default.AWS_BUCKET_NAME,
                     Key: key
                 }, function (err) {
                     if (err)

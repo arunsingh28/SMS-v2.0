@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var user_model_1 = __importDefault(require("../models/user.model"));
+var envConfig_1 = __importDefault(require("../../config/envConfig"));
 var authorization = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var token, decoded, user, error_1;
     return __generator(this, function (_a) {
@@ -60,7 +61,7 @@ var authorization = function (req, res, next) { return __awaiter(void 0, void 0,
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET_KEY1);
+                decoded = jsonwebtoken_1.default.verify(token, envConfig_1.default.JWT_SECRET_KEY1);
                 return [4 /*yield*/, user_model_1.default.findOne({ email: decoded.id })];
             case 2:
                 user = _a.sent();

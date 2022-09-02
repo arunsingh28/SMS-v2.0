@@ -23,11 +23,27 @@ export default function forgotPasswordSuccess(name: string) {
                                     <p style="font-size:15px; color:#455056;text-align: initial;margin:8px 0 0; line-height:24px;">
                                        <span style="margin-top:10px">Hello ${name}</span>,<br> <br>This notification is on behalf of SMS to let you know that your password has been successfully reset. <br>
                                     </p>
-                                    <p style="font-size:15px; color:#1f2026;text-align: initial;margin:15px 0 0; line-height:24px;">If you did't initiate the fotgot password process. Please change the password immediately.</p>
+                                    <p style="font-size:12px; border-left:3px solid #eee; color:#1f2026;text-align: initial;margin:15px px 0; padding-left:3px; line-height:24px;">If you did't initiate the forgot password process. Please change the password immediately.</p>
                                 </td>
                             </tr>
                             <tr>
                             <td style="height:40px;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>
+                            <table align="center" border="0" cellpadding="0" cellspacing="0" width="95%" style="max-width:670px; background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);>
+                            <a href="/" style="padding: 12px 40px;
+                            font-size:18px;
+                            background: #3349d2;
+                            border-radius:4px;
+                            color: #fff;
+                            text-decoration: none;
+                            pointer-events: all;">Login</a>
+                            </table>
+                        </td>
+                    </tr>
+                        <tr>
+                        <td style="height:40px">&nbsp;</td>
                         </tr>
                         </table>
                         <tr>

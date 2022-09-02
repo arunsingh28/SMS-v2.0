@@ -73,7 +73,7 @@ app.use('*', (req, res) => {
 let server;
 
 // handle server crash ===============================
-errorHandler(server);
+errorHandler(server,app);
 
 
 app.use(function (err: any, res: express.Response) {

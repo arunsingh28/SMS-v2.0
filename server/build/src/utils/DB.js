@@ -41,11 +41,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = void 0;
 var mongoose_1 = __importDefault(require("mongoose"));
+var envConfig_1 = __importDefault(require("../../config/envConfig"));
 var connectDB = function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, mongoose_1.default
-                    .connect(process.env.MONGODB_URI, {
+                    .connect(envConfig_1.default.MONGODB_URI, {
                     useNewUrlParser: true,
                     useUnifiedTopology: true,
                     useFindAndModify: true,

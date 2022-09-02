@@ -209,7 +209,6 @@ const resetPassword = async (req: Request, res: Response) => {
 const verifyForgotOTP = async (req: Request | RequestCustome, res: Response) => {
   const email = req.params.email
   const { otp } = req.body;
-  console.table({ otp, email })
   if (!email || !otp) return res.status(401).json({ message: 'please provide the information' })
   const user = await _user.findOne({ email }).exec()
   // if hacker do something with url
@@ -232,7 +231,6 @@ const verifyForgotOTP = async (req: Request | RequestCustome, res: Response) => 
 const forgotPassword = async (req: Request, res: Response) => {
   const uft = req.cookies?.uft
   const { password } = req.body;
-
   // check token 
   if (!uft) {
     // delte the old cookie
@@ -241,7 +239,7 @@ const forgotPassword = async (req: Request, res: Response) => {
       sameSite: 'none',
       secure: true
     })
-    return res.status(401).json({ message: "tempared token" })
+    return res.status(401).json({ message: "token required" })
   } else { // validate the password
     if (!password) return res.status(401).json({ message: "Please provide the detail" })
     // decode the token
@@ -269,6 +267,12 @@ const forgotPassword = async (req: Request, res: Response) => {
           }
         );
         Mail(user?.email!, user?.otp, user?.name, env.MAIL_FORGOTPASSWORD_SUCCESS)
+        // clear the previus cookie
+        res.clearCookie('uft', {
+          httpOnly: true,
+          sameSite: 'none',
+          secure: true
+        })
         return res.status(200).json({ message: "Succssfuly change the password." })
       })
     } catch (err) {

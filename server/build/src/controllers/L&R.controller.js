@@ -43,7 +43,8 @@ var token_1 = __importDefault(require("../utils/token"));
 var user_model_1 = __importDefault(require("../models/user.model"));
 var otpGenrator_1 = __importDefault(require("../utils/otpGenrator"));
 var nodeMailer_1 = __importDefault(require("../utils/nodeMailer"));
-var mailTypes_1 = require("../../config/mailTypes");
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var envConfig_1 = __importDefault(require("../../config/envConfig"));
 // register api for emp
 var register = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, email, password, name, refreshToken, newUser, accesstoken, typeOfMail, error_1;
@@ -87,7 +88,7 @@ var register = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
                 });
                 // start session
                 req.session.user = newUser;
-                typeOfMail = mailTypes_1.mailType.MAIL_CREATE;
+                typeOfMail = envConfig_1.default.MAIL_CREATE;
                 nodeMailer_1.default(newUser.email, newUser.otp, newUser.name, typeOfMail);
                 // user created
                 return [2 /*return*/, res.status(201).json({
@@ -213,7 +214,7 @@ var logout = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 // clear the refresh token  
                 res.clearCookie('jwt', {
                     httpOnly: true,
-                    smaeSite: 'none',
+                    sameSite: 'none',
                     secure: true
                 });
                 return [2 /*return*/, res.sendStatus(204)];
@@ -268,9 +269,9 @@ var resetPassword = function (req, res) { return __awaiter(void 0, void 0, void 
                 // change the otp
                 otpGenrator_1.default(email, res);
                 // send success mail
-                nodeMailer_1.default(email, otp, user === null || user === void 0 ? void 0 : user.name, mailTypes_1.mailType.MAIL_SUCCESS);
+                nodeMailer_1.default(email, otp, user === null || user === void 0 ? void 0 : user.name, envConfig_1.default.MAIL_SUCCESS);
                 return [2 /*return*/, res.status(200).json({ message: 'Password change succssfully' })];
-            case 7: return [2 /*return*/, res.status(406).json({ message: 'incorrect otp' })];
+            case 7: return [2 /*return*/, res.status(406).json({ message: 'incorrect OTP' })];
             case 8: return [3 /*break*/, 10];
             case 9:
                 error_2 = _b.sent();
@@ -280,51 +281,112 @@ var resetPassword = function (req, res) { return __awaiter(void 0, void 0, void 
         }
     });
 }); };
-// forgot password for local emp
-var forgotPassword = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var email, user, typeOfMail;
+// forgot password otp verify controller
+var verifyForgotOTP = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var email, otp, user, forgotToken;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                email = req.body.email;
-                if (!!email) return [3 /*break*/, 1];
-                return [2 /*return*/, res
-                        .status(401)
-                        .json({ message: "please enter your email", code: res.statusCode })];
-            case 1: return [4 /*yield*/, user_model_1.default.findOne({ email: email })];
-            case 2:
+                email = req.params.email;
+                otp = req.body.otp;
+                console.table({ otp: otp, email: email });
+                if (!email || !otp)
+                    return [2 /*return*/, res.status(401).json({ message: 'please provide the information' })];
+                return [4 /*yield*/, user_model_1.default.findOne({ email: email }).exec()
+                    // if hacker do something with url
+                ];
+            case 1:
                 user = _a.sent();
-                // if user not found in db
-                if (!user) {
-                    return [2 /*return*/, res.status(401).json({
-                            message: "no account found with this email",
-                            code: res.statusCode,
-                        })];
-                }
-                else {
-                    try {
-                        // change the otp into db
-                        otpGenrator_1.default(email, res);
-                        typeOfMail = 404;
-                        nodeMailer_1.default(user.email, user.otp, user.name, typeOfMail);
-                        return [2 /*return*/, res.status(200).json({
-                                // send the otp to client by email serivce by Gunmail
-                                otp: user.otp,
-                                name: user.name,
-                                email: user.email
-                            })];
-                    }
-                    catch (error) {
-                        // catch server error
-                        return [2 /*return*/, res.status(500).json({
-                                message: 'server error',
-                                code: res.statusCode
-                            })];
-                    }
-                }
-                _a.label = 3;
-            case 3: return [2 /*return*/];
+                // if hacker do something with url
+                if (!user)
+                    return [2 /*return*/, res.status(401).json({ message: 'something went wrong' })];
+                if (otp != user.oldOtp)
+                    return [2 /*return*/, res.status(406).json({ message: 'incorrect OTP' })
+                        // create token
+                    ];
+                forgotToken = token_1.default.ForgotToken(user._id);
+                // create the cookie to save id of current user 
+                res.cookie('uft', forgotToken, {
+                    httpOnly: true,
+                    maxAge: 24 * 60 * 60 * 1000,
+                    // sameSite: 'none',
+                    // secure: true
+                });
+                return [2 /*return*/, res.sendStatus(200)];
         }
+    });
+}); };
+// forgot password for local emp
+var forgotPassword = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var uft, password;
+    var _a;
+    return __generator(this, function (_b) {
+        uft = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.uft;
+        password = req.body.password;
+        // check token 
+        if (!uft) {
+            // delte the old cookie
+            res.clearCookie('uft', {
+                httpOnly: true,
+                sameSite: 'none',
+                secure: true
+            });
+            return [2 /*return*/, res.status(401).json({ message: "tempared token" })];
+        }
+        else { // validate the password
+            if (!password)
+                return [2 /*return*/, res.status(401).json({ message: "Please provide the detail" })
+                    // decode the token
+                ];
+            // decode the token
+            try {
+                jsonwebtoken_1.default.verify(uft, envConfig_1.default.JWT_SECRET_KEY3, function (err, value) { return __awaiter(void 0, void 0, void 0, function () {
+                    var user, email, hash;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (err) {
+                                    // clear the old tempared cookie
+                                    res.clearCookie('uft', {
+                                        httpOnly: true,
+                                        sameSite: 'none',
+                                        secure: true
+                                    });
+                                    return [2 /*return*/, res.sendStatus(403)]; //forbiden
+                                }
+                                return [4 /*yield*/, user_model_1.default.findById(value.id)];
+                            case 1:
+                                user = _a.sent();
+                                email = user === null || user === void 0 ? void 0 : user.email;
+                                return [4 /*yield*/, (user === null || user === void 0 ? void 0 : user.encryptPassword(password))];
+                            case 2:
+                                hash = _a.sent();
+                                // save the new hash password to DB
+                                return [4 /*yield*/, user_model_1.default.findOneAndUpdate({ email: email }, {
+                                        $set: {
+                                            password: hash
+                                        }
+                                    })];
+                            case 3:
+                                // save the new hash password to DB
+                                _a.sent();
+                                nodeMailer_1.default(user === null || user === void 0 ? void 0 : user.email, user === null || user === void 0 ? void 0 : user.otp, user === null || user === void 0 ? void 0 : user.name, envConfig_1.default.MAIL_FORGOTPASSWORD_SUCCESS);
+                                return [2 /*return*/, res.status(200).json({ message: "Succssfuly change the password." })];
+                        }
+                    });
+                }); });
+            }
+            catch (err) {
+                return [2 /*return*/, res.status(500).json({ message: "server error" })]; //forbiden
+            }
+        }
+        return [2 /*return*/];
+    });
+}); };
+// delet account parament
+var delteAccount = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        return [2 /*return*/];
     });
 }); };
 var module = {
@@ -332,6 +394,7 @@ var module = {
     login: login,
     logout: logout,
     resetPassword: resetPassword,
-    forgotPassword: forgotPassword
+    forgotPassword: forgotPassword,
+    verifyForgotOTP: verifyForgotOTP
 };
 exports.default = module;

@@ -40,12 +40,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mailgun_js_1 = __importDefault(require("mailgun-js"));
+var envConfig_1 = __importDefault(require("../../config/envConfig"));
 // init mailgun-js
 var mail = new mailgun_js_1.default({
-    apiKey: process.env.MAILGUN_API_KEY,
-    domain: process.env.MAILGUN_DOMAIN
+    apiKey: envConfig_1.default.MAILGUN_API_KEY,
+    domain: envConfig_1.default.MAILGUN_DOMAIN
 });
-console.log(process.env.MAILGUN_API_KEY, process.env.MAILGUN_DOMAIN);
 // creating message
 var mailGun = function (to, subject, body) { return __awaiter(void 0, void 0, void 0, function () {
     var data;

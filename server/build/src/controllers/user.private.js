@@ -41,6 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var user_model_1 = __importDefault(require("../models/user.model"));
 var aws_1 = __importDefault(require("../utils/aws"));
+// profile photo controllers ===========================
 var addProfile = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var id, file, key, location, isUpload, data;
     return __generator(this, function (_a) {

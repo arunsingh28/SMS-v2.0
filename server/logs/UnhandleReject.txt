@@ -34,3 +34,4 @@
 2022-09-01 23:54:38	 fa98aa31-0819-4279-9bfe-63f7bf3d6980	 - Cannot read properties of undefined (reading 'env')
 2022-09-02 00:05:41	 84795b55-c219-4e0b-948f-425124b68de7	 - Cannot read properties of undefined (reading 'env')
 2022-09-02 00:50:08	 4b199ddf-8cee-401d-a06d-1830190e1bb3	 - Cannot read properties of undefined (reading 'env')
+2022-09-02 01:33:38	 84f1a482-8543-419d-95df-cf152da76c34	 - Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/

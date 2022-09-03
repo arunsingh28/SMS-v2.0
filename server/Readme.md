@@ -18,7 +18,6 @@
 ### Token Requried
 
 - refresh token: api/refreshToken method: GET
-- 
 
 
 
@@ -26,6 +25,5 @@
 
 **PROTECTED**
 - reset Password : /api/v1/forgotpassword/otp method: GET
-
 **PUBLIC**
 - forgot Password : /api/v1/forgotpassword/otp method: POST

@@ -7,6 +7,7 @@
         "aws-sdk": "^2.953.0",
         "bcrypt": "^5.0.1",
         "body-parser": "^1.19.0",
+        "concurrently": "^7.3.0",
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
         "date-fns": "^2.29.1",
@@ -23,7 +24,8 @@
         "uuid": "^8.3.2"
     },
     "scripts": {
-        "start": "node src/app.js"
+        "start": "node src/app.js",
+        "deploy:github":"concurrently \"git add .\" \"git commit -m 'dep'\" \"git push origin master\" "
     },
     "engines": {
         "node": "14.17.4",

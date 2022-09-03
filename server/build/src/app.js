@@ -57,7 +57,7 @@ app.use('*', function (req, res) {
 });
 var server;
 // handle server crash ===============================
-errorHandler_1.default(server);
+errorHandler_1.default(server, app);
 app.use(function (err, res) {
     console.log(err.message);
     logEvents_middleware_1.default.logEvents(err.message, 'serverInternalError.txt');

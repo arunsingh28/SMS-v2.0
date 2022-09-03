@@ -53,5 +53,16 @@ const sendOtpForForgotPassword = async (req: Request, res: Response) => {
     }
 }
 
+const sendMessage = async (req: Request, res: Response) => {
+    const { to, message } = req.body;
+    try {
+        Mail(to, 12, message, env.MAIL_MESSAGE)
+        return res.sendStatus(200)
+    } catch (error) {
+        console.log(error)
+        return res.sendStatus(500)
+    }
+}
 
-export default { sendOtpForForgotPassword, sendOtpforResetPassword }
+
+export default { sendOtpForForgotPassword, sendOtpforResetPassword, sendMessage }

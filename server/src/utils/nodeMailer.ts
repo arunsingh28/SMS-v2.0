@@ -5,6 +5,7 @@ import forgotPassword from '../templates/forgotPassword'
 import resetPassword from '../templates/resetPassword'
 import successResetPassword from '../templates/resetPasswordConfirmation'
 import forgotPasswordSuccess from '../templates/forgotPasswordSuccess'
+import message from '../templates/message'
 
 
 async function sendMail(to: string, otp?: number, name?: string, type?: number) {
@@ -60,7 +61,18 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number) 
       if (err) console.log(err)
       else console.log("email send:", info.response)
     })
-  } else {
+  } else if (type == env.MAIL_MESSAGE) {
+    transporter.sendMail({
+      from: "sms.798361@hotmail.com",
+      to: to,
+      subject: "Message",
+      html: message(name!)
+    }, (err, info) => {
+      if (err) console.log(err)
+      else console.log("email send:", info.response)
+    })
+  }
+  else {
     transporter.sendMail({ //forgot password
       from: "sms.798361@hotmail.com",
       to: to,

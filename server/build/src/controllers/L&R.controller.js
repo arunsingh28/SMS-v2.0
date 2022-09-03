@@ -289,7 +289,6 @@ var verifyForgotOTP = function (req, res) { return __awaiter(void 0, void 0, voi
             case 0:
                 email = req.params.email;
                 otp = req.body.otp;
-                console.table({ otp: otp, email: email });
                 if (!email || !otp)
                     return [2 /*return*/, res.status(401).json({ message: 'please provide the information' })];
                 return [4 /*yield*/, user_model_1.default.findOne({ email: email }).exec()
@@ -331,7 +330,7 @@ var forgotPassword = function (req, res) { return __awaiter(void 0, void 0, void
                 sameSite: 'none',
                 secure: true
             });
-            return [2 /*return*/, res.status(401).json({ message: "tempared token" })];
+            return [2 /*return*/, res.status(401).json({ message: "token required" })];
         }
         else { // validate the password
             if (!password)
@@ -371,6 +370,12 @@ var forgotPassword = function (req, res) { return __awaiter(void 0, void 0, void
                                 // save the new hash password to DB
                                 _a.sent();
                                 nodeMailer_1.default(user === null || user === void 0 ? void 0 : user.email, user === null || user === void 0 ? void 0 : user.otp, user === null || user === void 0 ? void 0 : user.name, envConfig_1.default.MAIL_FORGOTPASSWORD_SUCCESS);
+                                // clear the previus cookie
+                                res.clearCookie('uft', {
+                                    httpOnly: true,
+                                    sameSite: 'none',
+                                    secure: true
+                                });
                                 return [2 /*return*/, res.status(200).json({ message: "Succssfuly change the password." })];
                         }
                     });

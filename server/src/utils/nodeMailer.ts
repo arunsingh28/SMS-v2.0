@@ -13,8 +13,8 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number) 
     service: "hotmail",
     host: "smtp-mail.outlook.com",
     auth: {
-      user: "sms.798361@hotmail.com",
-      pass: "#Apple1397000"
+      user: env.MAIL_DOMAIN,
+      pass: env.MAIL_DOMAIN_PASS
     },
     tls: {
       ciphers: 'SSLv3'
@@ -33,7 +33,7 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number) 
     })
   } else if (type == env.MAIL_RESETPASSWORD) { // sent otp for reset password
     transporter.sendMail({
-      from: "sms.798361@hotmail.com",
+      from: env.MAIL_DOMAIN,
       to: to,
       subject: "Reset Password",
       html: resetPassword(name!, otp!)
@@ -43,7 +43,7 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number) 
     })
   } else if (type == env.MAIL_SUCCESS) { // success reset password
     transporter.sendMail({
-      from: "sms.798361@hotmail.com",
+      from: env.MAIL_DOMAIN,
       to: to,
       subject: "Reset Password Successfuly",
       html: successResetPassword(name!)
@@ -53,7 +53,7 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number) 
     })
   } else if (type == env.MAIL_FORGOTPASSWORD_SUCCESS) { // success forgot password
     transporter.sendMail({
-      from: "sms.798361@hotmail.com",
+      from: env.MAIL_DOMAIN,
       to: to,
       subject: "Channge Password Successfuly",
       html: forgotPasswordSuccess(name!)
@@ -65,7 +65,7 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number) 
     transporter.sendMail({
       from: "sms.798361@hotmail.com",
       to: to,
-      subject: "Message",
+      subject: "New Message",
       html: message(name!)
     }, (err, info) => {
       if (err) console.log(err)
@@ -74,7 +74,7 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number) 
   }
   else {
     transporter.sendMail({ //forgot password
-      from: "sms.798361@hotmail.com",
+      from: env.MAIL_DOMAIN,
       to: to,
       subject: "Forgot Password",
       html: forgotPassword(name!, otp!)

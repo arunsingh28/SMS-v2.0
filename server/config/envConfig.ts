@@ -16,6 +16,8 @@ const configEnv = {
     MONGODB_URI: "mongodb+srv://arun:1234@cluster0.t3qon.mongodb.net/IPS-V2-0?retryWrites=true&w=majority",
 
 
+    MAIL_DOMAIN: "sms.798361@hotmail.com",
+    MAIL_DOMAIN_PASS: "#Apple1397000",
     MAIL_CREATE: 200,
     MAIL_RESETPASSWORD: 401,
     MAIL_FORGOTPASSWORD: 404,

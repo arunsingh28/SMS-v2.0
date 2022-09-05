@@ -1901,3 +1901,8 @@
 2022-09-02 01:46:40	 3bda3f5b-c3f0-4c10-8e5f-1d6200b9e106	 - POST /api/v1/forgotpassword/otp
 2022-09-02 01:47:03	 7432d682-b66f-48cb-8225-ae023c67e139	 - POST /api/otp/forgot/arunsingh28aug.as@gmail.com
 2022-09-02 01:47:36	 cd17347d-3a64-4445-a55f-2b3b607153c0	 - PUT /api/forgot-password
+2022-09-05 12:05:17	 527750fe-f003-413f-a91d-cd07600118e4	 - POST /api/v1/m/message
+2022-09-05 12:06:33	 96080a8a-aeed-44c3-898f-6800fb113cec	 - POST /api/v1/m/message
+2022-09-05 12:07:47	 8716c1e7-9af0-41a7-9d4a-0ecd9f35f97e	 - POST /api/v1/m/message
+2022-09-05 12:12:17	 fd23a02f-b179-4baf-904f-737560e8d94f	 - POST /api/v1/m/message
+2022-09-05 12:15:34	 9e563ff8-7ba2-4325-a4f4-87f1f612b2cc	 - POST /api/register

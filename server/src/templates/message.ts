@@ -1,6 +1,6 @@
 const message = (message: string) => {
     return `
-        <p style="padding:5px;font-size:13px;">${message} </p>
+        <i>Message</i><p style="padding:5px;font-size:13px;border:1px solid #333">${message} </p>
     `
 }
 

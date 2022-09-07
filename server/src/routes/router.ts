@@ -1,5 +1,4 @@
 import register_contollers from "../controllers/L&R.controller";
-import user_contollers from "../controllers/user.private";
 import contact from "../controllers/contact-us";
 import student from "../controllers/student";
 import { Express } from "express";
@@ -14,7 +13,8 @@ import awsFile from '../utils/aws'
 export default function (router: Express) {
 
   // test of file uplaod
-  router.post('/api/file', awsFile.upload.single('pro_img'), fileControllers.image)
+  router.post('/api/file/:id', awsFile.upload.single('pro_img'), fileControllers.addProfileImage)
+  router.delete('/api/v1/removeProfile/:id', fileControllers.deleteProfileImage)
 
   /**
    * @public routes
@@ -75,46 +75,6 @@ export default function (router: Express) {
     register_contollers.resetPassword
   );
 
-  /**
-   * @private routes
-   * @method post
-   *
-   * for add profile imgage
-   *
-   */
-  router.post(
-    "/api/user/add-profile",
-    authorization,
-    awsFile.upload.single("file"),
-    user_contollers.addProfile
-  );
-
-  /**
-   * @private routes
-   * @method post
-   *
-   * for deleteing profile imgage
-   *
-   */
-  router.get(
-    "/api/user/delete-profile",
-    authorization,
-    user_contollers.removeProfile
-  );
-
-  /**
-   * @private routes
-   * @method post
-   *
-   * for update profile imgage
-   *
-   */
-  router.post(
-    "/api/user/update-profile",
-    authorization,
-    awsFile.upload.single("file"),
-    user_contollers.updateProfile
-  );
 
   router.post("/api/student/detail", authorization, student.Detail);
 

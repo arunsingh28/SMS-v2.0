@@ -41,3 +41,16 @@
 2022-09-06 19:02:39	 20515fb5-008c-4171-b71d-7048c902ab93	 - Operation `users.findOne()` buffering timed out after 10000ms
 2022-09-06 19:03:18	 7cb2026a-d4ae-4e37-86b4-995b45337d65	 - Operation `users.findOne()` buffering timed out after 10000ms
 2022-09-06 19:03:25	 e947a4cd-ae50-463e-89fe-0142d9341a20	 - Operation `users.findOne()` buffering timed out after 10000ms
+2022-09-07 21:27:30	 61c75833-d339-47f6-8495-1018c8c017cf	 - Cannot read properties of undefined (reading 'location')
+2022-09-07 21:42:11	 cc59c3c0-8a28-46da-84bb-95e43dd672ad	 - Cannot create property 'location' on string 'https://sms-api-1.s3.ap-south-1.amazonaws.com/1662566435970-sample2.jpg'
+2022-09-07 21:57:40	 e17b2a58-4c32-4163-9171-fbdcad5a040b	 - Access Denied
+2022-09-07 21:58:29	 66fa53e6-59cf-4308-8961-fb61f7dfd6e0	 - Access Denied
+2022-09-07 21:59:04	 4471a9cb-bc5a-4a7f-95ce-3bcfb09169a1	 - Access Denied
+2022-09-07 22:06:31	 95d2ef59-2316-41b2-9083-c015df891acb	 - Access Denied
+2022-09-07 22:06:56	 4a214f5e-02c7-487b-8e7e-daf08f3eb95e	 - Access Denied
+2022-09-07 22:24:19	 cfa95bd7-64f4-4187-8a1e-48315019b776	 - Access Denied
+2022-09-07 22:26:38	 28163735-ccd6-4605-a5b0-a72bcd52aa96	 - Access Denied
+2022-09-07 22:31:44	 1326d92c-7417-47a7-8c67-a6a9ce2ab727	 - Access Denied
+2022-09-07 22:32:16	 0be0d14d-f99a-484d-8a4b-c8a77fed3c70	 - Access Denied
+2022-09-07 22:32:44	 b0a6f10b-5c80-4686-bf3f-4615d65d4504	 - Access Denied
+2022-09-07 22:33:11	 3746f7ab-3203-4dce-a5a2-ca488171a428	 - Access Denied

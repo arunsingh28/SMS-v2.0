@@ -31,13 +31,18 @@ const Login = () => {
             },
             body: JSON.stringify({ email, password }),
         }).then(d => d.json())
-        const name = result?.data?.name;
-        const accessToken = result?.accessToken;
-        window.confirm(accessToken)
-        localStorage.setItem('acessToken', accessToken)
-        setAuth({ email, name })
-        setErrMsg(result.message)
-        setResult(result)
+        if (result.code == 200) {
+            const name = result?.data?.name;
+            const accessToken = result?.accessToken;
+            window.confirm(accessToken)
+            localStorage.setItem('acessToken', 'Bearer ' + accessToken)
+            setAuth({ email, name, authState: true })
+            setErrMsg(result?.message)
+            setResult(result)
+        } else {
+            setAuth({ authState: true })
+            setErrMsg(result?.message)
+        }
     }
     console.log(result)
     return (

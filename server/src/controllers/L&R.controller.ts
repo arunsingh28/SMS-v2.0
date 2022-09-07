@@ -82,7 +82,7 @@ const login = async (req: Request, res: Response) => {
   if (!user) {
     return res
       .status(203)
-      .json({ message: "User not found" });
+      .json({ message: "User not found", code: res.statusCode });
   } else {
     // checking user password
     const isMatch = await user.comparePassword(password);

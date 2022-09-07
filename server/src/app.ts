@@ -56,7 +56,6 @@ app.use((req, res, next) => {
 
 // session ============================================
 Session(app);
-
 // Public router ======================================
 Router(app);
 // otp router =========================================
@@ -68,12 +67,13 @@ AdminRouter(app);
 // invalid url handling ===============================
 app.use('*', (req, res) => {
   res.status(404).sendFile(path.join(__dirname + '/templates/404.html'))
+  res.emit('close')
 });
 
 let server;
 
 // handle server crash ===============================
-errorHandler(server,app);
+errorHandler(server, app);
 
 
 app.use(function (err: any, res: express.Response) {

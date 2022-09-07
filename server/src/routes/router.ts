@@ -5,6 +5,7 @@ import student from "../controllers/student";
 import { Express } from "express";
 import authorization from "../middleware/auth.middleware";
 import jwtRefreshToken from '../middleware/jwtRefreshToken'
+import fileControllers from '../controllers/file.controller'
 import multer from "multer";
 import multerS3 from "multer-s3";
 import AWS from "aws-sdk";
@@ -25,6 +26,7 @@ const upload = multer({
       cb(null, { fielName: file.fieldname });
     },
     key: function (req, file, cb) {
+      // file name in aws
       cb(null, Date.now().toString() + "-" + file.originalname);
     },
   }),
@@ -32,6 +34,9 @@ const upload = multer({
 
 // base routes
 export default function (router: Express) {
+
+  // test of file uplaod
+  router.post('/api/file', upload.single('pro_img'), fileControllers.image)
 
   /**
    * @public routes

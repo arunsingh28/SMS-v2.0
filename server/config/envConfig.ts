@@ -9,9 +9,9 @@ const configEnv = {
     JWT_FORGOT_PASSWORD_EXPIRE_TIME: "2m",
 
 
-    AWS_SECRET_KEY: "",
-    AWS_BUCKET_NAME: "",
-    AWS_ACESS_KEY: "",
+    AWS_SECRET_KEY: "a+cwFdy/ao9SheoZugxxGyUIoP/ESV7Evw3R1VEr",
+    AWS_BUCKET_NAME: "sms-testing-api",
+    AWS_ACESS_KEY: "AKIAQFWDAU63MNP67M3C",
 
     MONGODB_URI: "mongodb+srv://arun:1234@cluster0.t3qon.mongodb.net/IPS-V2-0?retryWrites=true&w=majority",
 

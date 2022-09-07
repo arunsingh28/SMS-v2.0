@@ -2048,3 +2048,4 @@
 2022-09-07 15:34:37	 3a462896-170b-4d7a-b9bc-65ccf911cdeb	 - POST /api/login
 2022-09-07 15:46:21	 70c62355-912d-4464-ade0-72f1fcb6bdb6	 - OPTIONS /api/login
 2022-09-07 15:46:21	 7d95b0e6-df1b-408f-8124-a881a1224603	 - POST /api/login
+2022-09-07 20:23:03	 7295c971-af50-48bd-aefd-dcc526a495d5	 - POST /api/file

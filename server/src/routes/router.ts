@@ -6,37 +6,15 @@ import { Express } from "express";
 import authorization from "../middleware/auth.middleware";
 import jwtRefreshToken from '../middleware/jwtRefreshToken'
 import fileControllers from '../controllers/file.controller'
-import multer from "multer";
-import multerS3 from "multer-s3";
-import AWS from "aws-sdk";
-import env from '../../config/envConfig'
+import awsFile from '../utils/aws'
 
 
-const s3 = new AWS.S3({
-  accessKeyId: env.AWS_ACESS_KEY,
-  secretAccessKey: env.AWS_SECRET_KEY,
-});
-
-const upload = multer({
-  storage: multerS3({
-    s3,
-    bucket: env.AWS_BUCKET_NAME,
-    acl: "public-read",
-    metadata: function (req, file, cb) {
-      cb(null, { fielName: file.fieldname });
-    },
-    key: function (req, file, cb) {
-      // file name in aws
-      cb(null, Date.now().toString() + "-" + file.originalname);
-    },
-  }),
-});
 
 // base routes
 export default function (router: Express) {
 
   // test of file uplaod
-  router.post('/api/file', upload.single('pro_img'), fileControllers.image)
+  router.post('/api/file', awsFile.upload.single('pro_img'), fileControllers.image)
 
   /**
    * @public routes
@@ -107,7 +85,7 @@ export default function (router: Express) {
   router.post(
     "/api/user/add-profile",
     authorization,
-    upload.single("file"),
+    awsFile.upload.single("file"),
     user_contollers.addProfile
   );
 
@@ -134,7 +112,7 @@ export default function (router: Express) {
   router.post(
     "/api/user/update-profile",
     authorization,
-    upload.single("file"),
+    awsFile.upload.single("file"),
     user_contollers.updateProfile
   );
 

@@ -35,3 +35,9 @@
 2022-09-02 00:05:41	 84795b55-c219-4e0b-948f-425124b68de7	 - Cannot read properties of undefined (reading 'env')
 2022-09-02 00:50:08	 4b199ddf-8cee-401d-a06d-1830190e1bb3	 - Cannot read properties of undefined (reading 'env')
 2022-09-02 01:33:38	 84f1a482-8543-419d-95df-cf152da76c34	 - Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/
+2022-09-06 18:29:31	 f71098dd-9761-4d62-bbec-2286fa296cba	 - Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/
+2022-09-06 18:31:51	 232f7ca5-62b1-427f-885a-b377e6e73f6c	 - Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/
+2022-09-06 19:02:09	 829dcb45-ee60-4b72-84dc-5795560b4a24	 - Operation `users.findOne()` buffering timed out after 10000ms
+2022-09-06 19:02:39	 20515fb5-008c-4171-b71d-7048c902ab93	 - Operation `users.findOne()` buffering timed out after 10000ms
+2022-09-06 19:03:18	 7cb2026a-d4ae-4e37-86b4-995b45337d65	 - Operation `users.findOne()` buffering timed out after 10000ms
+2022-09-06 19:03:25	 e947a4cd-ae50-463e-89fe-0142d9341a20	 - Operation `users.findOne()` buffering timed out after 10000ms

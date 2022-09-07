@@ -11,9 +11,10 @@ declare module 'express-session' {
 export default function (app: Express) {
     app.use(session({
         secret: 'sce',
+        proxy: true,
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: true, maxAge: 60000 }
+        cookie: { secure: true, maxAge: 24 * 60 * 60 * 1000 }
     }))
 
     app.set('trust proxy', 1)

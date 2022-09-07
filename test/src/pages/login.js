@@ -1,13 +1,17 @@
 import React from 'react'
+import AuthContext from '../context/authProvider'
 
 const Login = () => {
     const errRef = React.useRef()
 
+    const { setAuth } = React.useContext(AuthContext)
 
     const [email, setUser] = React.useState('')
     const [password, setPwd] = React.useState('')
     const [errMsg, setErrMsg] = React.useState('')
     const [success, setSuccess] = React.useState(false)
+
+    const [result, setResult] = React.useState()
 
     React.useEffect(() => {
         errRef.current.focus()
@@ -20,46 +24,55 @@ const Login = () => {
     const handleSubmitLogin = async (e) => {
         e.preventDefault()
         console.table(email, password)
-        await fetch('https://sms-api-1.herokuapp.com/api/login', {
+        const result = await fetch('http://localhost:8080/api/login', {
             method: 'post',
             headers: {
-                'content-Type': "application/json"
+                'Content-Type': "application/json"
             },
-            body: JSON.stringify(email, password),
-            credentials: 'include'
+            body: JSON.stringify({ email, password }),
         }).then(d => d.json())
-            .then(res => console.log(res))
+        const name = result?.data?.name;
+        const accessToken = result?.accessToken;
+        window.confirm(accessToken)
+        localStorage.setItem('acessToken', accessToken)
+        setAuth({ email, name })
+        setErrMsg(result.message)
+        setResult(result)
     }
+    console.log(result)
     return (
         <main>
-            <div class="h-screen bg-white relative flex flex-col space-y-10 justify-center items-center">
-                <div class="bg-white md:shadow-lg shadow-none rounded p-6 w-96" >
-                    <h1 class="text-3xl font-bold leading-normal" >Sign in</h1>
-                    <p class="text-sm leading-normal">Stay updated on your professional world</p>
-                    <p ref={errRef}>{errMsg}</p>
-                    <form class="space-y-5 mt-5" onSubmit={handleSubmitLogin}>
-                        <div class="mb-4 relative">
+            <div className="h-screen bg-white relative flex flex-col space-y-10 justify-center items-center">
+                <div className="bg-white md:shadow-lg shadow-none rounded p-6 w-96" >
+                    <h1 className="text-3xl font-bold leading-normal" >Sign in</h1>
+                    <p className="text-sm leading-normal">Stay updated on your professional world</p>
+                    <p className='text-red-700' ref={errRef}>{errMsg}</p>
+                    <form className="space-y-5 mt-5" onSubmit={handleSubmitLogin}>
+                        <div className="mb-4 relative">
                             <input
                                 value={email}
                                 onChange={(e) => setUser(e.target.value)}
-                                class="w-full rounded px-3 border border-gray-500 pt-5 pb-2 focus:outline-none input active:outline-none" type="text" autofocus
+                                className="w-full rounded px-3 border border-gray-500 pt-5 pb-2 focus:outline-none input active:outline-none" type="text" autoFocus
                                 placeholder='username'
-                                autoComplete />
+                                autoComplete="false" />
                         </div>
-                        <div class="relative flex items-center border border-gray-500 focus:ring focus:border-blue-500 rounded">
+                        <div className="relative flex items-center border border-gray-500 focus:ring focus:border-blue-500 rounded">
                             <input
                                 value={password}
                                 onChange={(e) => setPwd(e.target.value)}
-                                class="w-full rounded px-3 pt-5 outline-none pb-2 focus:outline-none active:outline-none input active:border-blue-500" type="password"
+                                className="w-full rounded px-3 pt-5 outline-none pb-2 focus:outline-none active:outline-none input active:border-blue-500" type="password"
                                 placeholder='Password'
                             />
-                            <a class="text-sm font-bold text-blue-700 hover:bg-blue-100 rounded-full px-2 py-1 mr-1 leading-normal cursor-pointer">show</a>
+                            <a className="text-sm font-bold text-blue-700 hover:bg-blue-100 rounded-full px-2 py-1 mr-1 leading-normal cursor-pointer">show</a>
                         </div>
-                        <div class="-m-2">
-                            <a class="font-bold text-blue-700 hover:bg-blue-200 hover:underline hover:p-5 p-2 rounded-full" href="#">Forgot password?</a>
+                        <div className="-m-2">
+                            <a className="font-bold text-blue-700 hover:bg-blue-200 hover:underline hover:p-5 p-2 rounded-full" href="#">Forgot password?</a>
                         </div>
-                        <button class="w-full text-center bg-blue-700 hover:bg-blue-900 rounded-full text-white py-3 font-medium">Sign in</button>
+                        <button className="w-full text-center bg-blue-700 hover:bg-blue-900 rounded-full text-white py-3 font-medium">Sign in</button>
                     </form>
+                    <div className='mt-10'>
+                        {result && result.data.name}
+                    </div>
                 </div>
             </div>
         </main>

@@ -75,7 +75,6 @@ const login = async (req: Request, res: Response) => {
   if (!email || !password) {
     return res.status(401).json({
       message: "please fill all detail",
-      code: res.statusCode,
     });
   }
   const user = await _user.findOne({ email }).exec()
@@ -83,14 +82,14 @@ const login = async (req: Request, res: Response) => {
   if (!user) {
     return res
       .status(203)
-      .json({ message: "User not found", code: res.statusCode });
+      .json({ message: "User not found" });
   } else {
     // checking user password
     const isMatch = await user.comparePassword(password);
     if (isMatch === false) {
       return res
         .status(401)
-        .json({ message: "Invalid credinitals", code: res.statusCode });
+        .json({ message: "Invalid credinitals" });
     } else {
       // genrate access token
       const token = await TOKEN.getToken(email);
@@ -103,9 +102,9 @@ const login = async (req: Request, res: Response) => {
       // send the accessToken with cookie
       res.cookie('jwt', refreshToken, {
         httpOnly: true,
+        sameSite: 'none',
+        secure: true,
         maxAge: 24 * 60 * 60 * 1000,
-        // sameSite: 'none',
-        // secure: true
       })
       // start session 
       req.session.user = user

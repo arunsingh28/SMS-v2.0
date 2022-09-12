@@ -2090,3 +2090,10 @@
 2022-09-07 22:37:50	 aa108db5-62ca-435a-b69c-204c7e9c546b	 - DELETE /api/v1/removeProfile/1662567936535-sample2.jpg
 2022-09-07 22:47:35	 1b51f4f2-7fa8-4c8b-a012-fded35b23ca6	 - DELETE /api/v1/removeProfile/1662567936535-sample2.jpg
 2022-09-07 22:56:02	 6eaa30ba-b114-4fa1-891b-6b9410e1647d	 - DELETE /api/v1/removeProfile/1662567936535-sample2.jpg
+2022-09-12 21:23:31	 04eddec8-35ef-49a7-b753-ac159df07901	 - OPTIONS /api/login
+2022-09-12 21:23:31	 37ef6848-2c5c-4cc5-b885-87d847f79dbb	 - POST /api/login
+2022-09-12 21:23:52	 81f4e802-aee8-4440-a538-e7fe0cccec4c	 - OPTIONS /api/login
+2022-09-12 21:24:13	 457c4873-cc7a-410a-ae61-8e028f2e209d	 - OPTIONS /api/login
+2022-09-12 21:24:19	 b5815e43-2746-4d8a-8ab9-1c2a26dc4449	 - OPTIONS /api/login
+2022-09-12 21:24:32	 a0f43d0f-0150-4847-8c0d-41aa388f8ee3	 - OPTIONS /api/login
+2022-09-12 21:24:32	 7211d4de-41c4-4f23-a4af-5412ea954ba1	 - POST /api/login

@@ -13,8 +13,10 @@ import awsFile from '../utils/aws'
 export default function (router: Express) {
 
   // test of file uplaod
-  router.post('/api/file/:id', awsFile.upload.single('pro_img'), fileControllers.addProfileImage)
+  router.put('/api/file/:id', awsFile.upload.single('pro_img'), fileControllers.addProfileImage)
   router.delete('/api/v1/removeProfile/:id', fileControllers.deleteProfileImage)
+
+  router.get('/api/del',awsFile.deleteBucket)
 
   /**
    * @public routes

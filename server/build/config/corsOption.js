@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var allowedOrigin_1 = __importDefault(require("./allowedOrigin"));
 var corsOption = {
     origin: function (origin, callback) {
+        console.log('**********ORIGI*********', origin);
         // remove !origin it just for dev otherwise it allow all the other origin to access the route
         if (allowedOrigin_1.default.indexOf(origin) !== -1 || !origin) {
             callback(null, true);

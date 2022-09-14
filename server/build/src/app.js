@@ -28,8 +28,8 @@ DB_1.connectDB();
 app.use(logEvents_middleware_1.default.logger);
 var NAMESPACE = "server";
 // body parser =======================================
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: false }));
+app.use(express_1.default.json({ limit: '10mb' }));
+app.use(express_1.default.urlencoded({ limit: '10mb', extended: false }));
 app.use(credentials_1.default);
 // cookie parser =======================================
 app.use(cookie_parser_1.default());
@@ -54,6 +54,7 @@ admin_1.default(app);
 // invalid url handling ===============================
 app.use('*', function (req, res) {
     res.status(404).sendFile(path_1.default.join(__dirname + '/templates/404.html'));
+    res.emit('close');
 });
 var server;
 // handle server crash ===============================

@@ -128,7 +128,6 @@ var login = function (req, res) { return __awaiter(void 0, void 0, void 0, funct
                 if (!email || !password) {
                     return [2 /*return*/, res.status(401).json({
                             message: "please fill all detail",
-                            code: res.statusCode,
                         })];
                 }
                 return [4 /*yield*/, user_model_1.default.findOne({ email: email }).exec()
@@ -146,7 +145,7 @@ var login = function (req, res) { return __awaiter(void 0, void 0, void 0, funct
                 if (!(isMatch === false)) return [3 /*break*/, 4];
                 return [2 /*return*/, res
                         .status(401)
-                        .json({ message: "Invalid credinitals", code: res.statusCode })];
+                        .json({ message: "Invalid credinitals" })];
             case 4: return [4 /*yield*/, token_1.default.getToken(email)];
             case 5:
                 token = _b.sent();
@@ -165,9 +164,9 @@ var login = function (req, res) { return __awaiter(void 0, void 0, void 0, funct
                 // send the accessToken with cookie
                 res.cookie('jwt', refreshToken, {
                     httpOnly: true,
+                    sameSite: 'none',
+                    secure: true,
                     maxAge: 24 * 60 * 60 * 1000,
-                    // sameSite: 'none',
-                    // secure: true
                 });
                 // start session 
                 req.session.user = user;

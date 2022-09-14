@@ -12,6 +12,7 @@ const configEnv = {
     AWS_ACCESS_ID: "AKIAQFWDAU63OMLIMUXN",
     AWS_SECRET_KEY: "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",
     AWS_BUCKET_NAME: "sms-api-1",
+    AWS_REQUEST_LOG_BUCKET_NAME: "sms-api-1-requestlogs",
 
     MONGODB_URI: "mongodb+srv://arun:1234@cluster0.t3qon.mongodb.net/IPS-V2-0?retryWrites=true&w=majority",
 

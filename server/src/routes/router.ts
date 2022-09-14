@@ -8,13 +8,12 @@ import fileControllers from '../controllers/file.controller'
 import awsFile from '../utils/aws'
 
 
-
 // base routes
 export default function (router: Express) {
 
   // test of file uplaod
-  router.post('/api/v1/addProfile/:id', authorization, awsFile.uploadImage.single('pro_img'), fileControllers.addProfileImage)
-  router.delete('/api/v1/removeProfile/:id', authorization, fileControllers.deleteProfileImage)
+  router.post('/api/v1/addProfile', authorization, awsFile.uploadImage.single('pro_img'), fileControllers.addProfileImage)
+  router.delete('/api/v1/removeProfile', authorization, fileControllers.deleteProfileImage)
 
   router.post("/api/login", register_contollers.login);
 
@@ -31,7 +30,6 @@ export default function (router: Express) {
     authorization,
     register_contollers.resetPassword
   );
-
 
   router.post("/api/student/detail", authorization, student.Detail);
 

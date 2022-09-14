@@ -14,7 +14,7 @@ interface iFile {
 
 const addProfileImage = async (req: Request, res: Response) => {
     const file = req.file as Express.Multer.File & iFile;
-    const id = req.params.id
+    const id = req.session.user?._id
     // save the location to database
     const user = await _user.findById(id).exec();
     if (!user) {
@@ -39,9 +39,25 @@ const addProfileImage = async (req: Request, res: Response) => {
 }
 
 const deleteProfileImage = async (req: Request, res: Response) => {
-    const id = req.params.id
-    const response = awsInstance.deleteObject(req.params.id)
-
+    const id = req.session.user?._id
+    const user = await _user.findById(id).exec();
+    if (!user) {
+        return res.status(400).json({ message: "No user found", code: res.statusCode });
+    } else {
+        const key = user.profile?.key
+        if (key) {
+            awsInstance.deleteObject(key)
+            user.profile.location = null
+            user.profile.key = null
+            user.save().then(() => {
+                return res.status(200).json({ message: "image deleted", code: res.statusCode });
+            }).catch(err => {
+                return res.status(400).json({ message: err.message, code: res.statusCode });
+            })
+        } else {
+            return res.status(400).json({ message: "No image found", code: res.statusCode });
+        }
+    }
 }
 
 export default { addProfileImage, deleteProfileImage }

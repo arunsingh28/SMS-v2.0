@@ -73,12 +73,10 @@ var userSchema = new mongoose_1.default.Schema({
     refresh_token: {
         type: String,
     },
-    profile: [
-        {
-            key: String,
-            location: String,
-        },
-    ],
+    profile: {
+        location: String,
+        key: String,
+    },
 }, { timestamps: true });
 // hasing & salting  ==========================
 userSchema.pre("save", function (next) {

@@ -7,9 +7,10 @@ var express_session_1 = __importDefault(require("express-session"));
 function default_1(app) {
     app.use(express_session_1.default({
         secret: 'sce',
+        proxy: true,
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: true, maxAge: 60000 }
+        cookie: { secure: true, maxAge: 24 * 60 * 60 * 1000 }
     }));
     app.set('trust proxy', 1);
 }

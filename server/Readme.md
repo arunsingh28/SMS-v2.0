@@ -1,5 +1,7 @@
 ## API endpoints
 
+**[Deploy link]**(https://sms-api-1.herokuapp.com)
+
 ### Public APIs
 
 - login: /api/login method: POST

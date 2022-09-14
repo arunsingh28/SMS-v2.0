@@ -2090,6 +2090,25 @@
 2022-09-07 22:37:50	 aa108db5-62ca-435a-b69c-204c7e9c546b	 - DELETE /api/v1/removeProfile/1662567936535-sample2.jpg
 2022-09-07 22:47:35	 1b51f4f2-7fa8-4c8b-a012-fded35b23ca6	 - DELETE /api/v1/removeProfile/1662567936535-sample2.jpg
 2022-09-07 22:56:02	 6eaa30ba-b114-4fa1-891b-6b9410e1647d	 - DELETE /api/v1/removeProfile/1662567936535-sample2.jpg
+<<<<<<< HEAD
+2022-09-08 00:19:56	 9fcc1dac-1dab-4c85-a9bb-63785d271acb	 - POST /api/login
+2022-09-08 00:28:04	 85db5fa2-193e-4688-8e2d-bc1c3d3c23a6	 - PUT /api/file/arunsingh28aug.as@gmail.com
+2022-09-08 00:35:26	 95697073-2774-4c19-9475-df2ba35b0e9f	 - PUT /api/file/arunsingh28aug.as@gmail.com
+2022-09-08 00:37:18	 ceee4ca6-20a6-452d-aa21-560a82f787d2	 - PUT /api/file/arunsingh28aug.as@gmail.com
+2022-09-08 12:54:22	 29c19a62-8071-4a24-9de0-f78b009197e9	 - POST /api/v1/forgotpassword/otp
+2022-09-08 12:56:09	 35876a5b-0c87-4216-9822-3ab2e93ed2a5	 - PUT /api/otp/forgot/krishnasharma9525@gmail.com
+2022-09-08 12:56:21	 e21ba3ab-dac3-4e69-9ba1-56cf33246601	 - POST /api/otp/forgot/krishnasharma9525@gmail.com
+2022-09-08 12:56:30	 3d1dfbd9-0f5f-4c06-9447-37e0ef0d0ae5	 - POST /api/otp/forgot/krishnasharma9525@gmail.com
+2022-09-08 12:57:48	 d81281b6-50e9-4ae8-a31e-c8be2c418a17	 - PUT /api/forgot-password
+2022-09-08 16:04:57	 2544dadd-e2f9-46df-8dcb-e700f770fe0b	 - POST /api/v1/m/message
+2022-09-08 16:08:01	 3c700eee-6f77-4f33-b02d-7800a97a3a1e	 - POST /api/v1/m/message
+2022-09-08 16:08:23	 af2e5ac2-aabb-4d3e-a6e5-f3c8ec7cf0e9	 - POST /api/v1/m/message
+2022-09-08 16:09:54	 47b6d603-dde1-483e-872b-d6d512cc67ea	 - POST /api/v1/m/message
+2022-09-14 14:13:48	 7ab5f894-cd47-469f-9c11-a7acfba5eabe	 - GET /
+2022-09-14 14:13:49	 643dcfc7-e943-49c0-9652-c9d3f7d77826	 - GET /favicon.ico
+2022-09-14 14:55:45	 af18464f-63f3-40a0-83ed-38cd01d0d14c	 - GET /api/del
+2022-09-14 14:56:41	 ab1609ef-e277-4718-8510-5e99bea49a81	 - GET /api/del
+=======
 2022-09-12 21:23:31	 04eddec8-35ef-49a7-b753-ac159df07901	 - OPTIONS /api/login
 2022-09-12 21:23:31	 37ef6848-2c5c-4cc5-b885-87d847f79dbb	 - POST /api/login
 2022-09-12 21:23:52	 81f4e802-aee8-4440-a538-e7fe0cccec4c	 - OPTIONS /api/login
@@ -2104,6 +2123,7 @@
 2022-09-12 21:35:52	 42840549-12cc-4af0-8d57-a5c842be29fc	 - POST /api/login
 2022-09-12 21:36:09	 0df2a625-e06b-4cbb-ba16-f2a60692c044	 - OPTIONS /api/login
 2022-09-12 21:36:09	 6e215bd9-e4a1-494c-94a6-4bf06bb4d7a2	 - POST /api/login
+<<<<<<< HEAD
 2022-09-12 21:37:33	 6f0b6396-dfe9-43c5-a539-7577aa5e9ffb	 - OPTIONS /api/login
 2022-09-12 21:37:33	 90cc01f7-6686-43fa-8a81-8823f9c93ffb	 - POST /api/login
 2022-09-12 21:38:26	 1f5ad75e-6204-4adc-92e3-459c599c81ff	 - OPTIONS /api/login
@@ -2194,3 +2214,6 @@
 2022-09-14 23:39:07	 dd76b428-3154-45b2-8d97-53be4835650c	 - POST /api/file/arunsingh28aug.as@gmail.com
 2022-09-14 23:43:28	 6a0341b7-ad24-49c8-af99-fbd61ed1ac0e	 - POST /api/file/6318c5ebaa549e0f601cda3f
 2022-09-14 23:53:40	 617b0270-3ead-4b52-b518-c5461a827529	 - POST /api/file/6318c5ebaa549e0f601cda3f
+=======
+>>>>>>> 550e52d81d90ab4a11dddb231970fc2d2e0e3901
+>>>>>>> d40aeee47c3e7a3827ef1b14bd978a4ea5accbce

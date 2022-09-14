@@ -9,6 +9,7 @@ AWS.config.update({
     secretAccessKey: env.AWS_SECRET_KEY,
     region: 'ap-south-1',
     signatureVersion: 'v4',
+    apiVersion: '2022-09-14'
 })
 
 // create random key for file
@@ -54,5 +55,6 @@ const deleteObject = (key: string) => {
     })
 }
 
+// creating object
 
 export default { uploadImage, deleteObject }

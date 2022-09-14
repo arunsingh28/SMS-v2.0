@@ -2090,6 +2090,7 @@
 2022-09-07 22:37:50	 aa108db5-62ca-435a-b69c-204c7e9c546b	 - DELETE /api/v1/removeProfile/1662567936535-sample2.jpg
 2022-09-07 22:47:35	 1b51f4f2-7fa8-4c8b-a012-fded35b23ca6	 - DELETE /api/v1/removeProfile/1662567936535-sample2.jpg
 2022-09-07 22:56:02	 6eaa30ba-b114-4fa1-891b-6b9410e1647d	 - DELETE /api/v1/removeProfile/1662567936535-sample2.jpg
+<<<<<<< HEAD
 2022-09-08 00:19:56	 9fcc1dac-1dab-4c85-a9bb-63785d271acb	 - POST /api/login
 2022-09-08 00:28:04	 85db5fa2-193e-4688-8e2d-bc1c3d3c23a6	 - PUT /api/file/arunsingh28aug.as@gmail.com
 2022-09-08 00:35:26	 95697073-2774-4c19-9475-df2ba35b0e9f	 - PUT /api/file/arunsingh28aug.as@gmail.com
@@ -2107,3 +2108,19 @@
 2022-09-14 14:13:49	 643dcfc7-e943-49c0-9652-c9d3f7d77826	 - GET /favicon.ico
 2022-09-14 14:55:45	 af18464f-63f3-40a0-83ed-38cd01d0d14c	 - GET /api/del
 2022-09-14 14:56:41	 ab1609ef-e277-4718-8510-5e99bea49a81	 - GET /api/del
+=======
+2022-09-12 21:23:31	 04eddec8-35ef-49a7-b753-ac159df07901	 - OPTIONS /api/login
+2022-09-12 21:23:31	 37ef6848-2c5c-4cc5-b885-87d847f79dbb	 - POST /api/login
+2022-09-12 21:23:52	 81f4e802-aee8-4440-a538-e7fe0cccec4c	 - OPTIONS /api/login
+2022-09-12 21:24:13	 457c4873-cc7a-410a-ae61-8e028f2e209d	 - OPTIONS /api/login
+2022-09-12 21:24:19	 b5815e43-2746-4d8a-8ab9-1c2a26dc4449	 - OPTIONS /api/login
+2022-09-12 21:24:32	 a0f43d0f-0150-4847-8c0d-41aa388f8ee3	 - OPTIONS /api/login
+2022-09-12 21:24:32	 7211d4de-41c4-4f23-a4af-5412ea954ba1	 - POST /api/login
+2022-09-12 21:27:04	 51ff57db-b30f-4b9c-ae84-f3c133aec60d	 - OPTIONS /api/login
+2022-09-12 21:27:04	 6c5c6d08-08f5-404f-8adb-58418906fa1b	 - POST /api/login
+2022-09-12 21:30:09	 9c6cd315-1735-4f71-a6a5-5a6ae4cb469b	 - OPTIONS /api/login
+2022-09-12 21:35:52	 b28cdd56-3243-4936-a4ff-884ad0eb5c48	 - OPTIONS /api/login
+2022-09-12 21:35:52	 42840549-12cc-4af0-8d57-a5c842be29fc	 - POST /api/login
+2022-09-12 21:36:09	 0df2a625-e06b-4cbb-ba16-f2a60692c044	 - OPTIONS /api/login
+2022-09-12 21:36:09	 6e215bd9-e4a1-494c-94a6-4bf06bb4d7a2	 - POST /api/login
+>>>>>>> 550e52d81d90ab4a11dddb231970fc2d2e0e3901

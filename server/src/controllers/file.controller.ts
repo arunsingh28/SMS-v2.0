@@ -14,9 +14,9 @@ interface iFile {
 
 const addProfileImage = async (req: Request, res: Response) => {
     const file = req.file as Express.Multer.File & iFile;
-    const email = req.params.id
+    const id = req.params.id
     // save the location to database
-    const user = await _user.findOne({ email }).exec();
+    const user = await _user.findById(id).exec();
     if (!user) {
         return res.status(400).json({ message: "No user found", code: res.statusCode });
     } else {
@@ -39,8 +39,9 @@ const addProfileImage = async (req: Request, res: Response) => {
 }
 
 const deleteProfileImage = async (req: Request, res: Response) => {
-    const response = await awsInstance.deleteObject(req.params.id)
-    console.log('RESPONSE:::::', response)
+    const id = req.params.id
+    const response = awsInstance.deleteObject(req.params.id)
+
 }
 
 export default { addProfileImage, deleteProfileImage }

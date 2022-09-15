@@ -6,7 +6,8 @@ export const connectDB = async () => {
   await mongoose
     .connect(env.MONGODB_URI, {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 1000,
+      // useUnifiedTopology: true,
       useFindAndModify: true,
       useCreateIndex: true,
     })

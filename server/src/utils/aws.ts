@@ -30,6 +30,7 @@ const uploadImage = multer({
         bucket: env.AWS_BUCKET_NAME,
         acl: "public-read",
         metadata: function (req, file, next) {
+            console.log('FILE:::metadata',file)
             next(null, { fielName: file.fieldname });
         },
         key: function (req, file, next) {

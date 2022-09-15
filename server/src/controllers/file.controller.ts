@@ -14,7 +14,8 @@ interface iFile {
 
 const addProfileImage = async (req: Request, res: Response) => {
     const file = req.file as Express.Multer.File & iFile;
-    const id = req.session.user?._id
+    const id = req.session.user?._id;
+    console.log(id)
     // save the location to database
     const user = await _user.findById(id).exec();
     if (!user) {
@@ -27,9 +28,7 @@ const addProfileImage = async (req: Request, res: Response) => {
         user.save().then(() => {
             return res.status(200).json({
                 message: "image uploaded",
-                data: {
-                    image: file.location
-                },
+                images: file.location,
                 code: res.statusCode
             });
         }).catch(err => {

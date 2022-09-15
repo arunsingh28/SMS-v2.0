@@ -54,3 +54,4 @@
 2022-09-07 22:32:16	 0be0d14d-f99a-484d-8a4b-c8a77fed3c70	 - Access Denied
 2022-09-07 22:32:44	 b0a6f10b-5c80-4686-bf3f-4615d65d4504	 - Access Denied
 2022-09-07 22:33:11	 3746f7ab-3203-4dce-a5a2-ca488171a428	 - Access Denied
+2022-09-15 16:49:38	 25643b5c-e3c9-43a2-9a31-b75baabd6fbc	 - Operation `users.findOne()` buffering timed out after 10000ms

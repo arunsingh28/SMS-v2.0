@@ -15,8 +15,8 @@ export interface UserDocument extends mongoose.Document {
   role: string;
   refresh_token: string;
   profile: {
-    location: string;
-    key: string;
+    location: string | null;
+    key: string | null;
   };
 }
 

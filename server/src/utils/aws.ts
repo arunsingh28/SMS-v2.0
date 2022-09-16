@@ -3,6 +3,7 @@ import env from '../../config/envConfig'
 import multer from "multer";
 import multerS3 from "multer-s3";
 import { v1 as uuidV1 } from 'uuid'
+import sharp from 'sharp'
 
 AWS.config.update({
     accessKeyId: env.AWS_ACCESS_ID,
@@ -24,12 +25,42 @@ const v1options = {
 
 const s3 = new AWS.S3()
 
+const sharpify = async (originalFile: Buffer) => {
+    const image = sharp(originalFile)
+    const metadata = await image.metadata()
+    const { width, height, format } = metadata
+    const resizedImage = image.resize(200, 200, {
+        fit: sharp.fit.inside,
+        withoutEnlargement: true,
+    })
+    const resizedMetadata = await resizedImage.metadata()
+    const { width: resizedWidth, height: resizedHeight } = resizedMetadata
+    const data = await resizedImage.toBuffer()
+    return {
+        data,
+        info: {
+            original: {
+                width,
+                height,
+                format,
+            },
+            resized: {
+                width: resizedWidth,
+                height: resizedHeight,
+                format,
+            },
+        },
+    }
+}
+
+
 const uploadImage = multer({
     storage: multerS3({
         s3,
         bucket: env.AWS_BUCKET_NAME,
         acl: "public-read",
         metadata: function (req, file, next) {
+            console.log(req.files)
             next(null, { fielName: file.fieldname });
         },
         key: function (req, file, next) {

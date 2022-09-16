@@ -54,3 +54,7 @@
 2022-09-07 22:32:16	 0be0d14d-f99a-484d-8a4b-c8a77fed3c70	 - Access Denied
 2022-09-07 22:32:44	 b0a6f10b-5c80-4686-bf3f-4615d65d4504	 - Access Denied
 2022-09-07 22:33:11	 3746f7ab-3203-4dce-a5a2-ca488171a428	 - Access Denied
+2022-09-15 00:51:01	 1c5ca6d7-6075-468c-92f9-c339628e53d0	 - Invalid input
+2022-09-15 00:51:43	 c7511b26-4c42-4192-83fd-9eca888c2d95	 - Invalid input
+2022-09-15 01:02:28	 346cdffa-19d8-4910-bd9f-1711b52fe2b4	 - Invalid input
+2022-09-15 01:02:58	 5c2dc78f-ee8d-480c-b74a-77bb64f598c7	 - Invalid input

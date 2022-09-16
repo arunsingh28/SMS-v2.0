@@ -2,6 +2,7 @@ import { Response, Request } from 'express'
 import _user from '../models/user.model'
 import awsInstance from '../utils/aws'
 
+
 interface iFile {
     location: string,
     size: number,
@@ -12,9 +13,14 @@ interface iFile {
     key: string,
 }
 
+
+
 const addProfileImage = async (req: Request, res: Response) => {
     const file = req.file as Express.Multer.File & iFile;
     const id = req.session.user?._id
+
+    console.log(file)
+
     // save the location to database
     const user = await _user.findById(id).exec();
     if (!user) {

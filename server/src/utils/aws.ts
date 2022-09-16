@@ -30,7 +30,7 @@ const uploadImage = multer({
         bucket: env.AWS_BUCKET_NAME,
         acl: "public-read",
         metadata: function (req, file, next) {
-            console.log('FILE:::metadata',file)
+            console.log('FILE:::metadata', file)
             next(null, { fielName: file.fieldname });
         },
         key: function (req, file, next) {
@@ -42,17 +42,19 @@ const uploadImage = multer({
 });
 
 const deleteObject = (key: string) => {
-    s3.deleteObject({
-        Bucket: env.AWS_BUCKET_NAME,
-        Key: key,
-    }, (err, data) => {
-        if (err) {
-            console.log(err)
-            // reject(err)
-        } else {
-            console.log(data)
-            // resolve(data)
-        }
+    return new Promise((resolve, reject) => {
+        s3.deleteObject({
+            Bucket: env.AWS_BUCKET_NAME,
+            Key: key,
+        }, (err, data) => {
+            if (err) {
+                reject(err)
+                console.log(err)
+            } else {
+                resolve(data)
+                console.log(data)
+            }
+        })
     })
 }
 

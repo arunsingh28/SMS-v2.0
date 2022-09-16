@@ -45,11 +45,13 @@ const deleteProfileImage = async (req: Request, res: Response) => {
     } else {
         const key = user.profile?.key
         if (key) {
-            awsInstance.deleteObject(key)
-            user.profile.location = null
-            user.profile.key = null
-            user.save().then(() => {
-                return res.status(200).json({ message: "image deleted", code: res.statusCode });
+            awsInstance.deleteObject(key).then((message) => {
+                console.log('MESSAGE:', message)
+                user.profile.location = null
+                user.profile.key = null
+                user.save().then(() => {
+                    return res.status(200).json({ message: "image deleted", code: res.statusCode });
+                })
             }).catch(err => {
                 return res.status(400).json({ message: err.message, code: res.statusCode });
             })

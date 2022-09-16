@@ -2275,3 +2275,9 @@
 2022-09-15 13:56:22	 b2039cab-7004-4116-8763-608f9c91567e	 - POST /api/v1/addProfile
 2022-09-15 13:57:06	 9d87ed37-081f-4cad-b2f9-db380dc75491	 - POST /api/v1/addProfile
 2022-09-15 16:49:28	 f7e6a59f-a035-4a6c-a73b-7770670f7ac1	 - POST /api/login
+2022-09-15 17:13:36	 6e3d0944-a70d-4b05-a3e3-c6bd6c9fb7db	 - POST /api/login
+2022-09-15 17:14:11	 56b8e98f-4304-4ca4-901e-b0f6b7564653	 - GET /api/v1/removeProfile/
+2022-09-15 17:14:20	 9f121523-aae5-4fa3-b1c9-fd7fbfaa8a92	 - DELETE /api/v1/removeProfile
+2022-09-15 17:15:48	 199d4a4b-313f-4365-9af1-724f8b5b2fdf	 - POST /api/login
+2022-09-15 17:15:56	 8c20773f-a5d6-464d-93cc-48f9375ca71f	 - DELETE /api/v1/removeProfile
+2022-09-15 17:16:50	 5dee8e4c-59d5-42c0-bf3c-074093bf1958	 - POST /api/v1/addProfile

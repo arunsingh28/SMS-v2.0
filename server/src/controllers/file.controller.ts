@@ -17,10 +17,15 @@ interface iFile {
 
 const addProfileImage = async (req: Request, res: Response) => {
     const file = req.file as Express.Multer.File & iFile;
+<<<<<<< HEAD
     const id = req.session.user?._id
 
     console.log(file)
 
+=======
+    const id = req.session.user?._id;
+    console.log(id)
+>>>>>>> 6f52e9240c035bcd4b03c97dc20fc5c8e5816a9b
     // save the location to database
     const user = await _user.findById(id).exec();
     if (!user) {
@@ -33,9 +38,7 @@ const addProfileImage = async (req: Request, res: Response) => {
         user.save().then(() => {
             return res.status(200).json({
                 message: "image uploaded",
-                data: {
-                    image: file.location
-                },
+                images: file.location,
                 code: res.statusCode
             });
         }).catch(err => {
@@ -52,11 +55,13 @@ const deleteProfileImage = async (req: Request, res: Response) => {
     } else {
         const key = user.profile?.key
         if (key) {
-            awsInstance.deleteObject(key)
-            user.profile.location = null
-            user.profile.key = null
-            user.save().then(() => {
-                return res.status(200).json({ message: "image deleted", code: res.statusCode });
+            awsInstance.deleteObject(key).then((message) => {
+                console.log('MESSAGE:', message)
+                user.profile.location = null
+                user.profile.key = null
+                user.save().then(() => {
+                    return res.status(200).json({ message: "image deleted", code: res.statusCode });
+                })
             }).catch(err => {
                 return res.status(400).json({ message: err.message, code: res.statusCode });
             })

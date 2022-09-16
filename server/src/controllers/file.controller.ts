@@ -17,19 +17,12 @@ interface iFile {
 
 const addProfileImage = async (req: Request, res: Response) => {
     const file = req.file as Express.Multer.File & iFile;
-<<<<<<< HEAD
     const id = req.session.user?._id
 
-    console.log(file)
-
-=======
-    const id = req.session.user?._id;
-    console.log(id)
->>>>>>> 6f52e9240c035bcd4b03c97dc20fc5c8e5816a9b
     // save the location to database
     const user = await _user.findById(id).exec();
     if (!user) {
-        return res.status(400).json({ message: "No user found", code: res.statusCode });
+        return res.status(400).json({ message: "No user found" });
     } else {
         user.profile = {
             location: file.location,
@@ -38,11 +31,13 @@ const addProfileImage = async (req: Request, res: Response) => {
         user.save().then(() => {
             return res.status(200).json({
                 message: "image uploaded",
-                images: file.location,
+                data: {
+                    image: file.location
+                },
                 code: res.statusCode
             });
         }).catch(err => {
-            return res.status(400).json({ message: err.message, code: res.statusCode });
+            return res.status(400).json({ message: err.message });
         })
     }
 }
@@ -51,24 +46,52 @@ const deleteProfileImage = async (req: Request, res: Response) => {
     const id = req.session.user?._id
     const user = await _user.findById(id).exec();
     if (!user) {
-        return res.status(400).json({ message: "No user found", code: res.statusCode });
+        return res.status(400).json({ message: "No user found" });
     } else {
         const key = user.profile?.key
         if (key) {
-            awsInstance.deleteObject(key).then((message) => {
-                console.log('MESSAGE:', message)
+            awsInstance.deleteObject(key).then(message => {
                 user.profile.location = null
                 user.profile.key = null
                 user.save().then(() => {
-                    return res.status(200).json({ message: "image deleted", code: res.statusCode });
+                    return res.status(200).json({ message: "image deleted" });
                 })
             }).catch(err => {
-                return res.status(400).json({ message: err.message, code: res.statusCode });
+                return res.status(400).json({ message: err.message });
             })
         } else {
-            return res.status(400).json({ message: "No image found", code: res.statusCode });
+            return res.status(400).json({ message: "No image found" });
         }
     }
 }
 
-export default { addProfileImage, deleteProfileImage }
+const updateProfileImage = async (req: Request, res: Response) => {
+    const file = req.file as Express.Multer.File & iFile;
+    const id = req.session.user?._id
+    const user = await _user.findById(id).exec();
+    if (!user) {
+        return res.status(400).json({ message: "No user found" });
+    } else {
+        const key = user.profile?.key
+        if (key) {
+            awsInstance.deleteObject(key)
+            user.profile.location = file.location
+            user.profile.key = file.key
+            user.save().then(() => {
+                return res.status(200).json({
+                    message: "image updated",
+                    data: {
+                        image: file.location
+                    },
+                    code: res.statusCode
+                });
+            }).catch(err => {
+                return res.status(400).json({ message: err.message, code: res.statusCode });
+            })
+        } else {
+            return res.status(400).json({ message: "No image found" });
+        }
+    }
+}
+
+export default { addProfileImage, deleteProfileImage, updateProfileImage }

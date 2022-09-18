@@ -252,7 +252,7 @@ const forgotPassword = async (req: Request, res: Response) => {
             sameSite: 'none',
             secure: true
           })
-          return res.sendStatus(403) //forbiden
+          return res.status(403).json({ message: err.message }) //forbiden
         }
         const user = await _user.findById(value.id)
         const email = user?.email

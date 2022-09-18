@@ -28,13 +28,13 @@ function App() {
 
   useEffect(() => {
     // getToken()
-  }, [auth.authState])
+  }, [])
 
 
   return (
     <div className="App">
       {
-        auth.authState ? <Dashboard /> : <Login />
+        <Login />
       }
     </div>
   );

@@ -8,6 +8,8 @@ school management system (SMS)
 - Frontend (React)[v1.2]
 - Backend (Express)
 
+<img width="100px" src="http://jwt.io/img/badge-compatible.svg" alt="jwt logo"/>
+
 ## Script
 
 for javascript

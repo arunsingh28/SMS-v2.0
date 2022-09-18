@@ -252,7 +252,10 @@ const forgotPassword = async (req: Request, res: Response) => {
             sameSite: 'none',
             secure: true
           })
-          return res.status(403).json({ message: err.message }) //forbiden
+          if (err.message === 'jwt expired') {
+            return res.status(403).json({ message: 'Forgot password session has expired' })
+          }
+          return res.sendStatus(403) //forbiden
         }
         const user = await _user.findById(value.id)
         const email = user?.email

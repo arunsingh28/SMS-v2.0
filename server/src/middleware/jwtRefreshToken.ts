@@ -11,7 +11,7 @@ interface JwtPayload {
 }
 export default async function refreshToken(req: Request, res: Response, next: NextFunction) {
     const refresh_token = req.cookies?.jwt
-    if (!refresh_token) return res.sendStatus(401)
+    if (!refresh_token) return res.status(401).json({message:'token missing'})
     // find token in DB
     const foundUser = await _user.findOne({ refresh_token }).exec()
     // delete previous cookie //

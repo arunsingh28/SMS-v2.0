@@ -8,7 +8,7 @@ import forgotPasswordSuccess from '../templates/forgotPasswordSuccess'
 import message from '../templates/message'
 
 
-async function sendMail(to: string, otp?: number, name?: string, type?: number) {
+async function sendMail(to: string, otp?: number, name?: string, type?: number, profile?: string) {
   let transporter = nodemailer.createTransport({
     service: "hotmail",
     host: "smtp-mail.outlook.com",
@@ -77,7 +77,7 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number) 
       from: env.MAIL_DOMAIN,
       to: to,
       subject: "Forgot Password",
-      html: forgotPassword(name!, otp!)
+      html: forgotPassword(name!, otp!, profile!)
     }, (err, info) => {
       if (err) console.log(err)
       else console.log("email send:", info.response)

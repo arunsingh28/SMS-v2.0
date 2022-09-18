@@ -102,7 +102,7 @@ const login = async (req: Request, res: Response) => {
       // send the accessToken with cookie
       res.cookie('jwt', refreshToken, {
         httpOnly: true,
-        sameSite: 'none',
+        // sameSite: 'none',
         secure: true,
         maxAge: 24 * 60 * 60 * 1000,
       })
@@ -114,7 +114,8 @@ const login = async (req: Request, res: Response) => {
         data: {
           name: user.name,
           email: user.email,
-          role: user.role
+          role: user.role,
+          img: user.profile.location
         },
         accessToken: token,
         code: res.statusCode,
@@ -195,7 +196,7 @@ const resetPassword = async (req: Request, res: Response) => {
         return res.status(200).json({ message: 'Password change succssfully' })
       }
       // otp not match
-      else return res.status(406).json({ message: 'incorrect OTP' })
+      else return res.status(406).json({ message: 'OTP has Expired' })
     } catch (error) {
       console.log(error)
       return res.status(500).json({ message: 'server error' })
@@ -219,10 +220,10 @@ const verifyForgotOTP = async (req: Request | RequestCustome, res: Response) => 
   res.cookie('uft', forgotToken, {
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000,
-    // sameSite: 'none',
-    // secure: true
+    sameSite: 'none',
+    secure: true
   })
-  return res.sendStatus(200)
+  return res.status(200).json({ code: res.statusCode })
 }
 
 

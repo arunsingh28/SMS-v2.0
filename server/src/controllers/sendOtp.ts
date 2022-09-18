@@ -38,10 +38,11 @@ const sendOtpForForgotPassword = async (req: Request, res: Response) => {
             try {
                 // send otp to email
                 const typeOfMail = env.MAIL_FORGOTPASSWORD
-                Mail(user.email, user.otp, user.name, typeOfMail)
+                const img: any = user?.profile?.location
+                Mail(user.email, user.otp, user.name, typeOfMail, img)
                 // change the otp into db
                 otpGenrator(email, res)
-                return res.status(200).json({ message: 'OTP send to ' + email })
+                return res.status(200).json({ message: 'OTP send to ' + email, code: res.statusCode })
             } catch (error) {
                 // catch server error
                 return res.status(500).json({

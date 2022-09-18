@@ -2,6 +2,7 @@ import React from 'react'
 import AuthContext from '../context/authProvider'
 
 const Login = () => {
+    const URL = 'https://sms-api-1.herokuapp.com/api'
     const errRef = React.useRef()
 
     const { setAuth } = React.useContext(AuthContext)
@@ -34,7 +35,7 @@ const Login = () => {
     const handleSubmitLogin = async (e) => {
         e.preventDefault()
         mail = email + '@gmail.com';
-        const result = await fetch('http://localhost:8080/api/login', {
+        const result = await fetch(`${URL}/login`, {
             method: 'post',
             credentials: 'include',
             headers: {
@@ -60,7 +61,7 @@ const Login = () => {
 
     const handleForgotPassword = async (e) => {
         e.preventDefault()
-        const result = await fetch('http://localhost:8080/api/v1/forgotpassword/otp', {
+        const result = await fetch(`${URL}/v1/forgotpassword/otp`, {
             method: 'post',
             headers: {
                 'Content-Type': "application/json"
@@ -74,7 +75,7 @@ const Login = () => {
     }
     const handleOtpSumit = async (e) => {
         e.preventDefault()
-        const result = await fetch(`http://localhost:8080/api/otp/forgot/${fmail}`, {
+        const result = await fetch(`${URL}/otp/forgot/${fmail}`, {
             method: 'post',
             credentials: 'include',
             headers: {
@@ -96,7 +97,7 @@ const Login = () => {
         if (newPassword != newConPassword) {
             setSucMes('Both Password are not same')
         } else {
-            const result = await fetch(`http://localhost:8080/api/forgot-password`, {
+            const result = await fetch(`${URL}/forgot-password`, {
                 method: 'put',
                 credentials: 'include',
                 headers: {

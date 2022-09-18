@@ -177,7 +177,7 @@ const Login = () => {
                                             onChange={(e) => { setNewConPassword(e.target.value) }}
                                             placeholder="confirm password" className="mt-2 input input-bordered input-info w-full max-w-xs" />
                                     </div>
-                                    <button className="btn mt-2 btn-outline ml-2" type='submit'>Save</button>
+                                    <button className="btn mt-2 btn-outline ml-4" type='submit'>Save</button>
                                     {
                                         sucMes && <p className='p-2 text-white'>{sucMes}</p>
                                     }
@@ -194,7 +194,7 @@ const Login = () => {
                                         value={otp}
                                         onChange={(e) => { setOtp(e.target.value) }}
                                         placeholder="Type here" className="input input-bordered input-info w-full max-w-xs" />
-                                    <button className="btn btn-outline ml-2" type='submit'>Verify</button>
+                                    <button className="btn btn-outline ml-4" type='submit'>Verify</button>
                                     {
                                         sucMes && <p className='p-2 text-white'>{sucMes}</p>
                                     }
@@ -212,7 +212,7 @@ const Login = () => {
                                         value={fmail}
                                         onChange={(e) => { setFmail(e.target.value) }}
                                         placeholder="Type here" className="input input-bordered input-info w-full max-w-xs" />
-                                    <button className="btn btn-outline ml-2" type='submit'>Send</button>
+                                    <button className="btn btn-outline ml-4" type='submit'>Send</button>
                                     {
                                         sucMes && <p className='p-2 text-white'>{sucMes}</p>
                                     }
@@ -221,29 +221,6 @@ const Login = () => {
                         </label>
                     </>
                 }
-
-
-
-                {/* <label htmlFor="my-modal-4" className="modal cursor-pointer">
-                            <label className="modal-box relative" for="">
-                                <h3 className="text-lg font-bold">Forgot Password </h3>
-                                <p className="py-4">Enter your email id so we can send you the OTP to your register email</p>
-                                <form onSubmit={handleForgotPassword}>
-                                    <input type="email"
-                                        value={fmail}
-                                        onChange={(e) => { setFmail(e.target.value) }}
-                                        placeholder="Type here" className="input input-bordered input-info w-full max-w-xs" />
-                                    <button className="btn btn-outline ml-2" type='submit'>Send</button>
-                                    {
-                                        sucMes && <p className='p-2 text-white'>{sucMes}</p>
-                                    }
-                                </form>
-                            </label> */
-
-                    /* </label> */
-                }
-
-
             </div>
         </main >
     )

@@ -10,12 +10,12 @@ interface JwtPayload {
     exp: number
 }
 export default async function refreshToken(req: Request, res: Response, next: NextFunction) {
-    const refresh_token = req.cookies?.jwt
-    if (!refresh_token) return res.status(401).json({message:'token missing'})
+    const refresh_token = req.cookies?.__session_rsh
+    if (!refresh_token) return res.status(401).json({ message: 'token missing' })
     // find token in DB
     const foundUser = await _user.findOne({ refresh_token }).exec()
     // delete previous cookie //
-    res.clearCookie('jwt', {
+    res.clearCookie('__session_rsh', {
         httpOnly: true,
         sameSite: 'none',
         secure: true,
@@ -38,14 +38,15 @@ export default async function refreshToken(req: Request, res: Response, next: Ne
             foundUser.refresh_token = newRefreshToken
             foundUser.save()
             // create cookie with refresh token
-            res.cookie('jwt', newRefreshToken, {
+            res.cookie('__session_rsh', newRefreshToken, {
                 httpOnly: true,
                 maxAge: 24 * 60 * 60 * 1000,
-                // sameSite: 'none',
-                // secure: true
+                sameSite: 'none',
+                secure: true
             })
             // send new access token to client
             res.status(200).json({ accessToken })
+            next();
         })
     } catch (error) {
         console.log('error', error)

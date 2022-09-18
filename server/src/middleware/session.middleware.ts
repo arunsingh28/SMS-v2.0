@@ -10,7 +10,8 @@ declare module 'express-session' {
 
 export default function (app: Express) {
     app.use(session({
-        secret: 'sce',
+        name: 'connection_id',
+        secret: 'connectionid',
         proxy: true,
         resave: false,
         saveUninitialized: true,

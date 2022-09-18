@@ -18,7 +18,7 @@ const register = async (req: Request, res: Response) => {
     return res.json({ message: "Enter more then 6 char long password" })
   }
   else {
-    const refreshToken = await TOKEN.refreshToken(email);
+    const refreshToken = TOKEN.refreshToken(email);
     // hasing password
     const newUser = new _user({
       email,
@@ -27,11 +27,11 @@ const register = async (req: Request, res: Response) => {
       refresh_token: refreshToken
     })
     try {
-      const accesstoken = await TOKEN.getToken(email);
+      const accesstoken = TOKEN.getToken(email);
       // genrate refresh token
       await newUser.save();
       // send the accessToken with cookie
-      res.cookie('jwt', refreshToken, {
+      res.cookie('__session_rsh', refreshToken, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
         // sameSite: 'none',
@@ -92,17 +92,17 @@ const login = async (req: Request, res: Response) => {
         .json({ message: "Invalid credinitals" });
     } else {
       // genrate access token
-      const token = await TOKEN.getToken(email);
+      const token = TOKEN.getToken(email);
       // genrate refresh token
-      const refreshToken = await TOKEN.refreshToken(email);
+      const refreshToken = TOKEN.refreshToken(email);
       // update the refresh token in DB
       await _user.findOneAndUpdate({ email }, {
         $set: { refresh_token: refreshToken }
       })
       // send the accessToken with cookie
-      res.cookie('jwt', refreshToken, {
+      res.cookie('__session_rsh', refreshToken, {
         httpOnly: true,
-        // sameSite: 'none',
+        sameSite: 'none',
         secure: true,
         maxAge: 24 * 60 * 60 * 1000,
       })
@@ -132,7 +132,7 @@ const logout = async (req: Request, res: Response) => {
   // match refresh token in DB
   const foundUser = await _user.findOne({ refresh_token: cookie }).exec()
   if (!foundUser) {
-    res.clearCookie('jwt', {
+    res.clearCookie('__session_rsh', {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
@@ -141,14 +141,18 @@ const logout = async (req: Request, res: Response) => {
   }
   // delet refresh token in db
   foundUser.refresh_token = ''
-  foundUser.save()
-  // clear the refresh token  
-  res.clearCookie('jwt', {
-    httpOnly: true,
-    sameSite: 'none',
-    secure: true
+  foundUser.save().then(() => {
+    res.clearCookie('__session_rsh', {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: false
+    })
+    return res.sendStatus(204)
+  }).catch((err) => {
+    console.log(err)
+    return res.sendStatus(204)
   })
-  return res.sendStatus(204)
+  return res.sendStatus(500)
 };
 
 
@@ -217,7 +221,7 @@ const verifyForgotOTP = async (req: Request | RequestCustome, res: Response) => 
   // create token
   const forgotToken = TOKEN.ForgotToken(user._id);
   // create the cookie to save id of current user 
-  res.cookie('uft', forgotToken, {
+  res.cookie('_ftoken', forgotToken, {
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000,
     sameSite: 'none',
@@ -229,12 +233,12 @@ const verifyForgotOTP = async (req: Request | RequestCustome, res: Response) => 
 
 // forgot password for local emp
 const forgotPassword = async (req: Request, res: Response) => {
-  const uft = req.cookies?.uft
+  const uft = req.cookies?._ftoken
   const { password } = req.body;
   // check token 
   if (!uft) {
     // delte the old cookie
-    res.clearCookie('uft', {
+    res.clearCookie('_ftoken', {
       httpOnly: true,
       sameSite: 'none',
       secure: true
@@ -247,7 +251,7 @@ const forgotPassword = async (req: Request, res: Response) => {
       jwt.verify(uft, env.JWT_SECRET_KEY3, async (err: any, value: any) => {
         if (err) {
           // clear the old tempared cookie
-          res.clearCookie('uft', {
+          res.clearCookie('_ftoken', {
             httpOnly: true,
             sameSite: 'none',
             secure: true
@@ -271,7 +275,7 @@ const forgotPassword = async (req: Request, res: Response) => {
         );
         Mail(user?.email!, user?.otp, user?.name, env.MAIL_FORGOTPASSWORD_SUCCESS)
         // clear the previus cookie
-        res.clearCookie('uft', {
+        res.clearCookie('_ftoken', {
           httpOnly: true,
           sameSite: 'none',
           secure: true

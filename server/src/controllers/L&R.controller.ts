@@ -10,6 +10,7 @@ import { RequestCustome } from "../interface/request.interface";
 // register api for emp
 const register = async (req: Request, res: Response) => {
   const { email, password, name } = req.body;
+  console.log(req.body)
   if (!email || !password || !name) {
     return res
       .status(400)
@@ -41,7 +42,7 @@ const register = async (req: Request, res: Response) => {
       req.session.user = newUser
       // send mail to user
       const typeOfMail = env.MAIL_CREATE
-      Mail(newUser.email, newUser.otp, newUser.name, typeOfMail)
+      // Mail(newUser.email, newUser.otp, newUser.name, typeOfMail)
       // user created
       return res.status(201).json({
         message: "account created!",

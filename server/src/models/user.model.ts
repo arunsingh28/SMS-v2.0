@@ -14,6 +14,10 @@ export interface UserDocument extends mongoose.Document {
   otp: number;
   oldOtp: number;
   role: string;
+  address: string;
+  phone: number;
+  gender: string;
+  status: string;
   refresh_token: string;
   profile: {
     location: string | null;
@@ -37,6 +41,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "please provide a password"],
       minlength: 6,
     },
+    // new property
     firstNmae: {
       type: String,
       required: true,
@@ -64,6 +69,7 @@ const userSchema = new mongoose.Schema(
     dob: {
       type: String,
     },
+    // end
     role: {
       type: String,
       default: "emp",

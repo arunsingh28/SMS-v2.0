@@ -24,7 +24,8 @@ export default function (router: Express) {
 
   router.get("/api/logout", register_contollers.logout);
 
-  router.get("/api/verify", authorization);
+  // router.get("/api/verify", authorization);
+  router.get('/api/refreshToken', jwtRefreshToken)
 
   router.put("/api/forgot-password", register_contollers.forgotPassword);
 
@@ -38,7 +39,6 @@ export default function (router: Express) {
 
   router.post("/api/contact-us", contact.newQuery);
 
-  router.get('/api/refreshToken', jwtRefreshToken)
 
   router.post('/api/otp/forgot/:email', register_contollers.verifyForgotOTP)
 

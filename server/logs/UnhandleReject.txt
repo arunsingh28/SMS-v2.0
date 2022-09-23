@@ -62,3 +62,4 @@
 =======
 2022-09-15 16:49:38	 25643b5c-e3c9-43a2-9a31-b75baabd6fbc	 - Operation `users.findOne()` buffering timed out after 10000ms
 >>>>>>> 6f52e9240c035bcd4b03c97dc20fc5c8e5816a9b
+2022-09-23 02:35:26	 70bf209d-4a2a-44cb-9947-1e778ac93a79	 - user validation failed: gender: Path `gender` is required., address: Path `address` is required., phone: Path `phone` is required., lastName: Path `lastName` is required., firstName: Path `firstName` is required.

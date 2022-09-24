@@ -12,7 +12,7 @@ const sendOtpforResetPassword = async (req: Request, res: Response) => {
     const user = await _user.findById(id).exec()
     if (!user) return res.sendStatus(401) //forbiden
     const type = env.MAIL_RESETPASSWORD // code for reset password
-    Mail(user?.email, user?.otp, user?.name, type)
+    Mail(user?.email, user?.otp, user?.firstName, type)
     // change the otp in DB
     otpGenrator(user.email, res)
     // send the confirm message
@@ -39,7 +39,7 @@ const sendOtpForForgotPassword = async (req: Request, res: Response) => {
                 // send otp to email
                 const typeOfMail = env.MAIL_FORGOTPASSWORD
                 const img: any = user?.profile?.location
-                Mail(user.email, user.otp, user.name, typeOfMail, img)
+                Mail(user.email, user.otp, user.firstName, typeOfMail, img)
                 // change the otp into db
                 otpGenrator(email, res)
                 return res.status(200).json({ message: 'OTP send to ' + email, code: res.statusCode })

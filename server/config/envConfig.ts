@@ -5,7 +5,7 @@ const configEnv = {
 
 
     JWT_EXPIRE_TIME: "1m",
-    JWT_REFRESH_EXPIRE_TIME: "5m",
+    JWT_REFRESH_EXPIRE_TIME: "10m",
     JWT_FORGOT_PASSWORD_EXPIRE_TIME: "2m",
 
 

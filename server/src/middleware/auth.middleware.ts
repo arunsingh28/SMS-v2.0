@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import _user from "../models/user.model";
+import _user, { UserDocument } from "../models/user.model";
 import { Response, Request, NextFunction } from "express";
 import env from '../../config/envConfig'
 
@@ -20,16 +20,17 @@ const authorization = async (
   ) {
     token = req.headers.authorization.split(" ")[1];
   }
+  //toke not found 
   if (!token) {
-    return res.status(404).json({
-      message: "not authorize to access content",
+    return res.status(401).json({
+      message: "Token not found",
       code: res.statusCode,
       type: "error",
     });
   }
   try {
     const decoded = jwt.verify(token, env.JWT_SECRET_KEY1);
-    const user: any = await _user.findOne({ email: (<any>decoded).id });
+    const user: UserDocument | null = await _user.findOne({ email: (<any>decoded).id }).exec()
     if (!user) {
       return res.status(203).json({
         message: "No user found",
@@ -42,8 +43,9 @@ const authorization = async (
       next();
     }
   } catch (error) {
+    // expire token
     return res.status(401).json({
-      message: "Not authorize to access this route ",
+      message: "Unauthorized",
       error: (error as JwtError).message,
       code: res.statusCode,
     });

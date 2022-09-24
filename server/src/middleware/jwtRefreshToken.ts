@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import _user from '../models/user.model'
+import _user, { UserDocument } from '../models/user.model'
 import { Response, Request, NextFunction } from 'express'
 import env from '../../config/envConfig'
 
@@ -11,19 +11,19 @@ interface JwtPayload {
 }
 export default async function refreshToken(req: Request, res: Response, next: NextFunction) {
     const refresh_token = req.cookies?.__session_rsh
+    console.log(refresh_token)
+    console.log(req.cookies)
     if (!refresh_token) return res.status(401).json({ message: 'token missing' })
     // find token in DB
-    const foundUser = await _user.findOne({ refresh_token }).exec()
-    // delete previous cookie //
-    res.clearCookie('__session_rsh', {
-        httpOnly: true,
-        sameSite: 'none',
-        secure: true,
-    })
-    if (!foundUser) return res.sendStatus(403)  //Forbidden
+    // #### PROBLEM IS HERE REFRESH_TOKEN IS NOT MATCHING
+    const foundUser: UserDocument | any = await _user.findOne({ refresh_token }).exec()
+    console.log(foundUser)
+    // if (!foundUser) return res.sendStatus(403)  //Forbidden
     // verify token
+    // else {
     try {
         jwt.verify(refresh_token, env.JWT_SECRET_KEY2, (err: any, decoded: JwtPayload | any) => {
+            console.log(err || decoded)
             // match token in DB
             if (err || foundUser.email !== decoded.id) return res.sendStatus(403) // Forbiden
             // create new access token
@@ -46,10 +46,17 @@ export default async function refreshToken(req: Request, res: Response, next: Ne
             })
             // send new access token to client
             res.status(200).json({ accessToken })
-            next();
         })
-    } catch (error) {
+    }
+    catch (error) {
+        // delete previous cookie //
+        res.clearCookie('__session_rsh', {
+            httpOnly: true,
+            sameSite: 'none',
+            secure: true,
+        })
         console.log('error', error)
         return res.sendStatus(403) //// forbidden
     }
+    // }
 }

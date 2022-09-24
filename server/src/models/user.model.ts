@@ -9,10 +9,25 @@ export interface UserDocument extends mongoose.Document {
   password: string;
   createdAt: Date;
   updatedAt: Date;
-  name: string;
+  firstName: string;
+  lastName: string;
   otp: number;
   oldOtp: number;
   role: string;
+  address: string;
+  phone: number;
+  gender: string;
+  status: string;
+  institute: [{
+    name: string;
+    when: string;
+    till: string;
+  }];
+  education: [{
+    name: string;
+    when: string;
+    till: string;
+  }];
   refresh_token: string;
   profile: {
     location: string | null;
@@ -36,10 +51,61 @@ const userSchema = new mongoose.Schema(
       required: [true, "please provide a password"],
       minlength: 6,
     },
-    name: {
+    // new property
+    firstName: {
       type: String,
       required: true,
     },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: Number,
+      required: true
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    gender: {
+      type: String,
+      required: true
+    },
+    status: {
+      type: String,
+      default: 'Active'
+    },
+    dob: {
+      type: String,
+    },
+    institute: {
+      type: String
+    },
+    education: {
+      type: [{
+        instituteName: String,
+        when: String,
+        till: String,
+      }],
+      default: [{
+        instituteName: 'No Data found'
+      }]
+    },
+
+    certificate: {
+      type: [
+        {
+          name: String,
+          when: String,
+          till: String
+        }
+      ],
+      default: [{
+        name: "You don't have any certificates."
+      }]
+    },
+    // end
     role: {
       type: String,
       default: "emp",
@@ -66,7 +132,7 @@ userSchema.pre("save", async function (next: mongoose.HookNextFunction) {
   const user = this as UserDocument;
   if (!user.isModified("password")) return next();
   const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hashSync(user.password, salt);
+  const hash = bcrypt.hashSync(user.password, salt);
   user.password = hash;
   // set or asign otp to user
   user.otp = Math.floor(100000 + Math.random() * 900000);

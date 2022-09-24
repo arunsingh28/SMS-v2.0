@@ -9,23 +9,26 @@ import { RequestCustome } from "../interface/request.interface";
 
 // register api for emp
 const register = async (req: Request, res: Response) => {
-  const { email, password, name } = req.body;
-  if (!email || !password || !name) {
+  const { email, password, firstName, lastName } = req.body;
+  console.log(req.body)
+  if (!email || !password || !firstName || !lastName) {
     return res
       .status(400)
-      .json({ message: "please fill all detail", code: res.statusCode });
+      .json({ message: "Please fill all detail", code: res.statusCode });
   } else if (password.length < 6) {
     return res.json({ message: "Enter more then 6 char long password" })
   }
   else {
     const refreshToken = TOKEN.refreshToken(email);
-    // hasing password
+    // hasing password and storing
     const newUser = new _user({
       email,
       password,
-      name,
+      firstName,
+      lastName,
       refresh_token: refreshToken
     })
+
     try {
       const accesstoken = TOKEN.getToken(email);
       // genrate refresh token
@@ -41,13 +44,13 @@ const register = async (req: Request, res: Response) => {
       req.session.user = newUser
       // send mail to user
       const typeOfMail = env.MAIL_CREATE
-      Mail(newUser.email, newUser.otp, newUser.name, typeOfMail)
+      // Mail(newUser.email, newUser.otp, newUser.name, typeOfMail)
       // user created
       return res.status(201).json({
         message: "account created!",
         accesstoken,
         user: {
-          name: newUser.name,
+          name: newUser.firstName,
           email: newUser.email,
           role: newUser.role
         },
@@ -113,7 +116,7 @@ const login = async (req: Request, res: Response) => {
       return res.status(200).json({
         message: "logged in",
         data: {
-          name: user.name,
+          name: user.firstName,
           email: user.email,
           role: user.role,
           img: user.profile.location
@@ -197,7 +200,7 @@ const resetPassword = async (req: Request, res: Response) => {
         // change the otp
         otpGenrator(email!, res)
         // send success mail
-        Mail(email!, otp, user?.name, env.MAIL_SUCCESS)
+        Mail(email!, otp, user?.firstName, env.MAIL_SUCCESS)
         return res.status(200).json({ message: 'Password change succssfully' })
       }
       // otp not match
@@ -274,7 +277,7 @@ const forgotPassword = async (req: Request, res: Response) => {
             }
           }
         );
-        Mail(user?.email!, user?.otp, user?.name, env.MAIL_FORGOTPASSWORD_SUCCESS)
+        Mail(user?.email!, user?.otp, user?.firstName, env.MAIL_FORGOTPASSWORD_SUCCESS)
         // clear the previus cookie
         res.clearCookie('_ftoken', {
           httpOnly: true,

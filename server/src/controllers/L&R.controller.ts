@@ -9,9 +9,9 @@ import { RequestCustome } from "../interface/request.interface";
 
 // register api for emp
 const register = async (req: Request, res: Response) => {
-  const { email, password, firstName, lastName } = req.body;
+  const { email, password, firstName, lastName, address, city, collage, gender, phone, term, zip, dob, countryCode } = req.body;
   console.log(req.body)
-  if (!email || !password || !firstName || !lastName) {
+  if (!email || !password || !firstName || !lastName || !address || !city || !collage || !gender || !phone || !term || !zip || !dob || !countryCode) {
     return res
       .status(400)
       .json({ message: "Please fill all detail", code: res.statusCode });
@@ -26,6 +26,13 @@ const register = async (req: Request, res: Response) => {
       password,
       firstName,
       lastName,
+      phone,
+      address,
+      city,
+      collage,
+      gender,
+      dob,
+      countryCode,
       refresh_token: refreshToken
     })
 
@@ -37,14 +44,14 @@ const register = async (req: Request, res: Response) => {
       res.cookie('__session_rsh', refreshToken, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
-        // sameSite: 'none',
-        // secure: true
+        sameSite: 'none',
+        secure: true
       })
       // start session
       req.session.user = newUser
       // send mail to user
       const typeOfMail = env.MAIL_CREATE
-      // Mail(newUser.email, newUser.otp, newUser.name, typeOfMail)
+      Mail(newUser.email, newUser.otp, newUser.firstName, typeOfMail)
       // user created
       return res.status(201).json({
         message: "account created!",
@@ -116,9 +123,22 @@ const login = async (req: Request, res: Response) => {
       return res.status(200).json({
         message: "logged in",
         data: {
-          name: user.firstName,
+          firstName: user.firstName,
+          lastName: user.lastName,
           email: user.email,
           role: user.role,
+          phone: user.phone,
+          address: user.address,
+          city: user.city,
+          collage: user.collage,
+          status: user.status,
+          gender: user.gender,
+          countryCode: user.countryCode,
+          dob: user.dob,
+          zip: user.zip,
+          isVerified: user.isVerified,
+          certificate: user.certificate[0],
+          education: user.education[0],
           img: user.profile.location
         },
         accessToken: token,
@@ -292,6 +312,24 @@ const forgotPassword = async (req: Request, res: Response) => {
   }
 };
 
+const verifyAccount = async (req: Request, res: Response) => {
+  const { otp, email } = req.body
+  if (!otp) return res.status(401).json({ message: 'please provide the otp' })
+  if (!email) return res.status(401).json({ message: 'please provide the email' })
+  const user = await _user.findOne({ email }).exec()
+  if (!user) return res.status(401).json({ message: 'something went wrong' })
+  if (otp != user.oldOtp) return res.status(406).json({ message: 'incorrect OTP' })
+  // update the user
+  await _user.findOneAndUpdate({ email },
+    {
+      $set: {
+        isVerified: true
+      }
+    }
+  );
+  return res.status(200).json({ message: 'Account verified', code: res.statusCode })
+}
+
 
 // delet account parament
 const delteAccount = async (req: Request, res: Response) => {
@@ -304,6 +342,7 @@ const module = {
   logout,
   resetPassword,
   forgotPassword,
+  verifyAccount,
   verifyForgotOTP
 };
 export default module;

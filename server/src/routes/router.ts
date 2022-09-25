@@ -18,16 +18,15 @@ export default function (router: Express) {
   // profile image update
   router.put('/api/v1/updateProfile', authorization, awsFile.uploadObject.single('pro_img'), fileControllers.updateProfileImage)
 
-  router.post("/api/login", register_contollers.login);
+  router.post("/api/v1/login", register_contollers.login);
 
-  router.post("/api/register", register_contollers.register);
+  router.post("/api/v1/register", register_contollers.register);
 
-  router.get("/api/logout", register_contollers.logout);
+  router.get("/api/v1/logout", register_contollers.logout);
 
-  // router.get("/api/verify", authorization);
-  router.get('/api/refreshToken', jwtRefreshToken)
+  router.get('/api/v1/refreshToken', jwtRefreshToken)
 
-  router.put("/api/forgot-password", register_contollers.forgotPassword);
+  router.put("/api/v1/forgot-password", register_contollers.forgotPassword);
 
   router.put(
     "/api/reset-password",
@@ -35,11 +34,12 @@ export default function (router: Express) {
     register_contollers.resetPassword
   );
 
-  router.post("/api/student/detail", authorization, student.Detail);
+  router.post("/api/v1/student/detail", authorization, student.Detail);
 
-  router.post("/api/contact-us", contact.newQuery);
+  router.post("/api/v1/contact-us", contact.newQuery);
 
 
-  router.post('/api/otp/forgot/:email', register_contollers.verifyForgotOTP)
+  // verify Account with OTP
+  router.post('/api/v1/verify/account', authorization, register_contollers.verifyAccount)
 
 }

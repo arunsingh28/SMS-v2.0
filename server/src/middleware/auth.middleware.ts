@@ -29,6 +29,7 @@ const authorization = async (
     });
   }
   try {
+    console.table(token);
     const decoded = jwt.verify(token, env.JWT_SECRET_KEY1);
     const user: UserDocument | null = await _user.findOne({ email: (<any>decoded).id }).exec()
     if (!user) {

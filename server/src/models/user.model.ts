@@ -17,12 +17,14 @@ export interface UserDocument extends mongoose.Document {
   address: string;
   phone: number;
   gender: string;
-  status: string;
-  institute: [{
+  status: boolean;
+  isVerified: boolean;
+  certificate: [{
     name: string;
     when: string;
     till: string;
   }];
+  countryCode: number;
   education: [{
     name: string;
     when: string;
@@ -33,6 +35,10 @@ export interface UserDocument extends mongoose.Document {
     location: string | null;
     key: string | null;
   };
+  collage: string;
+  city: string;
+  dob: string;
+  zip: string;
 }
 
 const userSchema = new mongoose.Schema(
@@ -68,19 +74,32 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    zip: {
+      type: String,
+      default: 'No data found'
+    },
+    countryCode: {
+      type: Number,
+      default: '91'
+    },
     gender: {
       type: String,
       required: true
     },
+    // deactive || active
     status: {
-      type: String,
-      default: 'Active'
+      type: Boolean,
+      default: false
     },
     dob: {
       type: String,
     },
     institute: {
       type: String
+    },
+    isVerified: {
+      type: Boolean,
+      default: false
     },
     education: {
       type: [{
@@ -92,7 +111,14 @@ const userSchema = new mongoose.Schema(
         instituteName: 'No Data found'
       }]
     },
-
+    city: {
+      type: String,
+      required: true
+    },
+    collage: {
+      type: String,
+      default: 'No Data found'
+    },
     certificate: {
       type: [
         {

@@ -9,10 +9,6 @@ export default function (router: Express) {
     router.post("/api/v1/otp/forgotpassword", otpController.sendOtpForForgotPassword);
     router.post("/api/v1/m/message", otpController.sendMessage)
 
-    router.post('/api/otp/forgot/:email', register_contollers.verifyForgotOTP)
-
-
-
-    // verify otp
+    router.post("/api/v1/otp/forgot", register_contollers.verifyForgotOTP)
 
 }

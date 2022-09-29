@@ -27,7 +27,8 @@ const sendOtpForForgotPassword = async (req: Request, res: Response) => {
             .status(401)
             .json({ message: "please enter your email", code: res.statusCode });
     } else {
-        const user = await _user.findOne({ email }).exec()
+        const lowerCaseEmail = email.toLowerCase();
+        const user = await _user.findOne({ email: lowerCaseEmail }).exec()
         // if user not found in DB
         if (!user) {
             return res.status(401).json({

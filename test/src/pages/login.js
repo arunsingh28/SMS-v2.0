@@ -179,7 +179,7 @@ const Login = () => {
                                     </div>
                                     <button className="btn mt-2 btn-outline ml-2 mt-2" type='submit'>Save</button>
                                     {
-                                        sucMes && <p className='p-2 text-white'>{sucMes}</p>
+                                        sucMes && <p className='p-2'>{sucMes}</p>
                                     }
                                 </form>
                             </label>
@@ -196,7 +196,7 @@ const Login = () => {
                                         placeholder="Type here" className="input input-bordered input-info w-full max-w-xs" />
                                     <button className="btn btn-outline ml-2 mt-2" type='submit'>Verify</button>
                                     {
-                                        sucMes && <p className='p-2 text-white'>{sucMes}</p>
+                                        sucMes && <p className='p-2'>{sucMes}</p>
                                     }
                                 </form>
                             </label>
@@ -214,7 +214,7 @@ const Login = () => {
                                         placeholder="Type here" className="input input-bordered input-info w-full max-w-xs" />
                                     <button className="btn btn-outline ml-2 mt-2" type='submit'>Send</button>
                                     {
-                                        sucMes && <p className='p-2 text-white'>{sucMes}</p>
+                                        sucMes && <p className='p-2'>{sucMes}</p>
                                     }
                                 </form>
                             </label>

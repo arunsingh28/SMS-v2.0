@@ -31,7 +31,7 @@ const sendOtpForForgotPassword = async (req: Request, res: Response) => {
         // if user not found in DB
         if (!user) {
             return res.status(401).json({
-                message: "no account found with this email",
+                message: `We couldn't find an account associated with ${email} Please try with an alternate email or phone number.`,
                 code: res.statusCode,
             });
         } else {

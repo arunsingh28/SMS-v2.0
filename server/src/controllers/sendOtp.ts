@@ -43,7 +43,7 @@ const sendOtpForForgotPassword = async (req: Request, res: Response) => {
                 Mail(user.email, user.otp, user.firstName, typeOfMail, img)
                 // change the otp into db
                 otpGenrator(email, res)
-                return res.status(200).json({ message: 'OTP send to ' + email, code: res.statusCode })
+                return res.status(200).json({ message: "Thanks! If there's an account associated with this email, we'll send the password reset instructions immediately" + email, code: res.statusCode })
             } catch (error) {
                 // catch server error
                 return res.status(500).json({

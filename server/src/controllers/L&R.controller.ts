@@ -151,7 +151,7 @@ const login = async (req: Request, res: Response) => {
 // logout api 
 const logout = async (req: Request, res: Response) => {
   // on client delte the access token
-  const cookie = req.cookies?.jwt
+  const cookie = req.cookies?.__session_rsh
   if (!cookie) return res.sendStatus(204) //no content
   // match refresh token in DB
   const foundUser = await _user.findOne({ refresh_token: cookie }).exec()
@@ -164,19 +164,14 @@ const logout = async (req: Request, res: Response) => {
     return res.sendStatus(204)
   }
   // delet refresh token in db
-  foundUser.refresh_token = ''
-  foundUser.save().then(() => {
-    res.clearCookie('__session_rsh', {
-      httpOnly: true,
-      sameSite: 'none',
-      secure: false
-    })
-    return res.sendStatus(204)
-  }).catch((err) => {
-    console.log(err)
-    return res.sendStatus(204)
+  foundUser.refresh_token = '';
+  foundUser.save();
+  res.clearCookie('__session_rsh', {
+    httpOnly: true,
+    sameSite: 'none',
+    secure: false
   })
-  return res.sendStatus(500)
+  return res.sendStatus(204)
 };
 
 

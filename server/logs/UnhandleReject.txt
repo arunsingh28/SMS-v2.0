@@ -79,3 +79,4 @@
 2022-09-24 23:38:40	 0097c813-cbc7-4917-8b86-3869e9d45aaa	 - user validation failed: gender: Path `gender` is required., address: Path `address` is required., phone: Path `phone` is required., lastName: Path `lastName` is required., firstName: Path `firstName` is required.
 2022-09-24 23:38:54	 dcd05890-c02e-4aa7-ab14-2f054cff0c73	 - user validation failed: gender: Path `gender` is required., address: Path `address` is required., phone: Path `phone` is required., lastName: Path `lastName` is required., firstName: Path `firstName` is required.
 2022-09-29 23:08:27	 0e2915a0-9ede-43fc-87d8-ebe1425f963e	 - Cast to string failed for value "{ email: 'arunsingh28aug.as@gmail.com' }" (type Object) at path "email" for model "user"
+2022-10-01 17:31:58	 614d6b62-5b8e-47e1-ba90-3354a045726a	 - Cannot set headers after they are sent to the client

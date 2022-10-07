@@ -237,6 +237,7 @@ const resetPassword = async (req: Request, res: Response) => {
 const verifyForgotOTP = async (req: Request | RequestCustome, res: Response) => {
   const email = req.params.email
   const { otp } = req.body;
+  console.log(req.params)
   if (!email || !otp) return res.status(401).json({ message: 'please provide the information' })
   const user = await _user.findOne({ email }).exec()
   // if hacker do something with url

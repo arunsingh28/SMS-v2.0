@@ -1,9 +1,9 @@
 const autocannon = require('autocannon')
-const userData = require('./Data/user.json')
+const userData = require('./Data/newUser.json')
 
 function startBench() {
-    const url = "http://sms-api-1.herokuapp.com"
-    const numConnection = 2000
+    const url = "http://localhost:8080"
+    const numConnection = 1
     // const maxConnectionRequests = 10
 
     let requestNumber = 0
@@ -11,7 +11,7 @@ function startBench() {
     const instance = autocannon({
         url,
         connections: numConnection,
-        duration: 50,
+        duration: 1,
         // maxConnectionRequests,
         headers: {
             'content-type': 'application/json'

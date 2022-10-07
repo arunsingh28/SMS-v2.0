@@ -28,7 +28,7 @@ const addProfileImage = async (req: Request, res: Response) => {
         user.save().then(() => {
             return res.status(200).json({
                 message: "image uploaded",
-                images: file.location,
+                data: file.location,
                 code: res.statusCode
             });
         }).catch(err => {
@@ -76,9 +76,7 @@ const updateProfileImage = async (req: Request, res: Response) => {
             user.save().then(() => {
                 return res.status(200).json({
                     message: "image updated",
-                    data: {
-                        image: file.location
-                    },
+                    data: file.location,
                     code: res.statusCode
                 });
             }).catch(err => {

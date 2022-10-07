@@ -29,6 +29,13 @@ const configEnv = {
 
     MAILGUN_API_KEY: "",
     MAILGUN_DOMAIN: "",
+
+
+
+    // twilio api
+    T_ACCOUNTSID: "ACf0cabe3715c461b59ac9dd8e8697c341",
+    T_AUTH_TOKEN: "68dfd759fc44ea509d13d1c4444a7352"
+
 }
 
 export default configEnv

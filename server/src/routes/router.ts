@@ -5,27 +5,20 @@ import { Express } from "express";
 import authorization from "../middleware/auth.middleware";
 import jwtRefreshToken from '../middleware/jwtRefreshToken'
 import fileControllers from '../controllers/file.controller'
+import notification from "../controllers/notification";
 import awsFile from '../utils/aws'
 
 
 // base routes
 export default function (router: Express) {
   // profile image uplaod
-  router.post('/api/v1/addProfile',
-    authorization,
-    awsFile.uploadObject.single('pro_img'),
-    fileControllers.addProfileImage)
+  router.post('/api/v1/addProfile', authorization, awsFile.uploadObject.single('pro_img'), fileControllers.addProfileImage)
 
   // profile image delete
-  router.delete('/api/v1/removeProfile',
-    authorization,
-    fileControllers.deleteProfileImage)
+  router.delete('/api/v1/removeProfile', authorization, fileControllers.deleteProfileImage)
 
   // profile image update
-  router.put('/api/v1/updateProfile',
-    authorization,
-    awsFile.uploadObject.single('pro_img'),
-    fileControllers.updateProfileImage)
+  router.put('/api/v1/updateProfile', authorization, awsFile.uploadObject.single('pro_img'), fileControllers.updateProfileImage)
 
   // login route
   router.post("/api/v1/login", register_contollers.login);
@@ -43,22 +36,22 @@ export default function (router: Express) {
   router.put("/api/v1/forgot-password", register_contollers.forgotPassword);
 
   // password reset
-  router.put(
-    "/api/reset-password",
-    authorization,
-    register_contollers.resetPassword
-  );
+  router.put("/api/reset-password", authorization, register_contollers.resetPassword);
   // student details
-  router.post("/api/v1/student/detail",
-    authorization,
-    student.Detail);
+  router.post("/api/v1/student/detail", authorization, student.Detail);
 
   // contact us
   router.post("/api/v1/contact-us", contact.newQuery);
 
   // verify Account with OTP
-  router.post('/api/v1/verify/account',
-    authorization,
-    register_contollers.verifyAccount)
+  router.post('/api/v1/verify/account', authorization, register_contollers.verifyAccount)
 
+  /**
+   * NOTIFICATION ROUTER
+   * 
+   * send all notification and register new notification
+   */
+
+  // get all notication
+  router.get('/api/v1/get-all-notication', authorization, notification.sendAllNotification)
 }

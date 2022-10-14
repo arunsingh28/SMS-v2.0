@@ -5,6 +5,7 @@ export interface Inotification {
     time: Date
     type: string | null
     sendTo: UserDocument
+    notificationMessage: string
 }
 
 const notificationSchema = new mongoose.Schema({
@@ -18,12 +19,11 @@ const notificationSchema = new mongoose.Schema({
     type: {
         type: String,
     },
-    sendTo: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "user"
-    }]
+    sendTo: {
+        type: String,
+    }
 })
 
-const notification = mongoose.model('notification', notificationSchema)
+const notification = mongoose.model<Inotification>('notification', notificationSchema)
 
 export default notification

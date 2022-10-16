@@ -3,6 +3,7 @@ import Mail from '../utils/nodeMailer'
 import otpGenrator from "../utils/otpGenrator";
 import _user from "../models/user.model";
 import env from '../../config/envConfig'
+import { registerNewNotification } from './notification'
 
 // send the reset password otp to user's email
 const sendOtpforResetPassword = async (req: Request, res: Response) => {
@@ -13,6 +14,8 @@ const sendOtpforResetPassword = async (req: Request, res: Response) => {
     if (!user) return res.sendStatus(401) //forbiden
     const type = env.MAIL_RESETPASSWORD // code for reset password
     Mail(user?.email, user?.otp, user?.firstName, type)
+    // log notification
+    registerNewNotification('Reset password otp send to your email successfully', 'success', user?.email)
     // change the otp in DB
     otpGenrator(user.email, res)
     // send the confirm message
@@ -41,6 +44,8 @@ const sendOtpForForgotPassword = async (req: Request, res: Response) => {
                 const typeOfMail = env.MAIL_FORGOTPASSWORD
                 const img: any = user?.profile?.location
                 Mail(user.email, user.otp, user.firstName, typeOfMail, img)
+                // log notification
+                registerNewNotification('Forgot password otp send to your email successfully', 'success', email)
                 // change the otp into db
                 otpGenrator(email, res)
                 return res.status(200).json({ message: "Thanks! If there's an account associated with this email, we'll send the password reset instructions immediately" + email, code: res.statusCode })
@@ -63,6 +68,8 @@ const sendOtpForAccountVerification = async (req: Request, res: Response) => {
     const type = env.MAIL_ACCOUNTVERIFICATION // code for reset password
     const verifyLink = `http://localhost:3000/api/v1/verifty${user.refresh_token}`
     Mail(user?.email, user?.otp, user?.firstName + '' + user?.lastName, type, verifyLink)
+    //create account verification notification 
+    registerNewNotification('Account verification mail send successfully to your mail', 'success', user?.email)
     // change the otp in DB
     otpGenrator(user.email, res)
     // send the confirm message

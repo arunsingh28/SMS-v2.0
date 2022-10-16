@@ -4,6 +4,7 @@ import { Express } from "express";
 import authorization from "../middleware/auth.middleware";
 import jwtRefreshToken from '../middleware/jwtRefreshToken'
 import fileControllers from '../controllers/file.controller'
+import notification from "../controllers/notification";
 import awsFile from '../utils/aws'
 import authContoller from "../controllers/auth.contoller";
 import profileController from "../controllers/profile";
@@ -17,9 +18,7 @@ export default function (router: Express) {
     fileControllers.addProfileImage)
 
   // profile image delete
-  router.delete('/api/v1/removeProfile',
-    authorization,
-    fileControllers.deleteProfileImage)
+  router.delete('/api/v1/removeProfile', authorization, fileControllers.deleteProfileImage)
 
   // login route
   router.post("/api/v1/login", authContoller.login);
@@ -37,20 +36,12 @@ export default function (router: Express) {
   router.put("/api/v1/forgot-password", register_contollers.forgotPassword);
 
   // password reset
-  router.put(
-    "/api/reset-password",
-    authorization,
-    register_contollers.resetPassword
-  );
+  router.put("/api/reset-password", authorization, register_contollers.resetPassword);
   // student details
-  router.post("/api/v1/student/detail",
-    authorization,
-    student.Detail);
+  router.post("/api/v1/student/detail", authorization, student.Detail);
 
   // verify Account with OTP
-  router.post('/api/v1/verify/account',
-    authorization,
-    register_contollers.verifyAccount)
+  router.post('/api/v1/verify/account', authorization, register_contollers.verifyAccount)
 
   router.get('/api/v1/user-details', authorization, profileController.Detail)
 

@@ -1,17 +1,17 @@
 import register_contollers from "../controllers/L&R.controller";
-import contact from "../controllers/contact-us";
 import student from "../controllers/student";
 import { Express } from "express";
 import authorization from "../middleware/auth.middleware";
 import jwtRefreshToken from '../middleware/jwtRefreshToken'
 import fileControllers from '../controllers/file.controller'
 import awsFile from '../utils/aws'
-
+import authContoller from "../controllers/auth.contoller";
+import profileController from "../controllers/profile";
 
 // base routes
 export default function (router: Express) {
-  // profile image uplaod
-  router.post('/api/v1/addProfile',
+  // profile image uplaod update
+  router.put('/api/v1/updateProfile',
     authorization,
     awsFile.uploadObject.single('pro_img'),
     fileControllers.addProfileImage)
@@ -21,20 +21,14 @@ export default function (router: Express) {
     authorization,
     fileControllers.deleteProfileImage)
 
-  // profile image update
-  router.put('/api/v1/updateProfile',
-    authorization,
-    awsFile.uploadObject.single('pro_img'),
-    fileControllers.updateProfileImage)
-
   // login route
-  router.post("/api/v1/login", register_contollers.login);
+  router.post("/api/v1/login", authContoller.login);
+  // logout rotue
+  router.get("/api/v1/logout", authContoller.logout);
 
   // register route
   router.post("/api/v1/register", register_contollers.register);
 
-  // logout rotue
-  router.get("/api/v1/logout", register_contollers.logout);
 
   // refresh token 
   router.get('/api/v1/refreshToken', jwtRefreshToken)
@@ -53,12 +47,11 @@ export default function (router: Express) {
     authorization,
     student.Detail);
 
-  // contact us
-  router.post("/api/v1/contact-us", contact.newQuery);
-
   // verify Account with OTP
   router.post('/api/v1/verify/account',
     authorization,
     register_contollers.verifyAccount)
+
+  router.get('/api/v1/user-details', authorization, profileController.Detail)
 
 }

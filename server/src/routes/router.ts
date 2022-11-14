@@ -7,7 +7,8 @@ import jwtRefreshToken from '../middleware/jwtRefreshToken'
 import fileControllers from '../controllers/file.controller'
 import notification from "../controllers/notification";
 import awsFile from '../utils/aws'
-
+import _user from '../models/user.model'
+import otpVerifyer from '../controllers/sendOtp'
 
 // base routes
 export default function (router: Express) {
@@ -45,6 +46,8 @@ export default function (router: Express) {
 
   // verify Account with OTP
   router.post('/api/v1/verify/account', authorization, register_contollers.verifyAccount)
+
+  router.put("/api/v1/otp/forgot", otpVerifyer.verifyOtp)
 
   /**
    * NOTIFICATION ROUTER

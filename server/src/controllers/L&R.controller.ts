@@ -5,7 +5,6 @@ import otpGenrator from "../utils/otpGenrator";
 import Mail from '../utils/nodeMailer'
 import jwt from "jsonwebtoken";
 import env from '../../config/envConfig'
-import { RequestCustome } from "../interface/request.interface";
 
 // register api for emp
 const register = async (req: Request, res: Response) => {
@@ -229,10 +228,10 @@ const resetPassword = async (req: Request, res: Response) => {
 
 
 // forgot password otp verify controller
-const verifyForgotOTP = async (req: Request | RequestCustome, res: Response) => {
+const verifyForgotOTP = async (req: Request, res: Response) => {
   const email: any = req.query.email
   const { otp } = req.body;
-  console.log(req.params)
+  console.log('Email:', req.params)
   if (!email || !otp) return res.status(401).json({ message: 'please provide the information' })
   const user = await _user.findOne({ email }).exec()
   // if hacker do something with url

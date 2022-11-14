@@ -3,20 +3,21 @@ interface ErrorResponse {
 }
 import { Express, Request, Response } from 'express'
 import Logger from '../middleware/logEvents.middleware'
+import env from '../../config/envConfig'
+import Mail from './nodeMailer'
 
 const errorHandler = (server: any, app: Express) => {
-    app.use('*', (req: Request, res: Response) => {
-
-    })
     process.on("unhandledRejection", (err: ErrorResponse) => {
         Logger.logEvents(err.message, 'UnhandleReject.txt')
         console.log(`unhanle Rejection fail: ${err}`);
+        Mail('arunsingh28aug.as@gmail.com', 1001, err.message, env.MAIL_4_LOG_ADMIN, '', '',)
         app.use('*', (req: Request, res: Response) => {
             res.status(500).json({ message: "Maintenance work going on" })
         })
         process.on('uncaughtException', (err: ErrorResponse) => {
             Logger.logEvents(err.message, 'uncaughtException.txt')
             console.log(`Exception Error: ${err}`);
+            Mail('arunsingh28aug.as@gmail.com', 1001, err.message, env.MAIL_4_LOG_ADMIN, '', '',)
             app.use('*', (req: Request, res: Response) => {
                 res.status(500).json({ message: "Maintenance work going on" })
             })

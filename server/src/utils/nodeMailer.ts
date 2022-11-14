@@ -88,6 +88,17 @@ async function sendMail(to: string, otp?: number, name?: string, type?: number, 
       if (err) console.log(err)
       else console.log("email send:", info.response)
     })
+  } else if (type == env.MAIL_4_LOG_ADMIN) {
+    transporter.sendMail({
+      from: env.MAIL_DOMAIN,
+      sender: 'No-reply.skillvoid',
+      to: to,
+      subject: "Error logs",
+      html: `<p>${name}</p>`
+    }, (err, info) => {
+      if (err) console.log(err)
+      else console.log("email send:", info.response)
+    })
   }
   else {
     transporter.sendMail({ //forgot password

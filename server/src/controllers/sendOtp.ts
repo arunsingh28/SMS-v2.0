@@ -4,6 +4,7 @@ import otpGenrator from "../utils/otpGenrator";
 import _user from "../models/user.model";
 import env from '../../config/envConfig'
 import { registerNewNotification } from './notification'
+import TOKEN from "../utils/token";
 
 // send the reset password otp to user's email
 const sendOtpforResetPassword = async (req: Request, res: Response) => {
@@ -88,4 +89,25 @@ const sendMessage = async (req: Request, res: Response) => {
 }
 
 
-export default { sendOtpForForgotPassword, sendOtpforResetPassword, sendMessage, sendOtpForAccountVerification }
+const verifyOtp = async (req: Request, res: Response) => {
+    const email: any = req.query.email
+    const { otp } = req.body;
+    console.log('CRED:', otp, email)
+    if (!email || !otp) return res.status(401).json({ message: 'please provide the information' })
+    const user = await _user.findOne({ email }).exec()
+    // if hacker do something with url
+    if (!user) return res.status(401).json({ message: 'something went wrong' })
+    if (otp != user.oldOtp) return res.status(406).json({ message: 'incorrect OTP' })
+    // create token
+    const forgotToken = TOKEN.ForgotToken(user._id);
+    // create the cookie to save id of current user 
+    res.cookie('_ftoken', forgotToken, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
+        sameSite: 'none',
+        secure: true
+    })
+    return res.status(200).json({ code: res.statusCode })
+}
+
+export default { sendOtpForForgotPassword, verifyOtp, sendOtpforResetPassword, sendMessage, sendOtpForAccountVerification }

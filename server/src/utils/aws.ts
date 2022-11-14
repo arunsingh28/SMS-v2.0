@@ -13,10 +13,7 @@ AWS.config.update({
     apiVersion: '2022-09-14'
 })
 
-
 const s3 = new AWS.S3()
-
-
 
 const uploadObject = multer({
     storage: multerS3({
@@ -27,7 +24,6 @@ const uploadObject = multer({
             next(null, { fielName: file.fieldname });
         },
         key: function (req, file, next) {
-            const ext = file.originalname.split('.').pop()
             // name of object
             next(null, uuidV4() + file.originalname);
         },

@@ -74,6 +74,7 @@
 2022-09-24 23:26:57	 2bbb7f55-cbc5-488e-81ce-2ce5ec201666	 - user validation failed: gender: Path `gender` is required., address: Path `address` is required., phone: Path `phone` is required., lastName: Path `lastName` is required., firstName: Path `firstName` is required.
 2022-09-24 23:38:40	 0097c813-cbc7-4917-8b86-3869e9d45aaa	 - user validation failed: gender: Path `gender` is required., address: Path `address` is required., phone: Path `phone` is required., lastName: Path `lastName` is required., firstName: Path `firstName` is required.
 2022-09-24 23:38:54	 dcd05890-c02e-4aa7-ab14-2f054cff0c73	 - user validation failed: gender: Path `gender` is required., address: Path `address` is required., phone: Path `phone` is required., lastName: Path `lastName` is required., firstName: Path `firstName` is required.
+<<<<<<< HEAD
 2022-09-29 16:27:40	 720a20f1-94ee-4c89-8608-61cb40f75133	 - Operation `users.findOne()` buffering timed out after 10000ms
 2022-09-29 16:27:47	 d914993f-513d-4ed2-910b-2277172edca4	 - Operation `users.findOne()` buffering timed out after 10000ms
 2022-09-29 16:27:49	 206260b1-8407-47aa-8c6f-603726a3d130	 - Operation `users.findOne()` buffering timed out after 10000ms
@@ -84,3 +85,15 @@
 2022-10-14 12:48:17	 9b8934e1-f66d-440b-accb-551596424667	 - Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/
 2022-10-17 00:18:20	 c561a272-5699-419c-a3b6-49f9bfc00c9f	 - Operation `users.findOne()` buffering timed out after 10000ms
 2022-10-17 00:18:46	 ce799805-1ede-4d30-a8bf-e4c7c1cb195f	 - Operation `users.findOne()` buffering timed out after 10000ms
+=======
+2022-09-29 23:08:27	 0e2915a0-9ede-43fc-87d8-ebe1425f963e	 - Cast to string failed for value "{ email: 'arunsingh28aug.as@gmail.com' }" (type Object) at path "email" for model "user"
+2022-10-01 17:31:58	 614d6b62-5b8e-47e1-ba90-3354a045726a	 - Cannot set headers after they are sent to the client
+2022-10-01 17:53:07	 4b506f01-b375-4f7f-b0ce-7256765c6acb	 - Cannot read properties of undefined (reading 'location')
+2022-10-01 18:21:13	 eb747e65-013f-447e-a9a9-b9cccb7eebbd	 - Cannot read properties of undefined (reading 'location')
+2022-10-01 18:32:06	 f7cb10a1-4713-4829-b001-458452bb0256	 - Missing required key 'Key' in params
+2022-10-01 18:34:16	 98a17c50-88f8-49bb-ae13-680714b9fcc0	 - Missing required key 'Key' in params
+2022-10-01 18:34:16	 1a65a607-a441-4481-87cc-d7dac843f378	 - Cannot read properties of undefined (reading 'location')
+2022-10-01 18:34:29	 87356f8a-5116-4c06-8cda-3b2d979ac50a	 - Missing required key 'Key' in params
+2022-10-01 18:35:13	 c78906f1-1b6e-4dd8-9037-a17146fea7d2	 - Missing required key 'Key' in params
+2022-10-01 18:35:13	 7a8a0ee5-c91f-4224-b95a-d2e56cd52b6d	 - Cannot read properties of undefined (reading 'location')
+>>>>>>> dd130a8eccd08291c5959fccd3087001bf02883e
